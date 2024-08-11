@@ -244,63 +244,63 @@ namespace SoMRandomizer.processing.hacks.openworld
             // additional level for enemies for each difficulty
             Dictionary<string, int> difficultyAdditions = new Dictionary<string, int>();
             difficultyAdditions["easy"] = -2;
-            difficultyAdditions["sorta easy"] = -1;
+            difficultyAdditions["sortaeasy"] = -1;
             difficultyAdditions["normal"] = -1;
-            difficultyAdditions["kinda hard"] = -1;
+            difficultyAdditions["kindahard"] = -1;
             difficultyAdditions["hard"] = -1;
             difficultyAdditions["impossible"] = 5;
 
             // bosses are higher level than normal enemies
             Dictionary<string, int> bossAdditions = new Dictionary<string, int>();
             bossAdditions["easy"] = 3;
-            bossAdditions["sorta easy"] = 3;
+            bossAdditions["sortaeasy"] = 3;
             bossAdditions["normal"] = 3;
-            bossAdditions["kinda hard"] = 3;
+            bossAdditions["kindahard"] = 3;
             bossAdditions["hard"] = 3;
             bossAdditions["impossible"] = 5;
 
             // bosses can't be too low a level
             Dictionary<string, int> minimumBossLevels = new Dictionary<string, int>();
             minimumBossLevels["easy"] = 3;
-            minimumBossLevels["sorta easy"] = 3;
+            minimumBossLevels["sortaeasy"] = 3;
             minimumBossLevels["normal"] = 4;
-            minimumBossLevels["kinda hard"] = 4;
+            minimumBossLevels["kindahard"] = 4;
             minimumBossLevels["hard"] = 5;
             minimumBossLevels["impossible"] = 10;
 
             // stats won't go above the stats for this maximum level
             Dictionary<string, int> enemyLevelMaxes = new Dictionary<string, int>();
             enemyLevelMaxes["easy"] = 50;
-            enemyLevelMaxes["sorta easy"] = 60;
+            enemyLevelMaxes["sortaeasy"] = 60;
             enemyLevelMaxes["normal"] = 70;
-            enemyLevelMaxes["kinda hard"] = 80;
+            enemyLevelMaxes["kindahard"] = 80;
             enemyLevelMaxes["hard"] = 99;
             enemyLevelMaxes["impossible"] = 99;
 
             // evade for enemies won't go above this
             Dictionary<string, int> enemyEvadeMaxes = new Dictionary<string, int>();
             enemyEvadeMaxes["easy"] = 25;
-            enemyEvadeMaxes["sorta easy"] = 40;
+            enemyEvadeMaxes["sortaeasy"] = 40;
             enemyEvadeMaxes["normal"] = 50;
-            enemyEvadeMaxes["kinda hard"] = 75;
+            enemyEvadeMaxes["kindahard"] = 75;
             enemyEvadeMaxes["hard"] = 99;
             enemyEvadeMaxes["impossible"] = 99;
 
             // scale enemy magic defense
             Dictionary<string, double> extraMdefLevelMultipliers = new Dictionary<string, double>();
             extraMdefLevelMultipliers["easy"] = 0.0;
-            extraMdefLevelMultipliers["sorta easy"] = 1.0;
+            extraMdefLevelMultipliers["sortaeasy"] = 1.0;
             extraMdefLevelMultipliers["normal"] = 1.5;
-            extraMdefLevelMultipliers["kinda hard"] = 2.0;
+            extraMdefLevelMultipliers["kindahard"] = 2.0;
             extraMdefLevelMultipliers["hard"] = 2.5;
             extraMdefLevelMultipliers["impossible"] = 4.0;
 
             // enemy weapon/magic levels max at this amount
             Dictionary<string, int> enemyWeaponMagicLevelMaxes = new Dictionary<string, int>();
             enemyWeaponMagicLevelMaxes["easy"] = 4;
-            enemyWeaponMagicLevelMaxes["sorta easy"] = 5;
+            enemyWeaponMagicLevelMaxes["sortaeasy"] = 5;
             enemyWeaponMagicLevelMaxes["normal"] = 6;
-            enemyWeaponMagicLevelMaxes["kinda hard"] = 7;
+            enemyWeaponMagicLevelMaxes["kindahard"] = 7;
             enemyWeaponMagicLevelMaxes["hard"] = 8;
             enemyWeaponMagicLevelMaxes["impossible"] = 8;
 

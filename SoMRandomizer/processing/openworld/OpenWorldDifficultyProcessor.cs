@@ -34,9 +34,9 @@ namespace SoMRandomizer.processing.openworld
         {
             // these are used as scalars to the loaded enemy stats
             playerDifficultyValues["easy"] = 0.6;
-            playerDifficultyValues["sorta easy"] = 0.7;
+            playerDifficultyValues["sortaeasy"] = 0.7;
             playerDifficultyValues["normal"] = 0.8;
-            playerDifficultyValues["kinda hard"] = 1.0;
+            playerDifficultyValues["kindahard"] = 1.0;
             playerDifficultyValues["hard"] = 1.2;
             playerDifficultyValues["impossible"] = 2.0;
             difficultyValues["player"] = playerDifficultyValues;
@@ -46,18 +46,18 @@ namespace SoMRandomizer.processing.openworld
 
             // seconds per level
             timedDifficultyValues["easy"] = 320;
-            timedDifficultyValues["sorta easy"] = 256;
+            timedDifficultyValues["sortaeasy"] = 256;
             timedDifficultyValues["normal"] = 200;
-            timedDifficultyValues["kinda hard"] = 160;
+            timedDifficultyValues["kindahard"] = 160;
             timedDifficultyValues["hard"] = 128;
             timedDifficultyValues["impossible"] = 64;
             difficultyValues["timed"] = timedDifficultyValues;
 
             // number of enemy levels per boss killed
             bossesDifficultyValues["easy"] = 0.5; 
-            bossesDifficultyValues["sorta easy"] = 1;
+            bossesDifficultyValues["sortaeasy"] = 1;
             bossesDifficultyValues["normal"] = 1.5; 
-            bossesDifficultyValues["kinda hard"] = 2;
+            bossesDifficultyValues["kindahard"] = 2;
             bossesDifficultyValues["hard"] = 3; 
             bossesDifficultyValues["impossible"] = 4;
             difficultyValues["bosses"] = bossesDifficultyValues;
