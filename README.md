@@ -9,6 +9,10 @@ I'll be posting releases, so unless you're actively working on the project, you 
 # Using
 Instructions will be here eventually for how to use the rando.  For now join the discord and ask if you have questions.
 
+Releases will be posted here (no music pack)
+
+and also here: https://secretofmanaancientcave.blogspot.com/ (with music pack)
+
 # Contributing
 Blerp
 
