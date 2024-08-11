@@ -183,7 +183,6 @@ namespace SoMRandomizer.processing.hacks.common.qol
             // here: we continue because it's a consumable
             // so .. these are at 7ECC48 .. the amount is the 3 MSBs, the id is the lower 5; 0xFF means end list
 
-            // ~~~
             // SEC
             outRom[context.workingOffset++] = 0x38;
             // SBC #BA - candy id; first consumable

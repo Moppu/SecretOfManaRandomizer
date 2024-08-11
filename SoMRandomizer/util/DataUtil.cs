@@ -60,7 +60,6 @@ namespace SoMRandomizer.util
             return false;
         }
 
-        // ~~~ use this where needed:   + 1] << 8   or    + 1] * 256
         public static ushort ushortFromBytes(byte[] byteArray, int index)
         {
             // always little-endian (lsb first)
