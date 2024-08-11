@@ -59,14 +59,14 @@ namespace SoMRandomizer.forms
             Dictionary<string, string> dispStrings = DifficultySettings.displayStrings;
             foreach (string dispString in dispStrings.Keys)
             {
-                comboBox5.Items.Add(dispString);
+                cmbDifficultyValue.Items.Add(dispString);
             }
-            t.SetToolTip(numericUpDown1, "Value of the stat on the first floor.");
-            t.SetToolTip(numericUpDown2, "Linear growth rate of the stat per floor.");
-            t.SetToolTip(numericUpDown4, "Exponential growth rate of the stat per floor.");
-            t.SetToolTip(button5, "Save your difficulty settings to a reloadable file.");
-            t.SetToolTip(button6, "Load difficulty settings from a previously-saved file.\n" + "Any missing values will default to \"Casual\" values.");
-            t.SetToolTip(comboBox7, "Some options for how the graph below is displayed.\n" +
+            t.SetToolTip(nudDifficultyBaseValue, "Value of the stat on the first floor.");
+            t.SetToolTip(nudDifficultyLinearGrowth, "Linear growth rate of the stat per floor.");
+            t.SetToolTip(nudDifficultyExponent, "Exponential growth rate of the stat per floor.");
+            t.SetToolTip(btnDifficultySave, "Save your difficulty settings to a reloadable file.");
+            t.SetToolTip(btnDifficultyLoad, "Load difficulty settings from a previously-saved file.\n" + "Any missing values will default to \"Casual\" values.");
+            t.SetToolTip(cmbVisualizationOption, "Some options for how the graph below is displayed.\n" +
                 "These are not part of the difficulty setting and only affect the display.\n" +
                 "Options include:\n\n" +
                 "- Est. kills per floor: used to model the amount of\n" +
@@ -80,31 +80,31 @@ namespace SoMRandomizer.forms
                 "clipped down to 75.\n\n" +
                 "- Armor progression: models the amount of defense gained per\n" +
                 "floor from buying and finding armor.");
-            t.SetToolTip(comboBox8, "Enemy stat progression level.");
+            t.SetToolTip(cmbBossRushDifficulty, "Enemy stat progression level.");
         }
 
-        private void comboBox5_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbDifficultyValue_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (comboBox5.SelectedIndex < 0)
+            if (cmbDifficultyValue.SelectedIndex < 0)
             {
                 return;
             }
-            string dispString = (string)comboBox5.SelectedItem;
+            string dispString = (string)cmbDifficultyValue.SelectedItem;
             bool isGrowth = DifficultySettings.isGrowthValue(dispString);
             if (isGrowth)
             {
                 label13.Visible = true;
                 label16.Visible = true;
-                numericUpDown2.Visible = true;
-                numericUpDown4.Visible = true;
+                nudDifficultyLinearGrowth.Visible = true;
+                nudDifficultyExponent.Visible = true;
                 label12.Text = "Base value";
             }
             else
             {
                 label13.Visible = false;
                 label16.Visible = false;
-                numericUpDown2.Visible = false;
-                numericUpDown4.Visible = false;
+                nudDifficultyLinearGrowth.Visible = false;
+                nudDifficultyExponent.Visible = false;
                 label12.Text = "Value";
             }
 
@@ -117,25 +117,25 @@ namespace SoMRandomizer.forms
             if (isGrowth)
             {
                 IntGrowthValue igv = diff.getGrowthValue(dispString);
-                numericUpDown1.Value = (decimal)igv.baseValue;
-                numericUpDown2.Value = (decimal)igv.growthValue;
-                numericUpDown4.Value = (decimal)igv.exponent;
+                nudDifficultyBaseValue.Value = (decimal)igv.baseValue;
+                nudDifficultyLinearGrowth.Value = (decimal)igv.growthValue;
+                nudDifficultyExponent.Value = (decimal)igv.exponent;
             }
             else
             {
                 double val = diff.getDoubleValue(dispString);
-                numericUpDown1.Value = (decimal)val;
+                nudDifficultyBaseValue.Value = (decimal)val;
             }
-            comboBox6_SelectedIndexChanged(null, null);
+            cmbDifficultyVisualize_SelectedIndexChanged(null, null);
         }
 
-        private void comboBox6_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbDifficultyVisualize_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (selectedDifficulty == null)
             {
                 return;
             }
-            if (comboBox3.SelectedIndex < 0)
+            if (cmbACLength.SelectedIndex < 0)
             {
                 return;
             }
@@ -146,68 +146,68 @@ namespace SoMRandomizer.forms
             {
                 diff = difficulties[romType][selectedDifficulty];
             }
-            int numFloors = (comboBox3.SelectedIndex + 1) * 8;
-            if (tabControl1.SelectedTab.Text == "Chaos")
+            int numFloors = (cmbACLength.SelectedIndex + 1) * 8;
+            if (tabMode.SelectedTab.Text == "Chaos")
             {
-                numFloors = trackBar1.Value;
+                numFloors = trbChaosFloors.Value;
             }
 
-            switch (comboBox6.SelectedIndex)
+            switch (cmbDifficultyVisualize.SelectedIndex)
             {
                 case 0:
-                    DifficultyVisualizer.visualizePhysicalDamageToEnemies(pictureBox2, diff, numFloors, false, visOptions["Est. kills per floor"], false);
+                    DifficultyVisualizer.visualizePhysicalDamageToEnemies(picDifficultyGraph, diff, numFloors, false, visOptions["Est. kills per floor"], false);
                     break;
                 case 1:
-                    DifficultyVisualizer.visualizePhysicalDamageToPlayers(pictureBox2, diff, numFloors, false, visOptions["Est. kills per floor"], visOptions["Evade progression"], visOptions["Armor progression"], false);
+                    DifficultyVisualizer.visualizePhysicalDamageToPlayers(picDifficultyGraph, diff, numFloors, false, visOptions["Est. kills per floor"], visOptions["Evade progression"], visOptions["Armor progression"], false);
                     break;
                 case 2:
-                    DifficultyVisualizer.visualizePhysicalDamageToPlayers(pictureBox2, diff, numFloors, true, visOptions["Est. kills per floor"], visOptions["Evade progression"], visOptions["Armor progression"], false);
+                    DifficultyVisualizer.visualizePhysicalDamageToPlayers(picDifficultyGraph, diff, numFloors, true, visOptions["Est. kills per floor"], visOptions["Evade progression"], visOptions["Armor progression"], false);
                     break;
                 case 3:
-                    DifficultyVisualizer.visualizePhysicalDamageToEnemies(pictureBox2, diff, numFloors, true, visOptions["Est. kills per floor"], false);
+                    DifficultyVisualizer.visualizePhysicalDamageToEnemies(picDifficultyGraph, diff, numFloors, true, visOptions["Est. kills per floor"], false);
                     break;
                 case 4:
-                    DifficultyVisualizer.visualizeMagicDamageToEnemies(pictureBox2, diff, numFloors, false, visOptions["Est. kills per floor"], false);
+                    DifficultyVisualizer.visualizeMagicDamageToEnemies(picDifficultyGraph, diff, numFloors, false, visOptions["Est. kills per floor"], false);
                     break;
                 case 5:
-                    DifficultyVisualizer.visualizeMagicDamageToPlayers(pictureBox2, diff, numFloors, false, visOptions["Est. kills per floor"], visOptions["Evade progression"], visOptions["Armor progression"], false);
+                    DifficultyVisualizer.visualizeMagicDamageToPlayers(picDifficultyGraph, diff, numFloors, false, visOptions["Est. kills per floor"], visOptions["Evade progression"], visOptions["Armor progression"], false);
                     break;
                 case 6:
-                    DifficultyVisualizer.visualizeMagicDamageToPlayers(pictureBox2, diff, numFloors, true, visOptions["Est. kills per floor"], visOptions["Evade progression"], visOptions["Armor progression"], false);
+                    DifficultyVisualizer.visualizeMagicDamageToPlayers(picDifficultyGraph, diff, numFloors, true, visOptions["Est. kills per floor"], visOptions["Evade progression"], visOptions["Armor progression"], false);
                     break;
                 case 7:
-                    DifficultyVisualizer.visualizeMagicDamageToEnemies(pictureBox2, diff, numFloors, true, visOptions["Est. kills per floor"], false);
+                    DifficultyVisualizer.visualizeMagicDamageToEnemies(picDifficultyGraph, diff, numFloors, true, visOptions["Est. kills per floor"], false);
                     break;
                 case 8:
-                    DifficultyVisualizer.visualizePhysicalDamageToEnemies(pictureBox2, diff, numFloors, false, visOptions["Est. kills per floor"], true);
+                    DifficultyVisualizer.visualizePhysicalDamageToEnemies(picDifficultyGraph, diff, numFloors, false, visOptions["Est. kills per floor"], true);
                     break;
                 case 9:
-                    DifficultyVisualizer.visualizePhysicalDamageToPlayers(pictureBox2, diff, numFloors, false, visOptions["Est. kills per floor"], visOptions["Evade progression"], visOptions["Armor progression"], true);
+                    DifficultyVisualizer.visualizePhysicalDamageToPlayers(picDifficultyGraph, diff, numFloors, false, visOptions["Est. kills per floor"], visOptions["Evade progression"], visOptions["Armor progression"], true);
                     break;
                 case 10:
-                    DifficultyVisualizer.visualizePhysicalDamageToPlayers(pictureBox2, diff, numFloors, true, visOptions["Est. kills per floor"], visOptions["Evade progression"], visOptions["Armor progression"], true);
+                    DifficultyVisualizer.visualizePhysicalDamageToPlayers(picDifficultyGraph, diff, numFloors, true, visOptions["Est. kills per floor"], visOptions["Evade progression"], visOptions["Armor progression"], true);
                     break;
                 case 11:
-                    DifficultyVisualizer.visualizePhysicalDamageToEnemies(pictureBox2, diff, numFloors, true, visOptions["Est. kills per floor"], true);
+                    DifficultyVisualizer.visualizePhysicalDamageToEnemies(picDifficultyGraph, diff, numFloors, true, visOptions["Est. kills per floor"], true);
                     break;
                 case 12:
-                    DifficultyVisualizer.visualizeMagicDamageToEnemies(pictureBox2, diff, numFloors, false, visOptions["Est. kills per floor"], true);
+                    DifficultyVisualizer.visualizeMagicDamageToEnemies(picDifficultyGraph, diff, numFloors, false, visOptions["Est. kills per floor"], true);
                     break;
                 case 13:
-                    DifficultyVisualizer.visualizeMagicDamageToPlayers(pictureBox2, diff, numFloors, false, visOptions["Est. kills per floor"], visOptions["Evade progression"], visOptions["Armor progression"], true);
+                    DifficultyVisualizer.visualizeMagicDamageToPlayers(picDifficultyGraph, diff, numFloors, false, visOptions["Est. kills per floor"], visOptions["Evade progression"], visOptions["Armor progression"], true);
                     break;
                 case 14:
-                    DifficultyVisualizer.visualizeMagicDamageToPlayers(pictureBox2, diff, numFloors, true, visOptions["Est. kills per floor"], visOptions["Evade progression"], visOptions["Armor progression"], true);
+                    DifficultyVisualizer.visualizeMagicDamageToPlayers(picDifficultyGraph, diff, numFloors, true, visOptions["Est. kills per floor"], visOptions["Evade progression"], visOptions["Armor progression"], true);
                     break;
                 case 15:
-                    DifficultyVisualizer.visualizeMagicDamageToEnemies(pictureBox2, diff, numFloors, true, visOptions["Est. kills per floor"], true);
+                    DifficultyVisualizer.visualizeMagicDamageToEnemies(picDifficultyGraph, diff, numFloors, true, visOptions["Est. kills per floor"], true);
                     break;
             }
         }
 
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        private void nudDifficultyBaseValue_ValueChanged(object sender, EventArgs e)
         {
-            if (comboBox5.SelectedIndex < 0)
+            if (cmbDifficultyValue.SelectedIndex < 0)
             {
                 return;
             }
@@ -217,13 +217,13 @@ namespace SoMRandomizer.forms
             switch (romType)
             {
                 case AncientCaveSettings.MODE_KEY:
-                    selectedDifficulty = (string)comboBox1.SelectedItem;
+                    selectedDifficulty = (string)cmbACDifficulty.SelectedItem;
                     break;
                 case BossRushSettings.MODE_KEY:
-                    selectedDifficulty = (string)comboBox8.SelectedItem;
+                    selectedDifficulty = (string)cmbBossRushDifficulty.SelectedItem;
                     break;
                 case ChaosSettings.MODE_KEY:
-                    selectedDifficulty = (string)comboBox9.SelectedItem;
+                    selectedDifficulty = (string)cmbChaosDifficulty.SelectedItem;
                     break;
                 case VanillaRandoSettings.MODE_KEY:
                     // unused by mode
@@ -240,14 +240,14 @@ namespace SoMRandomizer.forms
                 return;
             }
 
-            string dispString = (string)comboBox5.SelectedItem;
+            string dispString = (string)cmbDifficultyValue.SelectedItem;
             bool isGrowth = DifficultySettings.isGrowthValue(dispString);
 
             if (isGrowth)
             {
-                double baseValue = (double)numericUpDown1.Value;
-                double growValue = (double)numericUpDown2.Value;
-                double exp = (double)numericUpDown4.Value;
+                double baseValue = (double)nudDifficultyBaseValue.Value;
+                double growValue = (double)nudDifficultyLinearGrowth.Value;
+                double exp = (double)nudDifficultyExponent.Value;
                 IntGrowthValue igv = new IntGrowthValue();
                 igv.baseValue = baseValue;
                 igv.growthValue = growValue;
@@ -256,50 +256,50 @@ namespace SoMRandomizer.forms
             }
             else
             {
-                double value = (double)numericUpDown1.Value;
+                double value = (double)nudDifficultyBaseValue.Value;
                 customDifficulty[romType].setDoubleValue(dispString, value);
             }
             // force graph redraw
-            comboBox6_SelectedIndexChanged(null, null);
+            cmbDifficultyVisualize_SelectedIndexChanged(null, null);
         }
 
-        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        private void nudDifficultyLinearGrowth_ValueChanged(object sender, EventArgs e)
         {
-            numericUpDown1_ValueChanged(null, null);
+            nudDifficultyBaseValue_ValueChanged(null, null);
             // force graph redraw
-            comboBox6_SelectedIndexChanged(null, null);
+            cmbDifficultyVisualize_SelectedIndexChanged(null, null);
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbACDifficulty_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedDifficulty = (string)comboBox1.SelectedItem;
-            bool customSelected = (string)comboBox1.SelectedItem == "Custom";
-            numericUpDown1.Enabled = customSelected;
-            numericUpDown2.Enabled = customSelected;
-            numericUpDown4.Enabled = customSelected;
-            button6.Enabled = customSelected;
+            selectedDifficulty = (string)cmbACDifficulty.SelectedItem;
+            bool customSelected = (string)cmbACDifficulty.SelectedItem == "Custom";
+            nudDifficultyBaseValue.Enabled = customSelected;
+            nudDifficultyLinearGrowth.Enabled = customSelected;
+            nudDifficultyExponent.Enabled = customSelected;
+            btnDifficultyLoad.Enabled = customSelected;
             refreshWidth();
-            comboBox5_SelectedIndexChanged(null, null);
+            cmbDifficultyValue_SelectedIndexChanged(null, null);
         }
 
         private void refreshWidth()
         {
-            if (tabControl1.SelectedTab == null)
+            if (tabMode.SelectedTab == null)
             {
                 return;
             }
             bool customSelected = false;
-            if (tabControl1.SelectedTab.Text == "Ancient Cave")
+            if (tabMode.SelectedTab.Text == "Ancient Cave")
             {
-                customSelected = (string)comboBox1.SelectedItem == "Custom";
+                customSelected = (string)cmbACDifficulty.SelectedItem == "Custom";
             }
-            else if (tabControl1.SelectedTab.Text == "Boss Rush")
+            else if (tabMode.SelectedTab.Text == "Boss Rush")
             {
-                customSelected = (string)comboBox8.SelectedItem == "Custom";
+                customSelected = (string)cmbBossRushDifficulty.SelectedItem == "Custom";
             }
-            else if (tabControl1.SelectedTab.Text == "Chaos")
+            else if (tabMode.SelectedTab.Text == "Chaos")
             {
-                customSelected = (string)comboBox9.SelectedItem == "Custom";
+                customSelected = (string)cmbChaosDifficulty.SelectedItem == "Custom";
             }
 
 
@@ -312,41 +312,41 @@ namespace SoMRandomizer.forms
                 ClientSize = new Size(noDifficultyWidth, ClientSize.Height);
             }
         }
-        private void numericUpDown3_ValueChanged(object sender, EventArgs e)
+        private void nudVisualizationOptionValue_ValueChanged(object sender, EventArgs e)
         {
-            string visOption = (string)comboBox7.SelectedItem;
+            string visOption = (string)cmbVisualizationOption.SelectedItem;
             if (visOption == null)
             {
                 return;
             }
-            visOptions[visOption] = (int)numericUpDown3.Value;
+            visOptions[visOption] = (int)nudVisualizationOptionValue.Value;
             // force graph redraw
-            comboBox6_SelectedIndexChanged(null, null);
+            cmbDifficultyVisualize_SelectedIndexChanged(null, null);
         }
 
-        private void comboBox7_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbVisualizationOption_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string visOption = (string)comboBox7.SelectedItem;
+            string visOption = (string)cmbVisualizationOption.SelectedItem;
             if (visOption == null)
             {
                 return;
             }
-            numericUpDown3.Value = visOptions[visOption];
+            nudVisualizationOptionValue.Value = visOptions[visOption];
         }
 
-        private void comboBox3_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbACLength_SelectedIndexChanged(object sender, EventArgs e)
         {
-            comboBox5_SelectedIndexChanged(null, null);
+            cmbDifficultyValue_SelectedIndexChanged(null, null);
         }
 
-        private void numericUpDown4_ValueChanged(object sender, EventArgs e)
+        private void nudDifficultyExponent_ValueChanged(object sender, EventArgs e)
         {
-            numericUpDown1_ValueChanged(null, null);
+            nudDifficultyBaseValue_ValueChanged(null, null);
             // force graph redraw
-            comboBox6_SelectedIndexChanged(null, null);
+            cmbDifficultyVisualize_SelectedIndexChanged(null, null);
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void btnDifficultySave_Click(object sender, EventArgs e)
         {
             SaveFileDialog sf = new SaveFileDialog();
             sf.Filter = "Properties File (*.properties)|*.properties";
@@ -391,7 +391,7 @@ namespace SoMRandomizer.forms
 
         }
 
-        private void button6_Click(object sender, EventArgs e)
+        private void btnDifficultyLoad_Click(object sender, EventArgs e)
         {
             OpenFileDialog sf = new OpenFileDialog();
             sf.Filter = "Properties File (*.properties)|*.properties";
@@ -406,7 +406,7 @@ namespace SoMRandomizer.forms
                     DifficultySettings newCustom = new DifficultySettings();
                     newCustom.readFromFile(filename, difficulties[romType]["Casual"]);
                     customDifficulty[romType] = newCustom;
-                    comboBox5_SelectedIndexChanged(null, null);
+                    cmbDifficultyValue_SelectedIndexChanged(null, null);
                 }
                 catch (Exception ee)
                 {
@@ -420,49 +420,49 @@ namespace SoMRandomizer.forms
             difficultyPopout = !difficultyPopout;
             if (difficultyPopout)
             {
-                linkLabel2.LinkColor = Color.Blue;
+                llbDifficultyDetails.LinkColor = Color.Blue;
             }
             else
             {
-                linkLabel2.LinkColor = Color.Red;
+                llbDifficultyDetails.LinkColor = Color.Red;
             }
             refreshWidth();
         }
 
-        private void comboBox8_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbBossRushDifficulty_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedDifficulty = (string)comboBox8.SelectedItem;
-            bool customSelected = (string)comboBox8.SelectedItem == "Custom";
-            numericUpDown1.Enabled = customSelected;
-            numericUpDown2.Enabled = customSelected;
-            numericUpDown4.Enabled = customSelected;
-            button6.Enabled = customSelected;
+            selectedDifficulty = (string)cmbBossRushDifficulty.SelectedItem;
+            bool customSelected = (string)cmbBossRushDifficulty.SelectedItem == "Custom";
+            nudDifficultyBaseValue.Enabled = customSelected;
+            nudDifficultyLinearGrowth.Enabled = customSelected;
+            nudDifficultyExponent.Enabled = customSelected;
+            btnDifficultyLoad.Enabled = customSelected;
             refreshWidth();
-            comboBox5_SelectedIndexChanged(null, null);
+            cmbDifficultyValue_SelectedIndexChanged(null, null);
         }
 
-        private void trackBar1_Scroll(object sender, EventArgs e)
+        private void trbChaosFloors_Scroll(object sender, EventArgs e)
         {
-            int val = trackBar1.Value;
+            int val = trbChaosFloors.Value;
             int newv = (int)Math.Round(val / 20.0) * 20;
 
-            if (trackBar1.Value != newv)
+            if (trbChaosFloors.Value != newv)
             {
-                trackBar1.Value = newv;
+                trbChaosFloors.Value = newv;
             }
-            comboBox5_SelectedIndexChanged(null, null);
+            cmbDifficultyValue_SelectedIndexChanged(null, null);
         }
 
-        private void comboBox9_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbChaosDifficulty_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selectedDifficulty = (string)comboBox9.SelectedItem;
-            bool customSelected = (string)comboBox9.SelectedItem == "Custom";
-            numericUpDown1.Enabled = customSelected;
-            numericUpDown2.Enabled = customSelected;
-            numericUpDown4.Enabled = customSelected;
-            button6.Enabled = customSelected;
+            selectedDifficulty = (string)cmbChaosDifficulty.SelectedItem;
+            bool customSelected = (string)cmbChaosDifficulty.SelectedItem == "Custom";
+            nudDifficultyBaseValue.Enabled = customSelected;
+            nudDifficultyLinearGrowth.Enabled = customSelected;
+            nudDifficultyExponent.Enabled = customSelected;
+            btnDifficultyLoad.Enabled = customSelected;
             refreshWidth();
-            comboBox5_SelectedIndexChanged(null, null);
+            cmbDifficultyValue_SelectedIndexChanged(null, null);
         }
     }
 }

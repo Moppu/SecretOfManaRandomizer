@@ -87,7 +87,7 @@ namespace SoMRandomizer.forms
             handleOptionChanges = false;
             if (handleIndividualChanges)
             {
-                textBox5.Text = optionsManager.getOptionsString();
+                txtOptions.Text = optionsManager.getOptionsString();
                 clearOptionsError();
             }
             handleOptionChanges = true;
@@ -123,14 +123,14 @@ namespace SoMRandomizer.forms
             string prevInputRom = AppConfig.APPCONFIG.getStringProperty("PreviousInputRom");
             if(prevInputRom != null)
             {
-                textBox1.Text = prevInputRom;
+                txtInputROM.Text = prevInputRom;
             }
 
             // copy filename, and process with seed
-            textBox2.Text = textBox1.Text;
+            txtOutputROM.Text = txtInputROM.Text;
             processOutputFilename();
 
-            label30.Text = "Uncheck all randomization options to play the vanilla game" + Environment.NewLine + "with the selected hacks enabled.  Seed will be ignored.";
+            lblVanillaNoRandoHint.Text = "Uncheck all randomization options to play the vanilla game" + Environment.NewLine + "with the selected hacks enabled.  Seed will be ignored.";
             optionsManager.addOptionsListener(this);
             propertyManager = new OptionsFormManager(optionsManager);
 
@@ -147,43 +147,43 @@ namespace SoMRandomizer.forms
             tError.AutoPopDelay = 32767; // last forever
             t.AutoPopDelay = 32767;
 
-            textBox3.TextChanged += TextBox3_TextChanged;
+            txtSeed.TextChanged += txtSeed_TextChanged;
             randomizeSeed();
 
             characterDesigner.Icon = Icon;
 
-            checkedListBox1.ItemCheck += CheckedListBox1_ItemCheck;
+            cklACBiomeTypes.ItemCheck += cklACBiomeTypes_ItemCheck;
             System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
             timer.Interval = 100;
             timer.Tick += Timer_Tick;
             timer.Start();
 
             ClientSize = new Size(510, ClientSize.Height);
-            tabControl1.SelectedIndexChanged += TabControl1_SelectedIndexChanged;
+            tabMode.SelectedIndexChanged += tabMode_SelectedIndexChanged;
 
             // disable some of the common components when we're running rom generation
-            enableComponents.Add(button1); // browse
-            enableComponents.Add(button2); // browse
-            enableComponents.Add(button3); // generate
-            enableComponents.Add(button4); // randomize seed
-            enableComponents.Add(textBox1); // input rom
-            enableComponents.Add(textBox2); // output rom
-            enableComponents.Add(textBox3); // seed
-            enableComponents.Add(textBox5); // options
-            enableComponents.Add(checkBox1); // append seed to filename
-            enableComponents.Add(button7); // general options
+            enableComponents.Add(btnBrowseInput); // browse
+            enableComponents.Add(btnBrowseOutput); // browse
+            enableComponents.Add(btnWriteROM); // generate
+            enableComponents.Add(btnRandomSeed); // randomize seed
+            enableComponents.Add(txtInputROM); // input rom
+            enableComponents.Add(txtOutputROM); // output rom
+            enableComponents.Add(txtSeed); // seed
+            enableComponents.Add(txtOptions); // options
+            enableComponents.Add(chkAppendSeedToFilename); // append seed to filename
+            enableComponents.Add(btnGeneralOptions); // general options
 
-            t.SetToolTip(button13, "Copy options string to the clipboard.");
-            t.SetToolTip(button14, "Paste options string from the clipboard and replace current selections.");
+            t.SetToolTip(btnOptionsCopy, "Copy options string to the clipboard.");
+            t.SetToolTip(btnOptionsPaste, "Paste options string from the clipboard and replace current selections.");
 
             makeOpenWorldPresets();
 
             // character selection for ancient cave mode
-            FormUtil.RequireAtLeastOneCheckbox(new CheckBox[] { checkBox8, checkBox9, checkBox10 }.ToList());
+            FormUtil.RequireAtLeastOneCheckbox(new CheckBox[] { chkACIncludeBoyChar, chkACIncludeGirlChar, chkACIncludeSpriteChar }.ToList());
             // character selection for boss rush mode
-            FormUtil.RequireAtLeastOneCheckbox(new CheckBox[] { checkBox11, checkBox12, checkBox13 }.ToList());
+            FormUtil.RequireAtLeastOneCheckbox(new CheckBox[] { chkBossRushIncludeSpriteChar, chkBossRushIncludeGirlChar, chkBossRushIncludeBoyChar }.ToList());
             // character selection for chaos mode
-            FormUtil.RequireAtLeastOneCheckbox(new CheckBox[] { checkBox15, checkBox16, checkBox17 }.ToList());
+            FormUtil.RequireAtLeastOneCheckbox(new CheckBox[] { chkChaosIncludeSpriteChar, chkChaosIncludeGirlChar, chkChaosIncludeBoyChar }.ToList());
             FormClosing += Form1_FormClosing;
 
             Thread versionCheckThread = new Thread(new ThreadStart(updateCheck));
@@ -227,19 +227,19 @@ namespace SoMRandomizer.forms
 
         private void newVersionAvailable()
         {
-            linkLabel3.Visible = true;
-            t.SetToolTip(linkLabel3, "Click to open the blog and download the latest version of the randomizer.");
+            llbNewVersion.Visible = true;
+            t.SetToolTip(llbNewVersion, "Click to open the blog and download the latest version of the randomizer.");
         }
 
         public string getInputRom()
         {
-            return textBox1.Text;
+            return txtInputROM.Text;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
             // save the input rom for next time when we close the window 
-            AppConfig.APPCONFIG.setConfigProperty("PreviousInputRom", textBox1.Text);
+            AppConfig.APPCONFIG.setConfigProperty("PreviousInputRom", txtInputROM.Text);
         }
 
         private void initCheckbox(CheckBox cb, string propertyName, StringValueSettings settings)
@@ -289,11 +289,11 @@ namespace SoMRandomizer.forms
 
         private void clearOptionsError()
         {
-            textBox5.BackColor = textBox3.BackColor;
-            t.SetToolTip(textBox5, "Paste options to quickly select randomizer settings, or copy to share them.\nTyping in here is allowed, but not recommended.");
+            txtOptions.BackColor = txtSeed.BackColor;
+            t.SetToolTip(txtOptions, "Paste options to quickly select randomizer settings, or copy to share them.\nTyping in here is allowed, but not recommended.");
         }
         
-        private void TextBox5_TextChanged(object sender, EventArgs e)
+        private void txtOptions_TextChanged(object sender, EventArgs e)
         {
             // options changed
             if (handleOptionChanges)
@@ -301,10 +301,10 @@ namespace SoMRandomizer.forms
                 handleIndividualChanges = false;
                 try
                 {
-                    optionsManager.setOptions(textBox5.Text);
-                    textBox5.BackColor = textBox3.BackColor;
-                    tError.SetToolTip(textBox5, null);
-                    t.SetToolTip(textBox5, "Paste options to quickly select randomizer settings, or copy to share them.\nTyping in here is allowed, but not recommended.");
+                    optionsManager.setOptions(txtOptions.Text);
+                    txtOptions.BackColor = txtSeed.BackColor;
+                    tError.SetToolTip(txtOptions, null);
+                    t.SetToolTip(txtOptions, "Paste options to quickly select randomizer settings, or copy to share them.\nTyping in here is allowed, but not recommended.");
                 }
                 catch (OptionsException ee)
                 {
@@ -312,12 +312,12 @@ namespace SoMRandomizer.forms
                     if(ee.versionMatch == null)
                     {
                         errorMsg = "No version specified! Options may not be compatible";
-                        textBox5.BackColor = Color.FromArgb(255, 255, 128);
+                        txtOptions.BackColor = Color.FromArgb(255, 255, 128);
                     }
                     else if(!(bool)ee.versionMatch)
                     {
                         errorMsg = "Version mismatch! Options may not be compatible";
-                        textBox5.BackColor = Color.FromArgb(255, 128, 128);
+                        txtOptions.BackColor = Color.FromArgb(255, 128, 128);
                     }
                     if(ee.valueError != null)
                     {
@@ -326,16 +326,16 @@ namespace SoMRandomizer.forms
                             errorMsg = errorMsg + "\n";
                         }
                         errorMsg = errorMsg + ee.valueError;
-                        textBox5.BackColor = Color.FromArgb(255, 128, 128);
+                        txtOptions.BackColor = Color.FromArgb(255, 128, 128);
                     }
-                    tError.SetToolTip(textBox5, errorMsg);
-                    t.SetToolTip(textBox5, null);
+                    tError.SetToolTip(txtOptions, errorMsg);
+                    t.SetToolTip(txtOptions, null);
                 }
                 handleIndividualChanges = true;
             }
         }
 
-        private void TabControl1_SelectedIndexChanged(object sender, EventArgs e)
+        private void tabMode_SelectedIndexChanged(object sender, EventArgs e)
         {
             // game mode selection changed
             string currentRomType = getRomType();
@@ -344,15 +344,15 @@ namespace SoMRandomizer.forms
                 // early-game rabites don't damage you with this on; it's a minor detail but we switch it off by default here
                 // for vanilla-like modes, but keep it on for procgen modes
                 propertyManager.setPropertyValue("generalMiscMechanical", CommonSettings.PROPERTYNAME_STARTER_GEAR, "no");
-                linkLabel2.Visible = false;
+                llbDifficultyDetails.Visible = false;
                 difficultyPopout = false;
-                linkLabel2.LinkColor = Color.Red;
+                llbDifficultyDetails.LinkColor = Color.Red;
                 refreshWidth();
             }
             else
             {
                 propertyManager.setPropertyValue("generalMiscMechanical", CommonSettings.PROPERTYNAME_STARTER_GEAR, "yes");
-                linkLabel2.Visible = true;
+                llbDifficultyDetails.Visible = true;
             }
 
             // update the warning for unfinished modes.
@@ -380,35 +380,35 @@ namespace SoMRandomizer.forms
         {
             // periodically update progress for ancient cave generation since it takes a bit
             int currentProgress = commonSettings.getInt(CommonSettings.PROPERTYNAME_CURRENT_PROGRESS);
-            progressBar1.Value = currentProgress;
+            prgGenerationProgress.Value = currentProgress;
         }
 
-        private void CheckedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
+        private void cklACBiomeTypes_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             // don't allow deselection of every item in the ancient cave biome selection
-            if (checkedListBox1.CheckedItems.Count == 1)
+            if (cklACBiomeTypes.CheckedItems.Count == 1)
             {
                 if (e.CurrentValue == CheckState.Checked)
                 {
                     e.NewValue = CheckState.Checked;
                 }
             }
-            checkedListBox1.SelectedIndex = -1;
+            cklACBiomeTypes.SelectedIndex = -1;
         }
         
-        private void PictureBox1_Click(object sender, EventArgs e)
+        private void picCatBread_Click(object sender, EventArgs e)
         {
             // clicked on the cat bread
             System.Diagnostics.Process.Start("http://secretofmanaancientcave.blogspot.com");
         }
 
-        private void TextBox3_TextChanged(object sender, EventArgs e)
+        private void txtSeed_TextChanged(object sender, EventArgs e)
         {
             // changed seed; add to output filename
             processOutputFilename();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnBrowseInput_Click(object sender, EventArgs e)
         {
             // select input rom
             OpenFileDialog of = new OpenFileDialog();
@@ -416,10 +416,10 @@ namespace SoMRandomizer.forms
             DialogResult dr = of.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                textBox1.Text = of.FileName;
-                if (textBox2.Text == null || textBox2.Text.Length == 0)
+                txtInputROM.Text = of.FileName;
+                if (txtOutputROM.Text == null || txtOutputROM.Text.Length == 0)
                 {
-                    textBox2.Text = textBox1.Text;
+                    txtOutputROM.Text = txtInputROM.Text;
                     processOutputFilename();
                 }
             }
@@ -428,8 +428,8 @@ namespace SoMRandomizer.forms
         private void processOutputFilename()
         {
             // process output filename as input filename + [seed]
-            string outFilename = textBox2.Text;
-            string seed = textBox3.Text;
+            string outFilename = txtOutputROM.Text;
+            string seed = txtSeed.Text;
             int periodIndex = outFilename.LastIndexOf(".");
             string beforeExtension = outFilename;
             string extension = "";
@@ -446,14 +446,14 @@ namespace SoMRandomizer.forms
                 beforeExtension = beforeExtension.Substring(0, oBracketIndex);
             }
 
-            if (checkBox1.Checked && beforeExtension.Length > 0)
+            if (chkAppendSeedToFilename.Checked && beforeExtension.Length > 0)
             {
                 beforeExtension += "[" + seed + "]";
             }
-            textBox2.Text = beforeExtension + extension;
+            txtOutputROM.Text = beforeExtension + extension;
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnBrowseOutput_Click(object sender, EventArgs e)
         {
             // select output filename
             OpenFileDialog of = new OpenFileDialog();
@@ -461,11 +461,11 @@ namespace SoMRandomizer.forms
             DialogResult dr = of.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                textBox2.Text = of.FileName;
+                txtOutputROM.Text = of.FileName;
             }
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void btnRandomSeed_Click(object sender, EventArgs e)
         {
             // randomize seed with some hex characters
             randomizeSeed();
@@ -474,7 +474,7 @@ namespace SoMRandomizer.forms
 
         private void randomizeSeed()
         {
-            textBox3.Text = randomHexString();
+            txtSeed.Text = randomHexString();
         }
 
         private string randomHexString()
@@ -491,13 +491,13 @@ namespace SoMRandomizer.forms
             return new String(stringChars);
         }
 
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        private void chkAppendSeedToFilename_CheckedChanged(object sender, EventArgs e)
         {
             // input rom path changed; re-process output filename
             processOutputFilename();
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void btnWriteROM_Click(object sender, EventArgs e)
         {
             // generate button press
             generateWithCurrentSettings(false);
@@ -511,13 +511,13 @@ namespace SoMRandomizer.forms
             {
                 comp.Enabled = false;
             }
-            pictureBox1.Enabled = true;
+            picCatBread.Enabled = true;
             GenerateParam p = new GenerateParam();
             p.skipConfirmation = skipConfirmation;
             p.romType = commonSettings.get(CommonSettings.PROPERTYNAME_MODE);
             
             // this is just for the log
-            commonSettings.set(CommonSettings.PROPERTYNAME_ALL_ENTERED_OPTIONS, textBox5.Text);
+            commonSettings.set(CommonSettings.PROPERTYNAME_ALL_ENTERED_OPTIONS, txtOptions.Text);
             commonSettings.set(CommonSettings.PROPERTYNAME_VERSION, RomGenerator.VERSION_NUMBER);
             propertyManager.closeAll();
             generalOptionsCategory.Hide();
@@ -540,7 +540,7 @@ namespace SoMRandomizer.forms
             GenerateParam genParam = (GenerateParam)param;
             try
             {
-                if (textBox2.Text != null && textBox2.Text != "" && File.Exists(textBox2.Text))
+                if (txtOutputROM.Text != null && txtOutputROM.Text != "" && File.Exists(txtOutputROM.Text))
                 {
                     if (!genParam.skipConfirmation)
                     {
@@ -603,7 +603,7 @@ namespace SoMRandomizer.forms
                 try
                 {
                     // try to make the ROM
-                    RomGenerator.initGeneration(textBox1.Text, textBox2.Text, textBox3.Text, generatorsByRomType, commonSettings, settingsByRomType);
+                    RomGenerator.initGeneration(txtInputROM.Text, txtOutputROM.Text, txtSeed.Text, generatorsByRomType, commonSettings, settingsByRomType);
                     MessageBox.Show("Done!");
                 }
                 catch (Exception e)
@@ -637,49 +637,49 @@ namespace SoMRandomizer.forms
             return commonSettings.get(CommonSettings.PROPERTYNAME_MODE);
         }
 
-        private void button7_Click(object sender, EventArgs e)
+        private void btnGeneralOptions_Click(object sender, EventArgs e)
         {
             // general options button
             generalOptionsCategory.Show();
         }
 
-        private void button8_Click(object sender, EventArgs e)
+        private void btnChoasMoreOptions_Click(object sender, EventArgs e)
         {
             // chaos more options button
             propertyManager.showForm("chaos");
         }
 
-        private void button9_Click(object sender, EventArgs e)
+        private void btnBossRushMoreOptions_Click(object sender, EventArgs e)
         {
             // boss rush more options button
             propertyManager.showForm("bossrush");
         }
 
-        private void trackBar3_Scroll(object sender, EventArgs e)
+        private void trbVanillaEnemyScaling_Scroll(object sender, EventArgs e)
         {
             // show the percentage value for enemy scaling in vanilla rando
-            int sel = trackBar3.Value;
+            int sel = trbVanillaEnemyScaling.Value;
             string printVal = "?";
             string[] percentStrings = vanillaRandoSettings.getOptionsValues(VanillaRandoSettings.PROPERTYNAME_ENEMY_SCALING);
             printVal = percentStrings[sel];
 
-            if (trackBar3.Value == percentStrings.Length / 2)
+            if (trbVanillaEnemyScaling.Value == percentStrings.Length / 2)
             {
                 label36.Text = "Normal [" + printVal + "%]";
             }
-            else if (trackBar3.Value == 0)
+            else if (trbVanillaEnemyScaling.Value == 0)
             {
                 label36.Text = "Easiest [" + printVal + "%]";
             }
-            else if (trackBar3.Value < percentStrings.Length / 2)
+            else if (trbVanillaEnemyScaling.Value < percentStrings.Length / 2)
             {
                 label36.Text = "Easier [" + printVal + "%]";
             }
-            else if (trackBar3.Value == percentStrings.Length - 1)
+            else if (trbVanillaEnemyScaling.Value == percentStrings.Length - 1)
             {
                 label36.Text = "Hardest [" + printVal + "%]";
             }
-            else if (trackBar3.Value > percentStrings.Length / 2)
+            else if (trbVanillaEnemyScaling.Value > percentStrings.Length / 2)
             {
                 label36.Text = "Harder [" + printVal + "%]";
             }
@@ -694,109 +694,109 @@ namespace SoMRandomizer.forms
             helpPages.openInfoForm(rt);
         }
 
-        private void pictureBox3_Click(object sender, EventArgs e)
+        private void picVanillaDetails_Click(object sender, EventArgs e)
         {
             // vanilla rando help button
             openInfoForm();
         }
 
-        private void PictureBox4_Click(object sender, EventArgs e)
+        private void picDiscord_Click(object sender, EventArgs e)
         {
             // discord icon button
             System.Diagnostics.Process.Start("https://discord.gg/YfmUHqU");
         }
 
-        private void PictureBox5_Click(object sender, EventArgs e)
+        private void picTwitch_Click(object sender, EventArgs e)
         {
             // twitch icon button
             System.Diagnostics.Process.Start("https://twitch.tv/moppleton");
         }
 
-        private void PictureBox6_Click(object sender, EventArgs e)
+        private void picBlogspot_Click(object sender, EventArgs e)
         {
             // blogspot icon button
             System.Diagnostics.Process.Start("http://secretofmanaancientcave.blogspot.com/");
         }
 
-        private void PictureBox7_Click(object sender, EventArgs e)
+        private void picMail_Click(object sender, EventArgs e)
         {
             // email icon button
             System.Diagnostics.Process.Start("mailto:umokumok@gmail.com");
         }
 
-        private void pictureBox8_Click(object sender, EventArgs e)
+        private void picACDetails_Click(object sender, EventArgs e)
         {
             // ancient cave help button
             openInfoForm();
         }
 
-        private void pictureBox9_Click(object sender, EventArgs e)
+        private void picBossRushDetails_Click(object sender, EventArgs e)
         {
             // boss rush help button
             openInfoForm();
         }
 
-        private void pictureBox10_Click(object sender, EventArgs e)
+        private void picChaosDetails_Click(object sender, EventArgs e)
         {
             // chaos help button
             openInfoForm();
         }
 
-        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void llbNewVersion_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             // new version available label
             System.Diagnostics.Process.Start("http://secretofmanaancientcave.blogspot.com/");
         }
 
-        private void comboBox13_SelectedIndexChanged(object sender, EventArgs e)
+        private void cmbOpenStatGrowth_SelectedIndexChanged(object sender, EventArgs e)
         {
             // open world enemy stat growth
-            if(((string)comboBox13.SelectedItem).Contains("None"))
+            if(((string)cmbOpenStatGrowth.SelectedItem).Contains("None"))
             {
                 // difficulty option for enemies
-                comboBox14.Enabled = false;
+                cmbOpenStatGrowthDifficulty.Enabled = false;
                 // randomize bosses - default to swap
-                if(comboBox25.SelectedIndex == 2)
+                if(cmbOpenRandomizeBosses.SelectedIndex == 2)
                 {
-                    comboBox25.SelectedIndex = 1;
+                    cmbOpenRandomizeBosses.SelectedIndex = 1;
                 }
             }
             else
             {
-                comboBox14.Enabled = true;
+                cmbOpenStatGrowthDifficulty.Enabled = true;
                 // randomize bosses - default to random
-                if (comboBox25.SelectedIndex == 1)
+                if (cmbOpenRandomizeBosses.SelectedIndex == 1)
                 {
-                    comboBox25.SelectedIndex = 2;
+                    cmbOpenRandomizeBosses.SelectedIndex = 2;
                 }
             }
         }
 
-        private void pictureBox11_Click(object sender, EventArgs e)
+        private void picOpenDetails_Click(object sender, EventArgs e)
         {
             // open world help button
             openInfoForm();
         }
 
-        private void button10_Click(object sender, EventArgs e)
+        private void btnOpenMoreOptions_Click(object sender, EventArgs e)
         {
             // open world options button
             openWorldOptionsCategory.Show();
         }
 
-        private void button12_Click(object sender, EventArgs e)
+        private void btnPresets_Click(object sender, EventArgs e)
         {
             // open world presets button
             openWorldPresetsForm.Show();
         }
 
-        private void button13_Click(object sender, EventArgs e)
+        private void btnOptionsCopy_Click(object sender, EventArgs e)
         {
             // options copy button
-            Clipboard.SetText(textBox5.Text);
+            Clipboard.SetText(txtOptions.Text);
         }
 
-        private void button14_Click(object sender, EventArgs e)
+        private void btnOptionsPaste_Click(object sender, EventArgs e)
         {
             // options paste button
             try
@@ -810,7 +810,7 @@ namespace SoMRandomizer.forms
                         return;
                     }
 
-                    textBox5.Text = clipText;
+                    txtOptions.Text = clipText;
                 }
                 else
                 {
@@ -823,7 +823,7 @@ namespace SoMRandomizer.forms
             }
         }
 
-        private void button15_Click(object sender, EventArgs e)
+        private void btnPlando_Click(object sender, EventArgs e)
         {
             // plando button
             plandoForm.Show();

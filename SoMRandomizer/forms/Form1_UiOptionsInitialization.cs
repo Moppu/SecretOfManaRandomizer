@@ -12,7 +12,7 @@ namespace SoMRandomizer.forms
     {
         private void initCommonComponents()
         {
-            initTabControl(tabControl1, "mode", commonSettings); // mode selector
+            initTabControl(tabMode, "mode", commonSettings); // mode selector
 
             generalOptionsCategory = new OptionsCategoryForm(propertyManager, "General options", "General options - categories");
 
@@ -105,11 +105,11 @@ namespace SoMRandomizer.forms
             propertyManager.makeBooleanValueProperty("generalStupid", CommonSettings.PROPERTYNAME_INCLUDE_TRASH_WEAPONS, "Trash weapons", "Weapon rando will rarely roll joke weapons with low accuracy.", commonSettings);
             propertyManager.makeBooleanValueProperty("generalStupid", CommonSettings.PROPERTYNAME_DEBUG_LOG, "Debug logging", "Enable a debug log with WAY more detail. Only really useful to me.", commonSettings);
 
-            t.SetToolTip(textBox1, "Please only use \"Secret of Mana (U).smc\".\nCountry: US\nVersion: 1.0\nSize: 16 Megabit (2.0 MB)");
-            t.SetToolTip(textBox2, "This is where the generated ROM will be written.");
-            t.SetToolTip(textBox3, "Any string is acceptable as a seed.  This is used to determine the\n" +
+            t.SetToolTip(txtInputROM, "Please only use \"Secret of Mana (U).smc\".\nCountry: US\nVersion: 1.0\nSize: 16 Megabit (2.0 MB)");
+            t.SetToolTip(txtOutputROM, "This is where the generated ROM will be written.");
+            t.SetToolTip(txtSeed, "Any string is acceptable as a seed.  This is used to determine the\n" +
                 "construction of the maps, gear that can be dropped, and other static RNG.");
-            t.SetToolTip(textBox5, "Paste options to quickly select randomizer settings, or copy to share them.\nTyping in here is allowed, but not recommended.");
+            t.SetToolTip(txtOptions, "Paste options to quickly select randomizer settings, or copy to share them.\nTyping in here is allowed, but not recommended.");
 
             string buildDateIndicator = "Build date: ";
             try
@@ -128,7 +128,7 @@ namespace SoMRandomizer.forms
                 // shrug i guess
                 buildDateIndicator += "???";
             }
-            t.SetToolTip(pictureBox1,
+            t.SetToolTip(picCatBread,
                 "Version " + RomGenerator.VERSION_NUMBER +
                 "\n" + buildDateIndicator +
                 "\nBy Mop!" +
@@ -151,57 +151,57 @@ namespace SoMRandomizer.forms
                 "\nYagamoth, Zheal," +
                 "\n\nand the rest of the very supportive Twitch SoM community.");
 
-            t.SetToolTip(pictureBox4, "Join the Secret of Mana Randomizer Discord server.");
-            pictureBox4.Click += PictureBox4_Click;
-            t.SetToolTip(pictureBox5, "Visit my Twitch channel for occasional development streams\nand other unrelated stuff.");
-            pictureBox5.Click += PictureBox5_Click;
-            t.SetToolTip(pictureBox6, "Blogspot with all Secret of Mana Randomizer releases and basic info.");
-            pictureBox6.Click += PictureBox6_Click;
-            t.SetToolTip(pictureBox7, "Email me: umokumok@gmail.com");
-            pictureBox7.Click += PictureBox7_Click;
+            t.SetToolTip(picDiscord, "Join the Secret of Mana Randomizer Discord server.");
+            picDiscord.Click += picDiscord_Click;
+            t.SetToolTip(picTwitch, "Visit my Twitch channel for occasional development streams\nand other unrelated stuff.");
+            picTwitch.Click += picTwitch_Click;
+            t.SetToolTip(picBlogspot, "Blogspot with all Secret of Mana Randomizer releases and basic info.");
+            picBlogspot.Click += picBlogspot_Click;
+            t.SetToolTip(picMail, "Email me: umokumok@gmail.com");
+            picMail.Click += picMail_Click;
 
-            textBox5.Text = optionsManager.getOptionsString();
+            txtOptions.Text = optionsManager.getOptionsString();
             clearOptionsError();
-            textBox5.TextChanged += TextBox5_TextChanged;
+            txtOptions.TextChanged += txtOptions_TextChanged;
         }
 
         private void initVanillaRandoComponents()
         {
             // rando
-            initCheckbox(checkBox18, VanillaRandoSettings.PROPERTYNAME_RANDOMIZE_BOSSES, vanillaRandoSettings);
-            t.SetToolTip(checkBox18, "Randomize bosses.  Stats from existing boss are\napplied to whoever replaces him.  Mode-7\nbosses (Slimes, Manabeast) are not randomized.");
-            initCheckbox(checkBox19, VanillaRandoSettings.PROPERTYNAME_RANDOMIZE_ENEMIES, vanillaRandoSettings);
-            t.SetToolTip(checkBox19, "Randomize enemies.  Stats are maintained.\nUnhittable enemies are randomized only\namongst themselves.");
-            initCheckbox(checkBox20, VanillaRandoSettings.PROPERTYNAME_RANDOMIZE_WEAPON_ORBS, vanillaRandoSettings);
-            t.SetToolTip(checkBox20, "Randomize weapon orbs.  You should still\ncap out at 9 for each weapon\nexcept Sword.");
-            initCheckbox(checkBox21, VanillaRandoSettings.PROPERTYNAME_RANDOMIZE_ELEMENTS, vanillaRandoSettings);
-            t.SetToolTip(checkBox21, "Randomize elemental summons.  Crystal orbs\nwill be modified to require spells\nthat got randomized in.");
-            initCheckbox(checkBox24, VanillaRandoSettings.PROPERTYNAME_RANDOMIZE_WEAPONS, vanillaRandoSettings);
-            t.SetToolTip(checkBox24, "Randomize names and properties of weapons.\nMana sword will be preserved.");
-            initCheckbox(checkBox26, VanillaRandoSettings.PROPERTYNAME_RANDOMIZE_MUSIC, vanillaRandoSettings);
-            t.SetToolTip(checkBox26, "Mix up songs a bit and bring in some songs from other games.");
-            initCheckbox(checkBox27, VanillaRandoSettings.PROPERTYNAME_AUTOSAVE, vanillaRandoSettings);
-            t.SetToolTip(checkBox27, "Replace save slot 4 with an automatic save every time you change maps.");
-            initCheckbox(checkBox22, VanillaRandoSettings.PROPERTYNAME_DIALOGUE_CUTS, vanillaRandoSettings);
-            t.SetToolTip(checkBox22, "Removes long story events and shortens\nall required dialogue significantly for\na faster run.");
-            initCheckbox(checkBox25, VanillaRandoSettings.PROPERTYNAME_PRESERVE_EARLY_BOSSES, vanillaRandoSettings);
-            t.SetToolTip(checkBox25, "Check to keep all bosses before getting magic in their normal place,\nto prevent unusually hard encounters.\nIgnored if boss rando disabled.");
-            initTrackbar(trackBar3, VanillaRandoSettings.PROPERTYNAME_ENEMY_SCALING, vanillaRandoSettings); // rando enemy difficulty
-            t.SetToolTip(trackBar3, "Boost or reduce enemy and boss stats.\nIncludes basic stats and defense/evade stats.\nAffects HP, but less than other stats.\nDoes not affect MP.");
-            initCombobox(comboBox10, VanillaRandoSettings.PROPERTYNAME_EXP_MULTIPLIER, vanillaRandoSettings); // exp in rando
-            t.SetToolTip(comboBox10, "Experience adjustments for basic difficulty changes.");
-            initCombobox(comboBox11, VanillaRandoSettings.PROPERTYNAME_GOLD_MULTIPLIER, vanillaRandoSettings); // gold in rando
-            t.SetToolTip(comboBox11, "You can adjust gold drops too.");
-            initCombobox(comboBox12, VanillaRandoSettings.PROPERTYNAME_SPECIAL_MODE, vanillaRandoSettings); // holiday mode in rando
-            t.SetToolTip(comboBox12, "Silly holiday modes and stuff");
-            initCombobox(comboBox17, VanillaRandoSettings.PROPERTYNAME_STATUS_AILMENTS, vanillaRandoSettings);
-            t.SetToolTip(comboBox17, "Status ailments caused by enemies are determined by:\n\n" +
+            initCheckbox(chkVanillaRandomizeBosses, VanillaRandoSettings.PROPERTYNAME_RANDOMIZE_BOSSES, vanillaRandoSettings);
+            t.SetToolTip(chkVanillaRandomizeBosses, "Randomize bosses.  Stats from existing boss are\napplied to whoever replaces him.  Mode-7\nbosses (Slimes, Manabeast) are not randomized.");
+            initCheckbox(chkVanillaRandomizeEnemies, VanillaRandoSettings.PROPERTYNAME_RANDOMIZE_ENEMIES, vanillaRandoSettings);
+            t.SetToolTip(chkVanillaRandomizeEnemies, "Randomize enemies.  Stats are maintained.\nUnhittable enemies are randomized only\namongst themselves.");
+            initCheckbox(chkVanillaRandomizeWeaponOrbs, VanillaRandoSettings.PROPERTYNAME_RANDOMIZE_WEAPON_ORBS, vanillaRandoSettings);
+            t.SetToolTip(chkVanillaRandomizeWeaponOrbs, "Randomize weapon orbs.  You should still\ncap out at 9 for each weapon\nexcept Sword.");
+            initCheckbox(chkVanillaRandomizeElements, VanillaRandoSettings.PROPERTYNAME_RANDOMIZE_ELEMENTS, vanillaRandoSettings);
+            t.SetToolTip(chkVanillaRandomizeElements, "Randomize elemental summons.  Crystal orbs\nwill be modified to require spells\nthat got randomized in.");
+            initCheckbox(chkVanillaRandomizeWeapons, VanillaRandoSettings.PROPERTYNAME_RANDOMIZE_WEAPONS, vanillaRandoSettings);
+            t.SetToolTip(chkVanillaRandomizeWeapons, "Randomize names and properties of weapons.\nMana sword will be preserved.");
+            initCheckbox(chkVanillaRandomizeMusic, VanillaRandoSettings.PROPERTYNAME_RANDOMIZE_MUSIC, vanillaRandoSettings);
+            t.SetToolTip(chkVanillaRandomizeMusic, "Mix up songs a bit and bring in some songs from other games.");
+            initCheckbox(chkVanillaAutoSave, VanillaRandoSettings.PROPERTYNAME_AUTOSAVE, vanillaRandoSettings);
+            t.SetToolTip(chkVanillaAutoSave, "Replace save slot 4 with an automatic save every time you change maps.");
+            initCheckbox(chkVanillaDialogCuts, VanillaRandoSettings.PROPERTYNAME_DIALOGUE_CUTS, vanillaRandoSettings);
+            t.SetToolTip(chkVanillaDialogCuts, "Removes long story events and shortens\nall required dialogue significantly for\na faster run.");
+            initCheckbox(chkVanillaPreserveEarlyBosses, VanillaRandoSettings.PROPERTYNAME_PRESERVE_EARLY_BOSSES, vanillaRandoSettings);
+            t.SetToolTip(chkVanillaPreserveEarlyBosses, "Check to keep all bosses before getting magic in their normal place,\nto prevent unusually hard encounters.\nIgnored if boss rando disabled.");
+            initTrackbar(trbVanillaEnemyScaling, VanillaRandoSettings.PROPERTYNAME_ENEMY_SCALING, vanillaRandoSettings); // rando enemy difficulty
+            t.SetToolTip(trbVanillaEnemyScaling, "Boost or reduce enemy and boss stats.\nIncludes basic stats and defense/evade stats.\nAffects HP, but less than other stats.\nDoes not affect MP.");
+            initCombobox(cmbVanillaExpMultiplier, VanillaRandoSettings.PROPERTYNAME_EXP_MULTIPLIER, vanillaRandoSettings); // exp in rando
+            t.SetToolTip(cmbVanillaExpMultiplier, "Experience adjustments for basic difficulty changes.");
+            initCombobox(cmbVanillaGoldMultiplier, VanillaRandoSettings.PROPERTYNAME_GOLD_MULTIPLIER, vanillaRandoSettings); // gold in rando
+            t.SetToolTip(cmbVanillaGoldMultiplier, "You can adjust gold drops too.");
+            initCombobox(cmbVanillaSpecialMode, VanillaRandoSettings.PROPERTYNAME_SPECIAL_MODE, vanillaRandoSettings); // holiday mode in rando
+            t.SetToolTip(cmbVanillaSpecialMode, "Silly holiday modes and stuff");
+            initCombobox(cmbVanillaStatusAilments, VanillaRandoSettings.PROPERTYNAME_STATUS_AILMENTS, vanillaRandoSettings);
+            t.SetToolTip(cmbVanillaStatusAilments, "Status ailments caused by enemies are determined by:\n\n" +
                 "- Location: an enemy will cause the same conditions as the enemy that was originally there.\n" +
                 "- Enemy type: every enemy retains its status conditions regardless of location.\n" +
                 "- Random easy: randomize status effects with about the same distribution as vanilla.\n" +
                 "- Random annoying: randomize with about double the status ailments as vanilla.\n" +
                 "- Random awful: every enemy causes status ailments");
-            t.SetToolTip(pictureBox3, "More details about this mode!"); // rando
+            t.SetToolTip(picVanillaDetails, "More details about this mode!"); // rando
         }
 
         private void initOpenWorldComponents()
@@ -258,8 +258,8 @@ namespace SoMRandomizer.forms
             propertyManager.makeNumericValueProperty("openNumeric", OpenWorldSettings.PROPERTYNAME_STARTING_LEVEL, "Starting level", "Minimum starting level of characters joining the party. Note that if enemy leveling is set to \"Match player,\" this could make the beginning of the game more difficult.", openWorldSettings);
             propertyManager.makeNumericValueProperty("openNumeric", OpenWorldSettings.PROPERTYNAME_NUM_XMAS_GIFTS, "Xmas gifts", "For the Christmas gift goal, the number of gifts you have to deliver.", openWorldSettings);
 
-            initCombobox(comboBox13, OpenWorldSettings.PROPERTYNAME_ENEMY_STAT_GROWTH, openWorldSettings);
-            t.SetToolTip(comboBox13,
+            initCombobox(cmbOpenStatGrowth, OpenWorldSettings.PROPERTYNAME_ENEMY_STAT_GROWTH, openWorldSettings);
+            t.SetToolTip(cmbOpenStatGrowth,
                 "Decide how enemy levels and stats will be determined.\n\n" +
                 "- Match player: Enemies will match the level of the highest\nplayer, and stats will scale up or down according to\nvanilla stat distribution of that enemy.\n\n" +
                 "- Increase after bosses: Enemy levels and stats will increase\nafter every boss defeated.\nDifficulty level will control the increase after each boss.\n\n" +
@@ -267,51 +267,51 @@ namespace SoMRandomizer.forms
                 "- No Future: All enemies are level 99 (or chosen level in More Options). Good luck.\n\n" +
                 "- None (vanilla): Enemy levels/stats based on location\nlike Rando mode. May be grindy!\n\n"
                 );
-            initCombobox(comboBox14, OpenWorldSettings.PROPERTYNAME_ENEMY_STAT_GROWTH_DIFFICULTY, openWorldSettings);
-            t.SetToolTip(comboBox14, "Choose how aggressively the stats of enemies will increase.\nIf you can complete \"impossible\" then I didn't make it hard enough.");
-            initCombobox(comboBox19, OpenWorldSettings.PROPERTYNAME_START_WITH_GIRL_AND_SPRITE, openWorldSettings);
-            t.SetToolTip(comboBox19, "How will you find the non-starting characters?");
-            initCombobox(comboBox20, OpenWorldSettings.PROPERTYNAME_STATUS_AILMENTS, openWorldSettings);
-            t.SetToolTip(comboBox20, "Status ailments caused by enemies are determined by:\n\n" +
+            initCombobox(cmbOpenStatGrowthDifficulty, OpenWorldSettings.PROPERTYNAME_ENEMY_STAT_GROWTH_DIFFICULTY, openWorldSettings);
+            t.SetToolTip(cmbOpenStatGrowthDifficulty, "Choose how aggressively the stats of enemies will increase.\nIf you can complete \"impossible\" then I didn't make it hard enough.");
+            initCombobox(cmbOpenOtherChars, OpenWorldSettings.PROPERTYNAME_START_WITH_GIRL_AND_SPRITE, openWorldSettings);
+            t.SetToolTip(cmbOpenOtherChars, "How will you find the non-starting characters?");
+            initCombobox(cmbOpenStatusAilments, OpenWorldSettings.PROPERTYNAME_STATUS_AILMENTS, openWorldSettings);
+            t.SetToolTip(cmbOpenStatusAilments, "Status ailments caused by enemies are determined by:\n\n" +
                 "- Location: an enemy will cause the same conditions as the enemy that was originally there.\n" +
                 "- Enemy type: every enemy retains its status conditions regardless of location.\n" +
                 "- Random easy: randomize status effects with about the same distribution as vanilla.\n" +
                 "- Random annoying: randomize with about double the status ailments as vanilla.\n" +
                 "- Random awful: every enemy causes status ailments");
-            initCombobox(comboBox21, OpenWorldSettings.PROPERTYNAME_GOAL, openWorldSettings);
-            t.SetToolTip(comboBox21, "Set the goal of the run:\n\n" +
+            initCombobox(cmbOpenGoal, OpenWorldSettings.PROPERTYNAME_GOAL, openWorldSettings);
+            t.SetToolTip(cmbOpenGoal, "Set the goal of the run:\n\n" +
                 "- Vanilla short: Beat the Mana Beast at the Mana Fort.  Mana Fort is accessible from the start.\n" +
                 "- Vanilla long: Beat the Mana Beast at the Mana Fort.  Mana Fort is accessible once you finish Grand Palace.\n" +
                 "- Mana tree revival: Bring the eight Mana Seeds to the Mana Tree.\n" +
                 "- Gift exchange: (Xmas 2020) Deliver random gifts to random NPCs.\n" +
                 "- Reindeer search: (Xmas 2020) Find Santa's eight reindeer, which replace random enemies/NPCs.\n"
                 );
-            initCombobox(comboBox22, OpenWorldSettings.PROPERTYNAME_RANDOMIZE_ENEMIES, openWorldSettings);
-            t.SetToolTip(comboBox22, "Determines how normal enemies are placed.\nNote that their stats are determined by \"Enemy stat growth\" based on their location:\n\n" +
+            initCombobox(cmbOpenRandomizeEnemies, OpenWorldSettings.PROPERTYNAME_RANDOMIZE_ENEMIES, openWorldSettings);
+            t.SetToolTip(cmbOpenRandomizeEnemies, "Determines how normal enemies are placed.\nNote that their stats are determined by \"Enemy stat growth\" based on their location:\n\n" +
                 "- Vanilla: all enemies are in their original places.\n" +
                 "- Swap: every enemy species is randomly swapped with another.\n" +
                 "- Random spawns: every enemy spawn will be a random species every time.\n" +
                 "- Oops all owls: all enemies are the same type as determined by More Options. Default Nemesis Owl.\n" +
                 "- None: with a few exceptions, there are no normal enemies.");
-            initCombobox(comboBox25, OpenWorldSettings.PROPERTYNAME_RANDOMIZE_BOSSES, openWorldSettings);
-            initCombobox(comboBox26, OpenWorldSettings.PROPERTYNAME_LOGIC_MODE, openWorldSettings);
-            t.SetToolTip(comboBox26, "Configure logic for the run:\n\n" +
+            initCombobox(cmbOpenRandomizeBosses, OpenWorldSettings.PROPERTYNAME_RANDOMIZE_BOSSES, openWorldSettings);
+            initCombobox(cmbOpenLogicMode, OpenWorldSettings.PROPERTYNAME_LOGIC_MODE, openWorldSettings);
+            t.SetToolTip(cmbOpenLogicMode, "Configure logic for the run:\n\n" +
                 "- Basic: Logic includes randomized spell orbs, whip/axe/sword for some locations, and gold key/sea hare's tail.\n" +
                 "- Restrictive: Additionally, Mana Palaces will only grant rewards once their Mana Seed is restored.\n"
                 );
-            initCombobox(comboBox27, OpenWorldSettings.PROPERTYNAME_STARTING_CHAR, openWorldSettings);
-            initCheckbox(checkBox28, OpenWorldSettings.PROPERTYNAME_RANDOMIZE_MUSIC, openWorldSettings);
-            t.SetToolTip(checkBox28, "Mix up songs a bit and bring in some songs from other games.");
-            initCheckbox(checkBox29, OpenWorldSettings.PROPERTYNAME_RANDOMIZE_WEAPONS, openWorldSettings);
-            t.SetToolTip(checkBox29, "Randomize names and properties of weapons.\nMana sword will be preserved.");
-            initCheckbox(checkBox36, OpenWorldSettings.PROPERTYNAME_RANDOMIZE_SHOPS, openWorldSettings); // random shops in open world
-            t.SetToolTip(checkBox36, "Randomize gear available in shops.");
-            initCheckbox(checkBox37, OpenWorldSettings.PROPERTYNAME_RANDOMIZE_COLORS, openWorldSettings); // random colors in open world
-            t.SetToolTip(checkBox37, "Randomize the hue/saturation/luminance of map colors.");
-            initCheckbox(checkBox39, OpenWorldSettings.PROPERTYNAME_FLAMMIE_DRUM_IN_LOGIC, openWorldSettings); // flammie drum found
-            t.SetToolTip(checkBox39, "Don't start with Flammie Drum - find it as a check instead.\nRestricts your options at the beginning of the run.\nChanges start location to Potos so you don't need a cutting weapon.");
+            initCombobox(cmbOpenStartingChar, OpenWorldSettings.PROPERTYNAME_STARTING_CHAR, openWorldSettings);
+            initCheckbox(chkOpenRandomizeMusic, OpenWorldSettings.PROPERTYNAME_RANDOMIZE_MUSIC, openWorldSettings);
+            t.SetToolTip(chkOpenRandomizeMusic, "Mix up songs a bit and bring in some songs from other games.");
+            initCheckbox(chkOpenRandomizeWeapons, OpenWorldSettings.PROPERTYNAME_RANDOMIZE_WEAPONS, openWorldSettings);
+            t.SetToolTip(chkOpenRandomizeWeapons, "Randomize names and properties of weapons.\nMana sword will be preserved.");
+            initCheckbox(chkOpenRandomizeShops, OpenWorldSettings.PROPERTYNAME_RANDOMIZE_SHOPS, openWorldSettings); // random shops in open world
+            t.SetToolTip(chkOpenRandomizeShops, "Randomize gear available in shops.");
+            initCheckbox(chkOpenRandomMapColors, OpenWorldSettings.PROPERTYNAME_RANDOMIZE_COLORS, openWorldSettings); // random colors in open world
+            t.SetToolTip(chkOpenRandomMapColors, "Randomize the hue/saturation/luminance of map colors.");
+            initCheckbox(chkOpenFlammieDrumLogic, OpenWorldSettings.PROPERTYNAME_FLAMMIE_DRUM_IN_LOGIC, openWorldSettings); // flammie drum found
+            t.SetToolTip(chkOpenFlammieDrumLogic, "Don't start with Flammie Drum - find it as a check instead.\nRestricts your options at the beginning of the run.\nChanges start location to Potos so you don't need a cutting weapon.");
 
-            t.SetToolTip(pictureBox11, "More details about this mode!"); // open
+            t.SetToolTip(picOpenDetails, "More details about this mode!"); // open
 
             plandoForm = new PlandoForm();
             optionsManager.addPlando(plandoForm, OpenWorldSettings.PROPERTYNAME_PLANDO, openWorldSettings);
@@ -319,32 +319,32 @@ namespace SoMRandomizer.forms
 
         private void initAncientCaveComponents()
         {
-            initCheckbox(checkBox5, AncientCaveSettings.PROPERTYNAME_PROFANITY_FILTER, ancientCaveSettings); // filter
-            t.SetToolTip(checkBox5, "Mitch Hedberg isn't for everybody.");
-            initCheckbox(checkBox8, AncientCaveSettings.PROPERTYNAME_INCLUDE_BOY_CHARACTER, ancientCaveSettings); // boy, girl, sprite for ancient cave
-            initCheckbox(checkBox9, AncientCaveSettings.PROPERTYNAME_INCLUDE_GIRL_CHARACTER, ancientCaveSettings);
-            initCheckbox(checkBox10, AncientCaveSettings.PROPERTYNAME_INCLUDE_SPRITE_CHARACTER, ancientCaveSettings);
-            initCheckedListbox(checkedListBox1, AncientCaveSettings.PROPERTYNAME_BIOME_TYPES, ancientCaveSettings);
-            initCombobox(comboBox1, AncientCaveSettings.PROPERTYNAME_DIFFICULTY, ancientCaveSettings); // AC difficulty
-            t.SetToolTip(comboBox1, "Enemy stat progression level.");
-            initCombobox(comboBox2, AncientCaveSettings.PROPERTYNAME_DIALOGUE_SOURCE, ancientCaveSettings); // AC npc dialogue
-            initCombobox(comboBox3, AncientCaveSettings.PROPERTYNAME_LENGTH, ancientCaveSettings); // AC length
-            t.SetToolTip(comboBox3, "The floors are much longer and more time-consuming than Lufia 2's.");
-            initCombobox(comboBox4, AncientCaveSettings.PROPERTYNAME_BOSS_FREQUENCY, ancientCaveSettings); // AC bosses
-            t.SetToolTip(comboBox4, "All ancient caves end with the Mana Beast fight.");
-            initCheckbox(checkBox35, AncientCaveSettings.PROPERTYNAME_RANDOM_MUSIC, ancientCaveSettings); // ac random music
-            t.SetToolTip(pictureBox8, "More details about this mode!"); // ac
+            initCheckbox(chkACProfanityFilter, AncientCaveSettings.PROPERTYNAME_PROFANITY_FILTER, ancientCaveSettings); // filter
+            t.SetToolTip(chkACProfanityFilter, "Mitch Hedberg isn't for everybody.");
+            initCheckbox(chkACIncludeBoyChar, AncientCaveSettings.PROPERTYNAME_INCLUDE_BOY_CHARACTER, ancientCaveSettings); // boy, girl, sprite for ancient cave
+            initCheckbox(chkACIncludeGirlChar, AncientCaveSettings.PROPERTYNAME_INCLUDE_GIRL_CHARACTER, ancientCaveSettings);
+            initCheckbox(chkACIncludeSpriteChar, AncientCaveSettings.PROPERTYNAME_INCLUDE_SPRITE_CHARACTER, ancientCaveSettings);
+            initCheckedListbox(cklACBiomeTypes, AncientCaveSettings.PROPERTYNAME_BIOME_TYPES, ancientCaveSettings);
+            initCombobox(cmbACDifficulty, AncientCaveSettings.PROPERTYNAME_DIFFICULTY, ancientCaveSettings); // AC difficulty
+            t.SetToolTip(cmbACDifficulty, "Enemy stat progression level.");
+            initCombobox(cmbACDialogSource, AncientCaveSettings.PROPERTYNAME_DIALOGUE_SOURCE, ancientCaveSettings); // AC npc dialogue
+            initCombobox(cmbACLength, AncientCaveSettings.PROPERTYNAME_LENGTH, ancientCaveSettings); // AC length
+            t.SetToolTip(cmbACLength, "The floors are much longer and more time-consuming than Lufia 2's.");
+            initCombobox(cmbACBossFrequency, AncientCaveSettings.PROPERTYNAME_BOSS_FREQUENCY, ancientCaveSettings); // AC bosses
+            t.SetToolTip(cmbACBossFrequency, "All ancient caves end with the Mana Beast fight.");
+            initCheckbox(chkACRandomMusic, AncientCaveSettings.PROPERTYNAME_RANDOM_MUSIC, ancientCaveSettings); // ac random music
+            t.SetToolTip(picACDetails, "More details about this mode!"); // ac
         }
 
         private void initBossRushComponents()
         {
             propertyManager.makePropertyClass("bossrush", "Boss rush options");
             propertyManager.makeBooleanValueProperty("bossrush", BossRushSettings.PROPERTYNAME_LIMIT_MP_STEAL, "Limit MP Absorb", "MP Absorb will grant the sprite 3 MP max, but still damage the enemy's MP by the original amount.", bossRushSettings);
-            initCheckbox(checkBox13, BossRushSettings.PROPERTYNAME_INCLUDE_BOY_CHARACTER, bossRushSettings); // boy, girl, sprite for boss rush mode
-            initCheckbox(checkBox12, BossRushSettings.PROPERTYNAME_INCLUDE_GIRL_CHARACTER, bossRushSettings);
-            initCheckbox(checkBox11, BossRushSettings.PROPERTYNAME_INCLUDE_SPRITE_CHARACTER, bossRushSettings);
-            initCombobox(comboBox8, BossRushSettings.PROPERTYNAME_DIFFICULTY, bossRushSettings); // boss rush difficulty
-            t.SetToolTip(pictureBox9, "More details about this mode!"); // bossrush
+            initCheckbox(chkBossRushIncludeBoyChar, BossRushSettings.PROPERTYNAME_INCLUDE_BOY_CHARACTER, bossRushSettings); // boy, girl, sprite for boss rush mode
+            initCheckbox(chkBossRushIncludeGirlChar, BossRushSettings.PROPERTYNAME_INCLUDE_GIRL_CHARACTER, bossRushSettings);
+            initCheckbox(chkBossRushIncludeSpriteChar, BossRushSettings.PROPERTYNAME_INCLUDE_SPRITE_CHARACTER, bossRushSettings);
+            initCombobox(cmbBossRushDifficulty, BossRushSettings.PROPERTYNAME_DIFFICULTY, bossRushSettings); // boss rush difficulty
+            t.SetToolTip(picBossRushDetails, "More details about this mode!"); // bossrush
         }
 
         private void initChaosComponents()
@@ -354,21 +354,21 @@ namespace SoMRandomizer.forms
             propertyManager.makeBooleanValueProperty("chaos", ChaosSettings.PROPERTYNAME_PRIORITIZE_HEAL_SPELLS, "Prioritize heal spells", "Chances of getting Undine toward the beginning of the run are heavily in your favor, and those of Dryad are slightly in your favor.", chaosSettings);
             propertyManager.makeBooleanValueProperty("chaos", ChaosSettings.PROPERTYNAME_SAFER_EARLY_FLOORS, "Safer early floors", "Extend the number of normal floors early in the run before you encounter the first boss.", chaosSettings);
 
-            initCheckbox(checkBox17, ChaosSettings.PROPERTYNAME_INCLUDE_BOY_CHARACTER, chaosSettings); // boy, girl, sprite for chaos mode
-            initCheckbox(checkBox16, ChaosSettings.PROPERTYNAME_INCLUDE_GIRL_CHARACTER, chaosSettings);
-            initCheckbox(checkBox15, ChaosSettings.PROPERTYNAME_INCLUDE_SPRITE_CHARACTER, chaosSettings);
-            initCombobox(comboBox9, ChaosSettings.PROPERTYNAME_DIFFICULTY, chaosSettings); // chaos difficulty
-            t.SetToolTip(comboBox9, "Enemy stat progression level.");
-            initTrackbar(trackBar1, ChaosSettings.PROPERTYNAME_NUM_FLOORS, chaosSettings); // chaos floors
-            t.SetToolTip(trackBar1, "Shortest around 20 maps, longest around 100.\nNote that enemies are scaled regardless of length,\nso shorter ROMs will be harder!");
-            initTrackbar(trackBar2, ChaosSettings.PROPERTYNAME_NUM_BOSSES, chaosSettings); // chaos bosses
-            t.SetToolTip(trackBar2, "Far left for no bosses (except the mana beast), far right for a bunch of bosses.");
-            initRadioButtons(new RadioButton[] { radioButton4, radioButton5, radioButton6 }, ChaosSettings.PROPERTYNAME_PALETTE_SWAP_TYPE, chaosSettings); // chaos colors
-            t.SetToolTip(radioButton4, "Don't screw with the palettes.");
-            t.SetToolTip(radioButton5, "Some semi-normal looking BG palette swaps.");
-            t.SetToolTip(radioButton6, "Just don't pick this.");
+            initCheckbox(chkChaosIncludeBoyChar, ChaosSettings.PROPERTYNAME_INCLUDE_BOY_CHARACTER, chaosSettings); // boy, girl, sprite for chaos mode
+            initCheckbox(chkChaosIncludeGirlChar, ChaosSettings.PROPERTYNAME_INCLUDE_GIRL_CHARACTER, chaosSettings);
+            initCheckbox(chkChaosIncludeSpriteChar, ChaosSettings.PROPERTYNAME_INCLUDE_SPRITE_CHARACTER, chaosSettings);
+            initCombobox(cmbChaosDifficulty, ChaosSettings.PROPERTYNAME_DIFFICULTY, chaosSettings); // chaos difficulty
+            t.SetToolTip(cmbChaosDifficulty, "Enemy stat progression level.");
+            initTrackbar(trbChaosFloors, ChaosSettings.PROPERTYNAME_NUM_FLOORS, chaosSettings); // chaos floors
+            t.SetToolTip(trbChaosFloors, "Shortest around 20 maps, longest around 100.\nNote that enemies are scaled regardless of length,\nso shorter ROMs will be harder!");
+            initTrackbar(trbChaosBosses, ChaosSettings.PROPERTYNAME_NUM_BOSSES, chaosSettings); // chaos bosses
+            t.SetToolTip(trbChaosBosses, "Far left for no bosses (except the mana beast), far right for a bunch of bosses.");
+            initRadioButtons(new RadioButton[] { rdoChaosPalatteNone, rdoChaosPalatteReasonable, rdoChaosPalatteRidiculous }, ChaosSettings.PROPERTYNAME_PALETTE_SWAP_TYPE, chaosSettings); // chaos colors
+            t.SetToolTip(rdoChaosPalatteNone, "Don't screw with the palettes.");
+            t.SetToolTip(rdoChaosPalatteReasonable, "Some semi-normal looking BG palette swaps.");
+            t.SetToolTip(rdoChaosPalatteRidiculous, "Just don't pick this.");
 
-            t.SetToolTip(pictureBox10, "More details about this mode!"); // chaos
+            t.SetToolTip(picChaosDetails, "More details about this mode!"); // chaos
         }
     }
 }
