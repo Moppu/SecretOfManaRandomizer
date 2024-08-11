@@ -243,66 +243,66 @@ namespace SoMRandomizer.processing.hacks.openworld
 
             // additional level for enemies for each difficulty
             Dictionary<string, int> difficultyAdditions = new Dictionary<string, int>();
-            difficultyAdditions["easy"] = -2;
-            difficultyAdditions["sortaeasy"] = -1;
-            difficultyAdditions["normal"] = -1;
-            difficultyAdditions["kindahard"] = -1;
-            difficultyAdditions["hard"] = -1;
-            difficultyAdditions["impossible"] = 5;
+            difficultyAdditions[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_EASY] = -2;
+            difficultyAdditions[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_SORTA_EASY] = -1;
+            difficultyAdditions[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_NORMAL] = -1;
+            difficultyAdditions[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_KINDA_HARD] = -1;
+            difficultyAdditions[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_HARD] = -1;
+            difficultyAdditions[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_IMPOSSIBLE] = 5;
 
             // bosses are higher level than normal enemies
             Dictionary<string, int> bossAdditions = new Dictionary<string, int>();
-            bossAdditions["easy"] = 3;
-            bossAdditions["sortaeasy"] = 3;
-            bossAdditions["normal"] = 3;
-            bossAdditions["kindahard"] = 3;
-            bossAdditions["hard"] = 3;
-            bossAdditions["impossible"] = 5;
+            bossAdditions[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_EASY] = 3;
+            bossAdditions[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_SORTA_EASY] = 3;
+            bossAdditions[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_NORMAL] = 3;
+            bossAdditions[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_KINDA_HARD] = 3;
+            bossAdditions[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_HARD] = 3;
+            bossAdditions[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_IMPOSSIBLE] = 5;
 
             // bosses can't be too low a level
             Dictionary<string, int> minimumBossLevels = new Dictionary<string, int>();
-            minimumBossLevels["easy"] = 3;
-            minimumBossLevels["sortaeasy"] = 3;
-            minimumBossLevels["normal"] = 4;
-            minimumBossLevels["kindahard"] = 4;
-            minimumBossLevels["hard"] = 5;
-            minimumBossLevels["impossible"] = 10;
+            minimumBossLevels[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_EASY] = 3;
+            minimumBossLevels[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_SORTA_EASY] = 3;
+            minimumBossLevels[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_NORMAL] = 4;
+            minimumBossLevels[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_KINDA_HARD] = 4;
+            minimumBossLevels[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_HARD] = 5;
+            minimumBossLevels[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_IMPOSSIBLE] = 10;
 
             // stats won't go above the stats for this maximum level
             Dictionary<string, int> enemyLevelMaxes = new Dictionary<string, int>();
-            enemyLevelMaxes["easy"] = 50;
-            enemyLevelMaxes["sortaeasy"] = 60;
-            enemyLevelMaxes["normal"] = 70;
-            enemyLevelMaxes["kindahard"] = 80;
-            enemyLevelMaxes["hard"] = 99;
-            enemyLevelMaxes["impossible"] = 99;
+            enemyLevelMaxes[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_EASY] = 50;
+            enemyLevelMaxes[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_SORTA_EASY] = 60;
+            enemyLevelMaxes[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_NORMAL] = 70;
+            enemyLevelMaxes[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_KINDA_HARD] = 80;
+            enemyLevelMaxes[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_HARD] = 99;
+            enemyLevelMaxes[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_IMPOSSIBLE] = 99;
 
             // evade for enemies won't go above this
             Dictionary<string, int> enemyEvadeMaxes = new Dictionary<string, int>();
-            enemyEvadeMaxes["easy"] = 25;
-            enemyEvadeMaxes["sortaeasy"] = 40;
-            enemyEvadeMaxes["normal"] = 50;
-            enemyEvadeMaxes["kindahard"] = 75;
-            enemyEvadeMaxes["hard"] = 99;
-            enemyEvadeMaxes["impossible"] = 99;
+            enemyEvadeMaxes[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_EASY] = 25;
+            enemyEvadeMaxes[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_SORTA_EASY] = 40;
+            enemyEvadeMaxes[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_NORMAL] = 50;
+            enemyEvadeMaxes[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_KINDA_HARD] = 75;
+            enemyEvadeMaxes[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_HARD] = 99;
+            enemyEvadeMaxes[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_IMPOSSIBLE] = 99;
 
             // scale enemy magic defense
             Dictionary<string, double> extraMdefLevelMultipliers = new Dictionary<string, double>();
-            extraMdefLevelMultipliers["easy"] = 0.0;
-            extraMdefLevelMultipliers["sortaeasy"] = 1.0;
-            extraMdefLevelMultipliers["normal"] = 1.5;
-            extraMdefLevelMultipliers["kindahard"] = 2.0;
-            extraMdefLevelMultipliers["hard"] = 2.5;
-            extraMdefLevelMultipliers["impossible"] = 4.0;
+            extraMdefLevelMultipliers[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_EASY] = 0.0;
+            extraMdefLevelMultipliers[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_SORTA_EASY] = 1.0;
+            extraMdefLevelMultipliers[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_NORMAL] = 1.5;
+            extraMdefLevelMultipliers[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_KINDA_HARD] = 2.0;
+            extraMdefLevelMultipliers[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_HARD] = 2.5;
+            extraMdefLevelMultipliers[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_IMPOSSIBLE] = 4.0;
 
             // enemy weapon/magic levels max at this amount
             Dictionary<string, int> enemyWeaponMagicLevelMaxes = new Dictionary<string, int>();
-            enemyWeaponMagicLevelMaxes["easy"] = 4;
-            enemyWeaponMagicLevelMaxes["sortaeasy"] = 5;
-            enemyWeaponMagicLevelMaxes["normal"] = 6;
-            enemyWeaponMagicLevelMaxes["kindahard"] = 7;
-            enemyWeaponMagicLevelMaxes["hard"] = 8;
-            enemyWeaponMagicLevelMaxes["impossible"] = 8;
+            enemyWeaponMagicLevelMaxes[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_EASY] = 4;
+            enemyWeaponMagicLevelMaxes[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_SORTA_EASY] = 5;
+            enemyWeaponMagicLevelMaxes[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_NORMAL] = 6;
+            enemyWeaponMagicLevelMaxes[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_KINDA_HARD] = 7;
+            enemyWeaponMagicLevelMaxes[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_HARD] = 8;
+            enemyWeaponMagicLevelMaxes[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_IMPOSSIBLE] = 8;
 
             // for logging; stat num -> level -> class, value
             Dictionary<int, Dictionary<int, Dictionary<int, int>>> finalStatValues = new Dictionary<int, Dictionary<int, Dictionary<int, int>>>();
