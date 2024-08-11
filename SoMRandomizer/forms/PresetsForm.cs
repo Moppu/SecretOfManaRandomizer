@@ -93,7 +93,7 @@ namespace SoMRandomizer.forms
             public Dictionary<NumericUpDown, double[]> numericUpDownSelections = new Dictionary<NumericUpDown, double[]>();
 
             public bool hideUi = false;
-            public Form1 mainForm;
+            public MainForm mainForm;
             public bool separatorOnly = false;
             public int fontSizeChange = 0;
 
