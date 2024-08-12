@@ -63,6 +63,13 @@ namespace SoMRandomizer.config.settings
         public const string PROPERTYNAME_NUM_XMAS_GIFTS = "opXmasGifts";
         public const string PROPERTYNAME_STARTING_LEVEL = "opStartLevel";
         public const string PROPERTYNAME_FLAMMIE_DRUM_IN_LOGIC = "opFlammieDrumInLogic";
+        
+        public const string PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_EASY = "easy";
+        public const string PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_SORTA_EASY = "sortaeasy";
+        public const string PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_NORMAL = "normal";
+        public const string PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_KINDA_HARD = "kindahard";
+        public const string PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_HARD = "hard";
+        public const string PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_IMPOSSIBLE = "impossible";
 
         public OpenWorldSettings(CommonSettings commonSettings) : base(commonSettings)
         {
@@ -95,7 +102,15 @@ namespace SoMRandomizer.config.settings
             setInitial(PROPERTYNAME_RANDOMIZE_BOSSES, new string[] { "vanilla", "swap", "random" }, new string[] { "Vanilla", "Swap", "Random" }, "random");
             setInitial(PROPERTYNAME_STATUS_AILMENTS, new string[] { "location", "type", "easy", "annoying", "awful" }, new string[] { "Location", "Enemy type", "Random (easy)", "Random (annoying)", "Random (awful)" }, "location");
             setInitial(PROPERTYNAME_ENEMY_STAT_GROWTH, new string[] { "player", "boss", "timed", "nofuture", "vanilla" }, new string[] { "Match player", "Increase after bosses", "Timed", "No Future", "Vanilla" }, "player");
-            setInitial(PROPERTYNAME_ENEMY_STAT_GROWTH_DIFFICULTY, new string[] { "easy", "sortaeasy", "normal", "kindahard", "hard", "impossible" }, new string[] { "Easy", "Sorta easy", "Normal", "Kinda hard", "Hard", "Impossible" }, "normal");
+            setInitial(PROPERTYNAME_ENEMY_STAT_GROWTH_DIFFICULTY, new string[]
+            {
+                PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_EASY,
+                PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_SORTA_EASY,
+                PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_NORMAL, 
+                PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_KINDA_HARD,
+                PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_HARD,
+                PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_IMPOSSIBLE
+            }, new string[] { "Easy", "Sorta easy", "Normal", "Kinda hard", "Hard", "Impossible" }, "normal");
             setInitial(PROPERTYNAME_START_WITH_GIRL_AND_SPRITE, new string[] { "startboth", "findbothL1", "findbothCL", "start1find1", "start1only", "find1L1", "find1CL", "none" }, 
                 new string[] { "Start with both", "Find both at level 1", "Find both at current level", "Start with one, find the other", "Start with one, other doesn't exist", "Find one at level 1", "Find one at current level", "They don't exist" }, "findbothL1");
             setInitial(PROPERTYNAME_STARTING_CHAR, new string[] { "random", "boy", "girl", "sprite" }, new string[] { "Random", "Boy", "Girl", "Sprite" }, "boy");

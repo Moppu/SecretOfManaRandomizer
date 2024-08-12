@@ -33,33 +33,33 @@ namespace SoMRandomizer.processing.openworld
         static OpenWorldDifficultyProcessor()
         {
             // these are used as scalars to the loaded enemy stats
-            playerDifficultyValues["easy"] = 0.6;
-            playerDifficultyValues["sorta easy"] = 0.7;
-            playerDifficultyValues["normal"] = 0.8;
-            playerDifficultyValues["kinda hard"] = 1.0;
-            playerDifficultyValues["hard"] = 1.2;
-            playerDifficultyValues["impossible"] = 2.0;
+            playerDifficultyValues[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_EASY] = 0.6;
+            playerDifficultyValues[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_SORTA_EASY] = 0.7;
+            playerDifficultyValues[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_NORMAL] = 0.8;
+            playerDifficultyValues[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_KINDA_HARD] = 1.0;
+            playerDifficultyValues[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_HARD] = 1.2;
+            playerDifficultyValues[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_IMPOSSIBLE] = 2.0;
             difficultyValues["player"] = playerDifficultyValues;
 
             // these increments are in 0.5 levels to give a little better granularity of leveling, particularly
             // for boss kills difficulty mode
 
             // seconds per level
-            timedDifficultyValues["easy"] = 320;
-            timedDifficultyValues["sorta easy"] = 256;
-            timedDifficultyValues["normal"] = 200;
-            timedDifficultyValues["kinda hard"] = 160;
-            timedDifficultyValues["hard"] = 128;
-            timedDifficultyValues["impossible"] = 64;
+            timedDifficultyValues[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_EASY] = 320;
+            timedDifficultyValues[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_SORTA_EASY] = 256;
+            timedDifficultyValues[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_NORMAL] = 200;
+            timedDifficultyValues[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_KINDA_HARD] = 160;
+            timedDifficultyValues[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_HARD] = 128;
+            timedDifficultyValues[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_IMPOSSIBLE] = 64;
             difficultyValues["timed"] = timedDifficultyValues;
 
             // number of enemy levels per boss killed
-            bossesDifficultyValues["easy"] = 0.5; 
-            bossesDifficultyValues["sorta easy"] = 1;
-            bossesDifficultyValues["normal"] = 1.5; 
-            bossesDifficultyValues["kinda hard"] = 2;
-            bossesDifficultyValues["hard"] = 3; 
-            bossesDifficultyValues["impossible"] = 4;
+            bossesDifficultyValues[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_EASY] = 0.5; 
+            bossesDifficultyValues[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_SORTA_EASY] = 1;
+            bossesDifficultyValues[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_NORMAL] = 1.5; 
+            bossesDifficultyValues[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_KINDA_HARD] = 2;
+            bossesDifficultyValues[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_HARD] = 3; 
+            bossesDifficultyValues[OpenWorldSettings.PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_IMPOSSIBLE] = 4;
             difficultyValues["bosses"] = bossesDifficultyValues;
         }
 
