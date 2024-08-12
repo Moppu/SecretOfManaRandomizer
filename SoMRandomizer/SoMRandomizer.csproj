@@ -59,13 +59,13 @@
     <Compile Include="config\settings\RandoSettings.cs" />
     <Compile Include="config\settings\StringValueSettings.cs" />
     <Compile Include="config\settings\VanillaRandoSettings.cs" />
-    <Compile Include="forms\Form1_DifficultyOptions.cs">
+    <Compile Include="forms\MainForm_DifficultyOptions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\Form1_OpenWorldPresets.cs">
+    <Compile Include="forms\MainForm_OpenWorldPresets.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\Form1_UiOptionsInitialization.cs">
+    <Compile Include="forms\MainForm_UiOptionsInitialization.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="processing\ancientcave\mapgen\AncientCaveMapGenerator.cs" />
@@ -332,11 +332,11 @@
     <Compile Include="logging\DebugLogger.cs" />
     <Compile Include="logging\NullWriter.cs" />
     <Compile Include="processing\ancientcave\mapgen\forest\ForestConstants.cs" />
-    <Compile Include="forms\Form1.cs">
+    <Compile Include="forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="forms\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="logging\FileLogger.cs" />
     <Compile Include="logging\Logging.cs" />
@@ -417,8 +417,8 @@
     <EmbeddedResource Include="forms\CharacterDesigner.resx">
       <DependentUpon>CharacterDesigner.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="forms\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="help\InfoForm.resx">
       <DependentUpon>InfoForm.cs</DependentUpon>
