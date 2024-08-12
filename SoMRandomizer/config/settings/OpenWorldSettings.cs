@@ -110,7 +110,7 @@ namespace SoMRandomizer.config.settings
                 PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_KINDA_HARD,
                 PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_HARD,
                 PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_IMPOSSIBLE
-            }, new string[] { "Easy", "Sorta easy", "Normal", "Kinda hard", "Hard", "Impossible" }, "normal");
+            }, new string[] { "Easy", "Sorta easy", "Normal", "Kinda hard", "Hard", "Impossible" }, PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_NORMAL);
             setInitial(PROPERTYNAME_START_WITH_GIRL_AND_SPRITE, new string[] { "startboth", "findbothL1", "findbothCL", "start1find1", "start1only", "find1L1", "find1CL", "none" }, 
                 new string[] { "Start with both", "Find both at level 1", "Find both at current level", "Start with one, find the other", "Start with one, other doesn't exist", "Find one at level 1", "Find one at current level", "They don't exist" }, "findbothL1");
             setInitial(PROPERTYNAME_STARTING_CHAR, new string[] { "random", "boy", "girl", "sprite" }, new string[] { "Random", "Boy", "Girl", "Sprite" }, "boy");
