@@ -500,7 +500,7 @@ namespace SoMRandomizer.forms
             generateWithCurrentSettings(false);
         }
 
-        public void generateWithCurrentSettings(bool skipConfirmation)
+        public void generateWithCurrentSettings(bool hideUI)
         {
             generating = true;
             label7.Visible = true;
@@ -510,7 +510,7 @@ namespace SoMRandomizer.forms
             }
             picCatBread.Enabled = true;
             GenerateParam p = new GenerateParam();
-            p.skipConfirmation = skipConfirmation;
+            p.skipConfirmation = hideUI;
             p.romType = commonSettings.get(CommonSettings.PROPERTYNAME_MODE);
             
             // this is just for the log
@@ -520,9 +520,17 @@ namespace SoMRandomizer.forms
             generalOptionsCategory.Hide();
             openWorldOptionsCategory.Hide();
 
+            
             // start rom generation on another thread so not to hold up the UI
             Thread t = new Thread(new ParameterizedThreadStart(generate));
             t.Start(p);
+            if (!hideUI)
+            {
+                return;
+            }
+            // if the UI is hidden we wait for generation then close the app
+            t.Join();
+            Close();
         }
 
         // an object with a few settings to pass into the rom generation thread
