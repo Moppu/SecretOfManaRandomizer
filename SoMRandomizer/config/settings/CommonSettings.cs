@@ -76,7 +76,7 @@ namespace SoMRandomizer.config.settings
         public const string PROPERTYNAME_MAGIC_ROPE_DEATH_FIX = "magicRopeDeathFix";
         public const string PROPERTYNAME_SPOILER_LOG = "spoilerLog";
 
-        // used by Form1 and CharacterPaletteRandomizer to coordinate custom colors for characters
+        // used by MainForm and CharacterPaletteRandomizer to coordinate custom colors for characters
         public const string PROPERTYNAME_PREFIX_CUSTOM_CHARACTER_COLORS = "CustomCharColor";
 
         public CommonSettings()
