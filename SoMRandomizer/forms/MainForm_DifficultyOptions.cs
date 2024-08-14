@@ -441,18 +441,6 @@ namespace SoMRandomizer.forms
             cmbDifficultyValue_SelectedIndexChanged(null, null);
         }
 
-        private void trbChaosFloors_Scroll(object sender, EventArgs e)
-        {
-            int val = trbChaosFloors.Value;
-            int newv = (int)Math.Round(val / 20.0) * 20;
-
-            if (trbChaosFloors.Value != newv)
-            {
-                trbChaosFloors.Value = newv;
-            }
-            cmbDifficultyValue_SelectedIndexChanged(null, null);
-        }
-
         private void cmbChaosDifficulty_SelectedIndexChanged(object sender, EventArgs e)
         {
             selectedDifficulty = (string)cmbChaosDifficulty.SelectedItem;

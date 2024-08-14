@@ -333,7 +333,11 @@
             // 
             this.cmbACDifficulty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbACDifficulty.FormattingEnabled = true;
-            this.cmbACDifficulty.Items.AddRange(new object[] { "Casual", "Hard", "Really hard", "Custom" });
+            this.cmbACDifficulty.Items.AddRange(new object[] {
+            "Casual",
+            "Hard",
+            "Really hard",
+            "Custom"});
             this.cmbACDifficulty.Location = new System.Drawing.Point(103, 28);
             this.cmbACDifficulty.Name = "cmbACDifficulty";
             this.cmbACDifficulty.Size = new System.Drawing.Size(116, 21);
@@ -344,7 +348,9 @@
             // 
             this.cmbACDialogSource.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbACDialogSource.FormattingEnabled = true;
-            this.cmbACDialogSource.Items.AddRange(new object[] { "Mitch Hedberg", "Demetri Martin" });
+            this.cmbACDialogSource.Items.AddRange(new object[] {
+            "Mitch Hedberg",
+            "Demetri Martin"});
             this.cmbACDialogSource.Location = new System.Drawing.Point(103, 57);
             this.cmbACDialogSource.Name = "cmbACDialogSource";
             this.cmbACDialogSource.Size = new System.Drawing.Size(116, 21);
@@ -362,7 +368,9 @@
             // cklACBiomeTypes
             // 
             this.cklACBiomeTypes.FormattingEnabled = true;
-            this.cklACBiomeTypes.Items.AddRange(new object[] { "sdf", "sdff" });
+            this.cklACBiomeTypes.Items.AddRange(new object[] {
+            "sdf",
+            "sdff"});
             this.cklACBiomeTypes.Location = new System.Drawing.Point(250, 107);
             this.cklACBiomeTypes.Name = "cklACBiomeTypes";
             this.cklACBiomeTypes.Size = new System.Drawing.Size(162, 64);
@@ -403,7 +411,10 @@
             // 
             this.cmbACBossFrequency.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbACBossFrequency.FormattingEnabled = true;
-            this.cmbACBossFrequency.Items.AddRange(new object[] { "Every floor", "Every few floors", "Final only" });
+            this.cmbACBossFrequency.Items.AddRange(new object[] {
+            "Every floor",
+            "Every few floors",
+            "Final only"});
             this.cmbACBossFrequency.Location = new System.Drawing.Point(296, 57);
             this.cmbACBossFrequency.Name = "cmbACBossFrequency";
             this.cmbACBossFrequency.Size = new System.Drawing.Size(116, 21);
@@ -422,7 +433,10 @@
             // 
             this.cmbACLength.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbACLength.FormattingEnabled = true;
-            this.cmbACLength.Items.AddRange(new object[] { "Short (8 Floors)", "Medium (16 Floors)", "Long (24 Floors)" });
+            this.cmbACLength.Items.AddRange(new object[] {
+            "Short (8 Floors)",
+            "Medium (16 Floors)",
+            "Long (24 Floors)"});
             this.cmbACLength.Location = new System.Drawing.Point(296, 28);
             this.cmbACLength.Name = "cmbACLength";
             this.cmbACLength.Size = new System.Drawing.Size(116, 21);
@@ -440,7 +454,8 @@
             // 
             // prgGenerationProgress
             // 
-            this.prgGenerationProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) | System.Windows.Forms.AnchorStyles.Right)));
+            this.prgGenerationProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.prgGenerationProgress.Location = new System.Drawing.Point(6, 239);
             this.prgGenerationProgress.Name = "prgGenerationProgress";
             this.prgGenerationProgress.Size = new System.Drawing.Size(457, 5);
@@ -450,7 +465,8 @@
             // 
             // groupBox1
             // 
-            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox1.Controls.Add(this.tabMode);
             this.groupBox1.Location = new System.Drawing.Point(10, 152);
             this.groupBox1.Name = "groupBox1";
@@ -511,7 +527,12 @@
             // 
             this.cmbVanillaStatusAilments.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbVanillaStatusAilments.FormattingEnabled = true;
-            this.cmbVanillaStatusAilments.Items.AddRange(new object[] { "Location", "Enemy type", "Random (easy)", "Random (annoying)", "Random (awful)" });
+            this.cmbVanillaStatusAilments.Items.AddRange(new object[] {
+            "Location",
+            "Enemy type",
+            "Random (easy)",
+            "Random (annoying)",
+            "Random (awful)"});
             this.cmbVanillaStatusAilments.Location = new System.Drawing.Point(255, 133);
             this.cmbVanillaStatusAilments.Name = "cmbVanillaStatusAilments";
             this.cmbVanillaStatusAilments.Size = new System.Drawing.Size(116, 21);
@@ -580,7 +601,10 @@
             // 
             this.cmbVanillaSpecialMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbVanillaSpecialMode.FormattingEnabled = true;
-            this.cmbVanillaSpecialMode.Items.AddRange(new object[] { "None", "Halloween", "Christmas" });
+            this.cmbVanillaSpecialMode.Items.AddRange(new object[] {
+            "None",
+            "Halloween",
+            "Christmas"});
             this.cmbVanillaSpecialMode.Location = new System.Drawing.Point(255, 162);
             this.cmbVanillaSpecialMode.Name = "cmbVanillaSpecialMode";
             this.cmbVanillaSpecialMode.Size = new System.Drawing.Size(116, 21);
@@ -602,7 +626,11 @@
             // 
             this.cmbVanillaGoldMultiplier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbVanillaGoldMultiplier.FormattingEnabled = true;
-            this.cmbVanillaGoldMultiplier.Items.AddRange(new object[] { "Half", "Normal", "Double", "Triple" });
+            this.cmbVanillaGoldMultiplier.Items.AddRange(new object[] {
+            "Half",
+            "Normal",
+            "Double",
+            "Triple"});
             this.cmbVanillaGoldMultiplier.Location = new System.Drawing.Point(377, 106);
             this.cmbVanillaGoldMultiplier.Name = "cmbVanillaGoldMultiplier";
             this.cmbVanillaGoldMultiplier.Size = new System.Drawing.Size(78, 21);
@@ -621,7 +649,11 @@
             // 
             this.cmbVanillaExpMultiplier.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbVanillaExpMultiplier.FormattingEnabled = true;
-            this.cmbVanillaExpMultiplier.Items.AddRange(new object[] { "Half", "Normal", "Double", "Triple" });
+            this.cmbVanillaExpMultiplier.Items.AddRange(new object[] {
+            "Half",
+            "Normal",
+            "Double",
+            "Triple"});
             this.cmbVanillaExpMultiplier.Location = new System.Drawing.Point(255, 106);
             this.cmbVanillaExpMultiplier.Name = "cmbVanillaExpMultiplier";
             this.cmbVanillaExpMultiplier.Size = new System.Drawing.Size(78, 21);
@@ -679,7 +711,7 @@
             this.label31.TabIndex = 61;
             this.label31.Text = "Options:";
             // 
-            // label30
+            // lblVanillaNoRandoHint
             // 
             this.lblVanillaNoRandoHint.AutoSize = true;
             this.lblVanillaNoRandoHint.Location = new System.Drawing.Point(14, 213);
@@ -840,7 +872,11 @@
             // 
             this.cmbOpenStartingChar.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOpenStartingChar.FormattingEnabled = true;
-            this.cmbOpenStartingChar.Items.AddRange(new object[] { "Random", "Boy", "Girl", "Sprite" });
+            this.cmbOpenStartingChar.Items.AddRange(new object[] {
+            "Random",
+            "Boy",
+            "Girl",
+            "Sprite"});
             this.cmbOpenStartingChar.Location = new System.Drawing.Point(74, 97);
             this.cmbOpenStartingChar.Name = "cmbOpenStartingChar";
             this.cmbOpenStartingChar.Size = new System.Drawing.Size(105, 21);
@@ -878,7 +914,9 @@
             // 
             this.cmbOpenLogicMode.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOpenLogicMode.FormattingEnabled = true;
-            this.cmbOpenLogicMode.Items.AddRange(new object[] { "Basic", "Restrictive" });
+            this.cmbOpenLogicMode.Items.AddRange(new object[] {
+            "Basic",
+            "Restrictive"});
             this.cmbOpenLogicMode.Location = new System.Drawing.Point(74, 216);
             this.cmbOpenLogicMode.Name = "cmbOpenLogicMode";
             this.cmbOpenLogicMode.Size = new System.Drawing.Size(105, 21);
@@ -907,7 +945,10 @@
             // 
             this.cmbOpenRandomizeBosses.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOpenRandomizeBosses.FormattingEnabled = true;
-            this.cmbOpenRandomizeBosses.Items.AddRange(new object[] { "Vanilla", "Swap", "Random" });
+            this.cmbOpenRandomizeBosses.Items.AddRange(new object[] {
+            "Vanilla",
+            "Swap",
+            "Random"});
             this.cmbOpenRandomizeBosses.Location = new System.Drawing.Point(74, 127);
             this.cmbOpenRandomizeBosses.Name = "cmbOpenRandomizeBosses";
             this.cmbOpenRandomizeBosses.Size = new System.Drawing.Size(105, 21);
@@ -917,7 +958,12 @@
             // 
             this.cmbOpenRandomizeEnemies.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOpenRandomizeEnemies.FormattingEnabled = true;
-            this.cmbOpenRandomizeEnemies.Items.AddRange(new object[] { "Vanilla", "Swap", "Random spawns", "Oops! All owls", "None" });
+            this.cmbOpenRandomizeEnemies.Items.AddRange(new object[] {
+            "Vanilla",
+            "Swap",
+            "Random spawns",
+            "Oops! All owls",
+            "None"});
             this.cmbOpenRandomizeEnemies.Location = new System.Drawing.Point(74, 157);
             this.cmbOpenRandomizeEnemies.Name = "cmbOpenRandomizeEnemies";
             this.cmbOpenRandomizeEnemies.Size = new System.Drawing.Size(105, 21);
@@ -957,7 +1003,12 @@
             // 
             this.cmbOpenGoal.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOpenGoal.FormattingEnabled = true;
-            this.cmbOpenGoal.Items.AddRange(new object[] { "Vanilla short", "Vanilla long", "Mana tree revival", "Gift exchange", "Reindeer search" });
+            this.cmbOpenGoal.Items.AddRange(new object[] {
+            "Vanilla short",
+            "Vanilla long",
+            "Mana tree revival",
+            "Gift exchange",
+            "Reindeer search"});
             this.cmbOpenGoal.Location = new System.Drawing.Point(74, 186);
             this.cmbOpenGoal.Name = "cmbOpenGoal";
             this.cmbOpenGoal.Size = new System.Drawing.Size(105, 21);
@@ -978,7 +1029,12 @@
             // 
             this.cmbOpenStatusAilments.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOpenStatusAilments.FormattingEnabled = true;
-            this.cmbOpenStatusAilments.Items.AddRange(new object[] { "Location", "Enemy type", "Random (easy)", "Random (annoying)", "Random (awful)" });
+            this.cmbOpenStatusAilments.Items.AddRange(new object[] {
+            "Location",
+            "Enemy type",
+            "Random (easy)",
+            "Random (annoying)",
+            "Random (awful)"});
             this.cmbOpenStatusAilments.Location = new System.Drawing.Point(273, 126);
             this.cmbOpenStatusAilments.Name = "cmbOpenStatusAilments";
             this.cmbOpenStatusAilments.Size = new System.Drawing.Size(152, 21);
@@ -1030,7 +1086,15 @@
             // 
             this.cmbOpenOtherChars.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOpenOtherChars.FormattingEnabled = true;
-            this.cmbOpenOtherChars.Items.AddRange(new object[] { "Start with both", "Find both at level 1", "Find both at current level", "Start with one, find the other", "Start with one, other doesn\'t exist", "Find one at level 1", "Find one at current level", "They don\'t exist" });
+            this.cmbOpenOtherChars.Items.AddRange(new object[] {
+            "Start with both",
+            "Find both at level 1",
+            "Find both at current level",
+            "Start with one, find the other",
+            "Start with one, other doesn\'t exist",
+            "Find one at level 1",
+            "Find one at current level",
+            "They don\'t exist"});
             this.cmbOpenOtherChars.Location = new System.Drawing.Point(273, 97);
             this.cmbOpenOtherChars.Name = "cmbOpenOtherChars";
             this.cmbOpenOtherChars.Size = new System.Drawing.Size(152, 21);
@@ -1049,7 +1113,13 @@
             // 
             this.cmbOpenStatGrowthDifficulty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOpenStatGrowthDifficulty.FormattingEnabled = true;
-            this.cmbOpenStatGrowthDifficulty.Items.AddRange(new object[] { "Easy", "Sorta easy", "Normal", "Kinda hard", "Hard", "Impossible" });
+            this.cmbOpenStatGrowthDifficulty.Items.AddRange(new object[] {
+            "Easy",
+            "Sorta easy",
+            "Normal",
+            "Kinda hard",
+            "Hard",
+            "Impossible"});
             this.cmbOpenStatGrowthDifficulty.Location = new System.Drawing.Point(273, 66);
             this.cmbOpenStatGrowthDifficulty.Name = "cmbOpenStatGrowthDifficulty";
             this.cmbOpenStatGrowthDifficulty.Size = new System.Drawing.Size(152, 21);
@@ -1068,7 +1138,12 @@
             // 
             this.cmbOpenStatGrowth.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbOpenStatGrowth.FormattingEnabled = true;
-            this.cmbOpenStatGrowth.Items.AddRange(new object[] { "Match player", "Increase after bosses", "Timed", "No Future", "None (vanilla)" });
+            this.cmbOpenStatGrowth.Items.AddRange(new object[] {
+            "Match player",
+            "Increase after bosses",
+            "Timed",
+            "No Future",
+            "None (vanilla)"});
             this.cmbOpenStatGrowth.Location = new System.Drawing.Point(273, 37);
             this.cmbOpenStatGrowth.Name = "cmbOpenStatGrowth";
             this.cmbOpenStatGrowth.Size = new System.Drawing.Size(152, 21);
@@ -1313,7 +1388,11 @@
             // 
             this.cmbBossRushDifficulty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbBossRushDifficulty.FormattingEnabled = true;
-            this.cmbBossRushDifficulty.Items.AddRange(new object[] { "Casual", "Hard", "Really hard", "Custom" });
+            this.cmbBossRushDifficulty.Items.AddRange(new object[] {
+            "Casual",
+            "Hard",
+            "Really hard",
+            "Custom"});
             this.cmbBossRushDifficulty.Location = new System.Drawing.Point(103, 28);
             this.cmbBossRushDifficulty.Name = "cmbBossRushDifficulty";
             this.cmbBossRushDifficulty.Size = new System.Drawing.Size(116, 21);
@@ -1466,7 +1545,11 @@
             // 
             this.cmbChaosDifficulty.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbChaosDifficulty.FormattingEnabled = true;
-            this.cmbChaosDifficulty.Items.AddRange(new object[] { "Casual", "Hard", "Really hard", "Custom" });
+            this.cmbChaosDifficulty.Items.AddRange(new object[] {
+            "Casual",
+            "Hard",
+            "Really hard",
+            "Custom"});
             this.cmbChaosDifficulty.Location = new System.Drawing.Point(103, 28);
             this.cmbChaosDifficulty.Name = "cmbChaosDifficulty";
             this.cmbChaosDifficulty.Size = new System.Drawing.Size(116, 21);
@@ -1503,17 +1586,13 @@
             // 
             // trbChaosFloors
             // 
-            this.trbChaosFloors.LargeChange = 20;
             this.trbChaosFloors.Location = new System.Drawing.Point(306, 26);
-            this.trbChaosFloors.Maximum = 100;
-            this.trbChaosFloors.Minimum = 20;
+            this.trbChaosFloors.Maximum = 5;
+            this.trbChaosFloors.Minimum = 1;
             this.trbChaosFloors.Name = "trbChaosFloors";
             this.trbChaosFloors.Size = new System.Drawing.Size(104, 45);
-            this.trbChaosFloors.SmallChange = 20;
             this.trbChaosFloors.TabIndex = 54;
-            this.trbChaosFloors.TickFrequency = 20;
-            this.trbChaosFloors.Value = 60;
-            this.trbChaosFloors.Scroll += new System.EventHandler(this.trbChaosFloors_Scroll);
+            this.trbChaosFloors.Value = 3;
             // 
             // label21
             // 
@@ -1528,7 +1607,8 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left)));
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.groupBox2.Controls.Add(this.nudDifficultyExponent);
             this.groupBox2.Controls.Add(this.label16);
             this.groupBox2.Controls.Add(this.cmbVisualizationOption);
@@ -1555,9 +1635,17 @@
             // nudDifficultyExponent
             // 
             this.nudDifficultyExponent.DecimalPlaces = 3;
-            this.nudDifficultyExponent.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
+            this.nudDifficultyExponent.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.nudDifficultyExponent.Location = new System.Drawing.Point(449, 27);
-            this.nudDifficultyExponent.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+            this.nudDifficultyExponent.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
             this.nudDifficultyExponent.Name = "nudDifficultyExponent";
             this.nudDifficultyExponent.Size = new System.Drawing.Size(68, 20);
             this.nudDifficultyExponent.TabIndex = 15;
@@ -1576,7 +1664,10 @@
             // 
             this.cmbVisualizationOption.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbVisualizationOption.FormattingEnabled = true;
-            this.cmbVisualizationOption.Items.AddRange(new object[] { "Est. kills per floor", "Evade progression", "Armor progression" });
+            this.cmbVisualizationOption.Items.AddRange(new object[] {
+            "Est. kills per floor",
+            "Evade progression",
+            "Armor progression"});
             this.cmbVisualizationOption.Location = new System.Drawing.Point(124, 106);
             this.cmbVisualizationOption.Name = "cmbVisualizationOption";
             this.cmbVisualizationOption.Size = new System.Drawing.Size(179, 21);
@@ -1586,7 +1677,11 @@
             // nudVisualizationOptionValue
             // 
             this.nudVisualizationOptionValue.Location = new System.Drawing.Point(318, 107);
-            this.nudVisualizationOptionValue.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+            this.nudVisualizationOptionValue.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
             this.nudVisualizationOptionValue.Name = "nudVisualizationOptionValue";
             this.nudVisualizationOptionValue.Size = new System.Drawing.Size(71, 20);
             this.nudVisualizationOptionValue.TabIndex = 13;
@@ -1623,7 +1718,8 @@
             // 
             // picDifficultyGraph
             // 
-            this.picDifficultyGraph.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) | System.Windows.Forms.AnchorStyles.Left)));
+            this.picDifficultyGraph.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
             this.picDifficultyGraph.Location = new System.Drawing.Point(19, 137);
             this.picDifficultyGraph.Name = "picDifficultyGraph";
             this.picDifficultyGraph.Size = new System.Drawing.Size(509, 310);
@@ -1634,7 +1730,23 @@
             // 
             this.cmbDifficultyVisualize.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cmbDifficultyVisualize.FormattingEnabled = true;
-            this.cmbDifficultyVisualize.Items.AddRange(new object[] { "Physical damage to enemies", "Physical damage to you", "Number of hits to kill you", "Number of hits to kill enemies", "Magic damage to enemies", "Magic damage to you", "Number of spells to kill you", "Number of spells to kill enemies", "[Boss] Physical damage to enemies", "[Boss] Physical damage to you", "[Boss] Number of hits to kill you", "[Boss] Number of hits to kill enemies", "[Boss] Magic damage to enemies", "[Boss] Magic damage to you", "[Boss] Number of spells to kill you", "[Boss] Number of spells to kill enemies" });
+            this.cmbDifficultyVisualize.Items.AddRange(new object[] {
+            "Physical damage to enemies",
+            "Physical damage to you",
+            "Number of hits to kill you",
+            "Number of hits to kill enemies",
+            "Magic damage to enemies",
+            "Magic damage to you",
+            "Number of spells to kill you",
+            "Number of spells to kill enemies",
+            "[Boss] Physical damage to enemies",
+            "[Boss] Physical damage to you",
+            "[Boss] Number of hits to kill you",
+            "[Boss] Number of hits to kill enemies",
+            "[Boss] Magic damage to enemies",
+            "[Boss] Magic damage to you",
+            "[Boss] Number of spells to kill you",
+            "[Boss] Number of spells to kill enemies"});
             this.cmbDifficultyVisualize.Location = new System.Drawing.Point(85, 72);
             this.cmbDifficultyVisualize.Name = "cmbDifficultyVisualize";
             this.cmbDifficultyVisualize.Size = new System.Drawing.Size(218, 21);
@@ -1653,9 +1765,17 @@
             // nudDifficultyLinearGrowth
             // 
             this.nudDifficultyLinearGrowth.DecimalPlaces = 3;
-            this.nudDifficultyLinearGrowth.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
+            this.nudDifficultyLinearGrowth.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.nudDifficultyLinearGrowth.Location = new System.Drawing.Point(352, 27);
-            this.nudDifficultyLinearGrowth.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+            this.nudDifficultyLinearGrowth.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
             this.nudDifficultyLinearGrowth.Name = "nudDifficultyLinearGrowth";
             this.nudDifficultyLinearGrowth.Size = new System.Drawing.Size(68, 20);
             this.nudDifficultyLinearGrowth.TabIndex = 5;
@@ -1682,9 +1802,17 @@
             // nudDifficultyBaseValue
             // 
             this.nudDifficultyBaseValue.DecimalPlaces = 3;
-            this.nudDifficultyBaseValue.Increment = new decimal(new int[] { 1, 0, 0, 65536 });
+            this.nudDifficultyBaseValue.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            65536});
             this.nudDifficultyBaseValue.Location = new System.Drawing.Point(255, 27);
-            this.nudDifficultyBaseValue.Maximum = new decimal(new int[] { 65535, 0, 0, 0 });
+            this.nudDifficultyBaseValue.Maximum = new decimal(new int[] {
+            65535,
+            0,
+            0,
+            0});
             this.nudDifficultyBaseValue.Name = "nudDifficultyBaseValue";
             this.nudDifficultyBaseValue.Size = new System.Drawing.Size(67, 20);
             this.nudDifficultyBaseValue.TabIndex = 2;
@@ -1918,6 +2046,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picCatBread)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
