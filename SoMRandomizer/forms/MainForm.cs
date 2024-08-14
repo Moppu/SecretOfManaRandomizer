@@ -6,6 +6,8 @@ using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using System.Net;
+using System.Net.Http;
+using System.Threading.Tasks;
 using SoMRandomizer.config.ui;
 using SoMRandomizer.config.settings;
 using SoMRandomizer.processing.ancientcave;
@@ -183,42 +185,15 @@ namespace SoMRandomizer.forms
             FormUtil.RequireAtLeastOneCheckbox(new CheckBox[] { chkChaosIncludeSpriteChar, chkChaosIncludeGirlChar, chkChaosIncludeBoyChar }.ToList());
             FormClosing += MainForm_FormClosing;
 
-            Thread versionCheckThread = new Thread(new ThreadStart(updateCheck));
-            versionCheckThread.Start();
+            Task.Run(updateCheck);
             optionsChanged();
         }
 
-        private void updateCheck()
+        private async Task updateCheck()
         {
-            // try to grab this text file off my dropbox to find out what the latest version is
-            try
+            if(await UpdateCheck.checkForNewVersion())
             {
-                string rt;
-                // MOPPLE: is there a better place we can stick this file for the version update checks?
-                WebRequest request = WebRequest.Create("https://dl.dropboxusercontent.com/s/eweg8jzkvmm48kd/currentVersion.txt");
-                request.Timeout = 5000;
-                WebResponse response = request.GetResponse();
-
-                Stream dataStream = response.GetResponseStream();
-
-                StreamReader reader = new StreamReader(dataStream);
-
-                rt = reader.ReadToEnd();
-
-                reader.Close();
-                response.Close();
-
-                // note that this requires all version numbers to be parsable doubles for comparison's sake
-                double latestVersion = Double.Parse(rt);
-                double currentVersion = Double.Parse(RomGenerator.VERSION_NUMBER);
-                if(currentVersion < latestVersion)
-                {
-                    BeginInvoke(new Action(newVersionAvailable));
-                }
-            }
-            catch (Exception)
-            {
-                // ignore; we just don't show the update thing
+                BeginInvoke(new Action(newVersionAvailable));
             }
         }
 
@@ -750,7 +725,7 @@ namespace SoMRandomizer.forms
         private void llbNewVersion_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             // new version available label
-            System.Diagnostics.Process.Start("http://secretofmanaancientcave.blogspot.com/");
+            System.Diagnostics.Process.Start(UpdateCheck.updateDownloadUrl);
         }
 
         private void cmbOpenStatGrowth_SelectedIndexChanged(object sender, EventArgs e)
