@@ -44,7 +44,7 @@ namespace SoMRandomizer.util
                     // throw the version string into Version class to compare
                     // note: the version string needs to have 2-4 numeric parts to work, just 1 won't parse (i.e. v2 would fail)
                     Version currentVersion = new Version(RomGenerator.VERSION_NUMBER);
-                    Version latestVersion = new Version("2.0");
+                    Version latestVersion = new Version(tagName.Replace("v", ""));
                     return currentVersion < latestVersion;
                 }
             }

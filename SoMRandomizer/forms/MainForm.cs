@@ -200,7 +200,7 @@ namespace SoMRandomizer.forms
         private void newVersionAvailable()
         {
             llbNewVersion.Visible = true;
-            t.SetToolTip(llbNewVersion, "Click to open the blog and download the latest version of the randomizer.");
+            t.SetToolTip(llbNewVersion, "Click to open the Mana Rando GitHub to download the latest version of the randomizer.");
         }
 
         public string getInputRom()
