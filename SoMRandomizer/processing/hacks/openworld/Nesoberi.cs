@@ -99,7 +99,7 @@ namespace SoMRandomizer.processing.hacks.openworld
             }, "Mia Taylor", 12, 6));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
                 new IndividualNeso("nesoberi_lanzhu_queendom.png", "Queendom"),
-            }, "Lanzhu Zhong", 2, 15));
+            }, "Zhong Lanzhu", 2, 15));
 
             // aqours
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
