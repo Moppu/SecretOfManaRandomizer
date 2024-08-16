@@ -181,6 +181,7 @@ namespace SoMRandomizer.processing.hacks.openworld
             // liella
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
                 new IndividualNeso("nesoberi_kanon.png", "Yuigaoka Winter"),
+                new IndividualNeso("nesoberi_kanon_happy.png", "Extra Happy"),
             }, "Shibuya Kanon", 5, 1));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
                 new IndividualNeso("nesoberi_keke.png", "Yuigaoka Winter"),
@@ -206,6 +207,12 @@ namespace SoMRandomizer.processing.hacks.openworld
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
                 new IndividualNeso("nesoberi_natsumi.png", "Yuigaoka Winter"),
             }, "Onitsuka Natsumi", 8, 7));
+            nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
+                new IndividualNeso("nesoberi_tomari.png", "Yuigaoka Winter"),
+            }, "Onitsuka Tomari", 12, 28));
+            nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
+                new IndividualNeso("nesoberi_margarete.png", "Yuigaoka Winter"),
+            }, "Wien Margarete", 1, 20));
 
             // hasunosora
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
@@ -253,6 +260,7 @@ namespace SoMRandomizer.processing.hacks.openworld
                 }
             }
 
+            // even if it's a birthday, we roll one anyway, so not to change the rng.
             NesoCharInfo nesoInfo = nesoResources[r.Next() % nesoResources.Count];
             if (birthdayNeso != null)
             {
@@ -561,10 +569,60 @@ namespace SoMRandomizer.processing.hacks.openworld
             newEvent18B.AddDialogue(VanillaEventUtil.wordWrapText(nesoFirstname + " neso has no more hints for you."));
             newEvent18B.CloseDialogueBox();
             newEvent18B.End();
+
+            // replace snowman with happy kanon snow neso
+            // tiles: 
+            // 0x1F42A0 (upper left)
+            // 0x1F42C0 (upper right)
+            // 0x1F42E0 (middle left)
+            // (gap)
+            // 0x1F5100 (middle right)
+            // 0x1F5120 (lower left)
+            // 0x1F5140 (lower right)
+            Dictionary<int, byte> snowNesoPaletteIndexes = new Dictionary<int, byte>();
+            // colors from the loaded png -> snowman palette (palette set 49, pal 1)
+            snowNesoPaletteIndexes[getColorInt(Color.FromArgb(26, 187, 109))] = 0; // background
+            snowNesoPaletteIndexes[getColorInt(Color.FromArgb(248, 248, 248))] = 1; // snow lightest
+            snowNesoPaletteIndexes[getColorInt(Color.FromArgb(232, 240, 248))] = 2;
+            snowNesoPaletteIndexes[getColorInt(Color.FromArgb(216, 216, 248))] = 3;
+            snowNesoPaletteIndexes[getColorInt(Color.FromArgb(192, 184, 232))] = 4;
+            snowNesoPaletteIndexes[getColorInt(Color.FromArgb(184, 168, 208))] = 5;
+            snowNesoPaletteIndexes[getColorInt(Color.FromArgb(152, 136, 192))] = 6; // snow darkest
+
+            byte[] snowNesoPngData = DataUtil.readResource("SoMRandomizer.Resources.nesoberi.snow_neso.png");
+
+            Bitmap snowNesoBitmap = new Bitmap(new MemoryStream(snowNesoPngData));
+            // 8-bit image by using the mapped colors above
+            List<byte> snowNesoEightBitImage = new List<byte>();
+            for (int y = 0; y < 24; y++)
+            {
+                for (int x = 0; x < 16; x++)
+                {
+                    Color c = snowNesoBitmap.GetPixel(x, y);
+                    snowNesoEightBitImage.Add(snowNesoPaletteIndexes[getColorInt(c)]);
+                }
+            }
+
+            int[] snowNesoTileOffsets = new int[] { 0x1f42a0, 0x1f42c0, 0x1f42e0, 0x1f5100, 0x1f5120, 0x1f5140, };
+            for (int i = 0; i < 6; i++)
+            {
+                SnesTile tileData = new SnesTile();
+                int _xpos = (i % 2) * 8;
+                int _ypos = (i / 2) * 8;
+                for (int y = 0; y < 8; y++)
+                {
+                    for (int x = 0; x < 8; x++)
+                    {
+                        tileData.data[y * 8 + x] = snowNesoEightBitImage[(_ypos + y) * 16 + _xpos + x];
+                    }
+                }
+                SnesTile.WriteTile4bpp(tileData, outRom, snowNesoTileOffsets[i]);
+            }
+
             return true;
         }
 
-        private int getColorInt(Color c)
+        private static int getColorInt(Color c)
         {
             return c.R + (c.G << 8) + (c.B << 16);
         }

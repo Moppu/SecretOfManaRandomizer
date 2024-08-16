@@ -598,6 +598,10 @@
     <EmbeddedResource Include="Resources\nesoberi\nesoberi_rurino.png" />
     <EmbeddedResource Include="Resources\nesoberi\nesoberi_sayaka.png" />
     <EmbeddedResource Include="Resources\nesoberi\nesoberi_tsuzuri.png" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kanon_happy.png" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_margarete.png" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_tomari.png" />
+    <EmbeddedResource Include="Resources\nesoberi\snow_neso.png" />
     <Content Include="Resources\pastebutton.png" />
     <Content Include="Resources\tonpole.ico" />
   </ItemGroup>
