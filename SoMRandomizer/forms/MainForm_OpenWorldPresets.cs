@@ -409,7 +409,7 @@ namespace SoMRandomizer.forms
                 "Owls enemy: Nemesis Owl\n" +
                 "Logic: Restrictive\n" +
                 "Confusion fix: Off";
-            ;
+            
             owl.tabNameSelections[tabMode] = new string[] { "Open" };
             owl.comboBoxSelections[cmbOpenGoal] = new string[] { "Vanilla long" };
             owl.comboBoxSelections[cmbOpenStatGrowthDifficulty] = new string[] { "Hard" };
@@ -438,7 +438,7 @@ namespace SoMRandomizer.forms
                 "Mana Beast stats: Vanilla\n" +
                 "Randomize Grand Palace elements: Off"
                 ;
-            ;
+            
             insanity.tabNameSelections[tabMode] = new string[] { "Open" };
             insanity.comboBoxSelections[cmbOpenGoal] = new string[] { "Vanilla long" };
             insanity.comboBoxSelections[cmbOpenStatGrowthDifficulty] = new string[] { "Hard" };
@@ -465,7 +465,7 @@ namespace SoMRandomizer.forms
                 "Obscure HP: On\n" +
                 "Permanent Poison: On"
                 ;
-            ;
+            
             poisonBs.tabNameSelections[tabMode] = new string[] { "Open" };
             poisonBs.comboBoxSelections[propertyManager.getFormByProperty(CommonSettings.PROPERTYNAME_OBSCURE_DAMAGE).getPropertyCombo(CommonSettings.PROPERTYNAME_OBSCURE_DAMAGE)] = new string[] { "Yes" };
             poisonBs.comboBoxSelections[propertyManager.getFormByProperty(CommonSettings.PROPERTYNAME_OBSCURE_OWN_HP).getPropertyCombo(CommonSettings.PROPERTYNAME_OBSCURE_OWN_HP)] = new string[] { "Yes" };
