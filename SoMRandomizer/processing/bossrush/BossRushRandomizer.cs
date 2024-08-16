@@ -90,6 +90,7 @@ namespace SoMRandomizer.processing.bossrush
                     doorToBossMap.setXpos((byte)vanillaBossMapInfo.entryPos.xpos);
                     doorToBossMap.setYpos((byte)vanillaBossMapInfo.entryPos.ypos);
                     doorToBossMap.setTransitionType(0);
+                    doorToBossMap.setLayer2Collision(vanillaBossMap.layer2Collision);
                     context.replacementDoors[doorNum++] = doorToBossMap;
                 }
                 else

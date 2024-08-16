@@ -84,6 +84,7 @@ namespace SoMRandomizer.processing.common
             bossMap.mapData.mapHeader = bossMapHeader;
             bossMap.layer1Data = consolidatedBg;
             bossMap.layer2Data = consolidatedFg;
+            bossMap.layer2Collision = vanillaBossMap.collideLayer2;
             bossMap.entryPos = vanillaBossMap.entryPos;
 
             if (bossId == VanillaBossMap.TRIPLE_TONPOLE_OBJECT_INDICATOR)

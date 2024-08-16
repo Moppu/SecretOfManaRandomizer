@@ -554,8 +554,25 @@ namespace SoMRandomizer.processing.bossrush
             // end of event
             manaBeastDeathEvent.End();
             // A978A in event 7F8 - remove restore jump; replace with spaces
-            outRom[0xA978A] = 0x80;
-            outRom[0xA978B] = 0x80;
+            EventScript event7f8;
+            if(context.replacementEvents.ContainsKey(0x7F8))
+            {
+                event7f8 = (EventScript)context.replacementEvents[0x7F8];
+            }
+            else
+            {
+                event7f8 = VanillaEventUtil.getVanillaEvent(origRom, 0x7f8);
+            }
+            for(int i=0; i < event7f8.Count - 1; i++)
+            {
+                // JSR 0x41B
+                if(event7f8[i] == EventCommandEnum.JUMP_SUBR_BASE.Value + 0x04 && event7f8[i + 1] == 0x1B)
+                {
+                    event7f8[i] = 0x80;
+                    event7f8[i + 1] = 0x80;
+                    break;
+                }
+            }
             return true;
         }
 

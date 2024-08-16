@@ -1,4 +1,5 @@
-﻿using SoMRandomizer.util;
+﻿using SoMRandomizer.processing.common.structure;
+using SoMRandomizer.util;
 using System;
 using System.Collections.Generic;
 
@@ -21,7 +22,7 @@ namespace SoMRandomizer.processing.common
         public const string GIRL_NAME_INDICATOR = "(girl)";
         public const string SPRITE_NAME_INDICATOR = "(sprite)";
 
-        public static List<byte> getVanillaEvent(byte[] origRom, int eventNum)
+        public static EventScript getVanillaEvent(byte[] origRom, int eventNum)
         {
             int eventStart = getEventStartOffset(origRom, eventNum);
             int nextEventStart = getEventStartOffset(origRom, eventNum + 1);
@@ -30,7 +31,7 @@ namespace SoMRandomizer.processing.common
             {
                 nextEventStart = 0x9F2D7;
             }
-            List<byte> eventData = new List<byte>();
+            EventScript eventData = new EventScript();
             for(int i=eventStart; i < nextEventStart; i++)
             {
                 eventData.Add(origRom[i]);
