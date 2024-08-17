@@ -54,7 +54,6 @@ namespace SoMRandomizer.processing.openworld
                 }
             }
 
-            bool foundCharactersGetYourLevel = false;
             bool boyInLogic = false;
             bool girlInLogic = true;
             bool spriteInLogic = true;
@@ -65,7 +64,7 @@ namespace SoMRandomizer.processing.openworld
 
             // process character settings
             string otherPlayersProp = settings.get(OpenWorldSettings.PROPERTYNAME_START_WITH_GIRL_AND_SPRITE);
-            foundCharactersGetYourLevel = otherPlayersProp.Contains("CL");
+            bool foundCharactersGetYourLevel = otherPlayersProp.Contains("CL");
             if (otherPlayersProp.Contains("none"))
             {
                 boyInLogic = false;
@@ -262,6 +261,7 @@ namespace SoMRandomizer.processing.openworld
             working.setBool(GIRL_EXISTS, girlExists);
             working.setBool(SPRITE_EXISTS, spriteExists);
             working.setBool(START_SOLO, startSolo);
+            working.setBool(FOUND_CHARS_GET_YOUR_LEVEL, foundCharactersGetYourLevel);
 
             if (startingChar != "boy")
             {
