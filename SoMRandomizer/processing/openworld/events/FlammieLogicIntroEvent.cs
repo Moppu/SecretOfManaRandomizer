@@ -29,7 +29,7 @@ namespace SoMRandomizer.processing.openworld.events
             eventData.Add(0x12);
             eventData.Add(0x8f);
 
-            eventData.AddAutoTextDialogueBox("Starting here because flammie drum is in logic! Give it a second here it's got a lot to set up", 0x0A);
+            eventData.AddAutoTextDialogueBox(VanillaEventUtil.wordWrapText("Starting here because flammie drum is in logic! Give it a second here it's got a lot to set up"), 0x0A);
 
             // event 0x107 - initialize event flags
             eventData.Jsr(0x107);
