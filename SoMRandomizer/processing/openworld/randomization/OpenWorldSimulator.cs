@@ -1,7 +1,6 @@
 ﻿using SoMRandomizer.config.settings;
 using SoMRandomizer.logging;
 using SoMRandomizer.processing.common;
-using SoMRandomizer.processing.hacks.openworld;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -59,8 +58,6 @@ namespace SoMRandomizer.processing.openworld.randomization
                     Logging.log("Short-circuiting open world simulator because plando told us to.  Possible that this ROM is unbeatable!");
                     bypassValidation = true;
                 }
-
-                Plando.populateStarterPrizes(gottenPrizeNames, plandoSettings);
             }
             bool simulating = true;
             int simCycle = 0;

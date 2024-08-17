@@ -993,7 +993,7 @@ namespace SoMRandomizer.forms
                 }
             }
 
-            if (!filterForStartsWith)
+            if (!filterForStartsWith) // separate option for this
             {
                 ToolStripMenuItem charactersCategory = new ToolStripMenuItem("Characters");
                 makePrizeSubmenu(charactersCategory, propertyToDisplay(VALUE_PRIZE_BOY), button);
@@ -1014,11 +1014,8 @@ namespace SoMRandomizer.forms
             makePrizeSubmenu(weaponsCategory, propertyToDisplay(VALUE_PRIZE_BOW), button);
             makePrizeSubmenu(weaponsCategory, propertyToDisplay(VALUE_PRIZE_BOOMERANG), button);
             makePrizeSubmenu(weaponsCategory, propertyToDisplay(VALUE_PRIZE_JAVELIN), button);
-            if (!filterForStartsWith)
-            {
-                makePrizeSubmenu(weaponsCategory, propertyToDisplay(VALUE_PRIZE_ANY_WEAPON), button);
-                makePrizeSubmenu(weaponsCategory, propertyToDisplay(VALUE_PRIZE_CUTTING_WEAPON), button);
-            }
+            makePrizeSubmenu(weaponsCategory, propertyToDisplay(VALUE_PRIZE_ANY_WEAPON), button);
+            makePrizeSubmenu(weaponsCategory, propertyToDisplay(VALUE_PRIZE_CUTTING_WEAPON), button);
             contextMenuStrip.Items.Add(weaponsCategory);
 
             ToolStripMenuItem spellsCategory = new ToolStripMenuItem("Spells");
@@ -1030,10 +1027,7 @@ namespace SoMRandomizer.forms
             makePrizeSubmenu(spellsCategory, propertyToDisplay(VALUE_PRIZE_SHADE), button);
             makePrizeSubmenu(spellsCategory, propertyToDisplay(VALUE_PRIZE_LUNA), button);
             makePrizeSubmenu(spellsCategory, propertyToDisplay(VALUE_PRIZE_DRYAD), button);
-            if (!filterForStartsWith)
-            {
-                makePrizeSubmenu(spellsCategory, propertyToDisplay(VALUE_PRIZE_ANY_SPELLS), button);
-            }
+            makePrizeSubmenu(spellsCategory, propertyToDisplay(VALUE_PRIZE_ANY_SPELLS), button);
             contextMenuStrip.Items.Add(spellsCategory);
 
             ToolStripMenuItem seedsCategory = new ToolStripMenuItem("Seeds");
@@ -1045,39 +1039,33 @@ namespace SoMRandomizer.forms
             makePrizeSubmenu(seedsCategory, propertyToDisplay(VALUE_PRIZE_DARK_SEED), button);
             makePrizeSubmenu(seedsCategory, propertyToDisplay(VALUE_PRIZE_MOON_SEED), button);
             makePrizeSubmenu(seedsCategory, propertyToDisplay(VALUE_PRIZE_DRYAD_SEED), button);
-            if (!filterForStartsWith)
-            {
-                makePrizeSubmenu(seedsCategory, propertyToDisplay(VALUE_PRIZE_ANY_SEED), button);
-            }
+            makePrizeSubmenu(seedsCategory, propertyToDisplay(VALUE_PRIZE_ANY_SEED), button);
             contextMenuStrip.Items.Add(seedsCategory);
 
-            if (!filterForStartsWith)
-            {
-                ToolStripMenuItem orbsCategory = new ToolStripMenuItem("Weapon orbs");
-                makePrizeSubmenu(orbsCategory, propertyToDisplay(VALUE_PRIZE_GLOVE_ORB), button);
-                makePrizeSubmenu(orbsCategory, propertyToDisplay(VALUE_PRIZE_SWORD_ORB), button);
-                makePrizeSubmenu(orbsCategory, propertyToDisplay(VALUE_PRIZE_AXE_ORB), button);
-                makePrizeSubmenu(orbsCategory, propertyToDisplay(VALUE_PRIZE_SPEAR_ORB), button);
-                makePrizeSubmenu(orbsCategory, propertyToDisplay(VALUE_PRIZE_WHIP_ORB), button);
-                makePrizeSubmenu(orbsCategory, propertyToDisplay(VALUE_PRIZE_BOW_ORB), button);
-                makePrizeSubmenu(orbsCategory, propertyToDisplay(VALUE_PRIZE_BOOMERANG_ORB), button);
-                makePrizeSubmenu(orbsCategory, propertyToDisplay(VALUE_PRIZE_JAVELIN_ORB), button);
-                makePrizeSubmenu(orbsCategory, propertyToDisplay(VALUE_PRIZE_ANY_WEAPON_ORB), button);
-                contextMenuStrip.Items.Add(orbsCategory);
-            }
+            ToolStripMenuItem orbsCategory = new ToolStripMenuItem("Weapon orbs");
+            makePrizeSubmenu(orbsCategory, propertyToDisplay(VALUE_PRIZE_GLOVE_ORB), button);
+            makePrizeSubmenu(orbsCategory, propertyToDisplay(VALUE_PRIZE_SWORD_ORB), button);
+            makePrizeSubmenu(orbsCategory, propertyToDisplay(VALUE_PRIZE_AXE_ORB), button);
+            makePrizeSubmenu(orbsCategory, propertyToDisplay(VALUE_PRIZE_SPEAR_ORB), button);
+            makePrizeSubmenu(orbsCategory, propertyToDisplay(VALUE_PRIZE_WHIP_ORB), button);
+            makePrizeSubmenu(orbsCategory, propertyToDisplay(VALUE_PRIZE_BOW_ORB), button);
+            makePrizeSubmenu(orbsCategory, propertyToDisplay(VALUE_PRIZE_BOOMERANG_ORB), button);
+            makePrizeSubmenu(orbsCategory, propertyToDisplay(VALUE_PRIZE_JAVELIN_ORB), button);
+            makePrizeSubmenu(orbsCategory, propertyToDisplay(VALUE_PRIZE_ANY_WEAPON_ORB), button);
+            contextMenuStrip.Items.Add(orbsCategory);
 
             ToolStripMenuItem miscCategory = new ToolStripMenuItem("Misc");
             makePrizeSubmenu(miscCategory, propertyToDisplay(VALUE_PRIZE_MOOGLE_BELT), button);
             makePrizeSubmenu(miscCategory, propertyToDisplay(VALUE_PRIZE_MIDGE_MALLET), button);
             makePrizeSubmenu(miscCategory, propertyToDisplay(VALUE_PRIZE_SEA_HARE_TAIL), button);
             makePrizeSubmenu(miscCategory, propertyToDisplay(VALUE_PRIZE_GOLD_KEY), button);
-            makePrizeSubmenu(miscCategory, propertyToDisplay(VALUE_PRIZE_FLAMMIE_DRUM), button);
             if (!filterForStartsWith)
             {
-                makePrizeSubmenu(miscCategory, propertyToDisplay(VALUE_PRIZE_MONEY), button);
-                if (!filterForChest)
+                makePrizeSubmenu(miscCategory, propertyToDisplay(VALUE_PRIZE_FLAMMIE_DRUM), button); // starts with flammie drum is just flammie drum not in logic
+                makePrizeSubmenu(miscCategory, propertyToDisplay(VALUE_PRIZE_MONEY), button); // separate option for this
+                if (!filterForChest) // chests can't have "nothing" since it has no event flag to make them disappear after opening
                 {
-                    makePrizeSubmenu(miscCategory, propertyToDisplay(VALUE_PRIZE_NOTHING), button);
+                    makePrizeSubmenu(miscCategory, propertyToDisplay(VALUE_PRIZE_NOTHING), button); // we always start with nothing.
                 }
             }
             contextMenuStrip.Items.Add(miscCategory);

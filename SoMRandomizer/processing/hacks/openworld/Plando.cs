@@ -1,4 +1,5 @@
 ﻿using SoMRandomizer.logging;
+using SoMRandomizer.processing.common;
 using SoMRandomizer.processing.openworld.randomization;
 using System;
 using System.Collections.Generic;
@@ -397,16 +398,82 @@ namespace SoMRandomizer.processing.hacks.openworld
             }.ToList();
         }
 
-        public static void populateStarterPrizes(List<string> gottenPrizes, Dictionary<string, List<string>> plandoSettings)
+        // replace "any" prize with randomly chosen one from that category
+        public static void processAnyPrizes(List<string> startingItems, RandoContext context)
         {
-            if(plandoSettings.ContainsKey(KEY_LOCATION_START_WITH))
+            int boyStarterWeapon = context.workingData.getInt(StartingWeaponRandomizer.BOY_START_WEAPON_INDEX);
+            int girlStarterWeapon = context.workingData.getInt(StartingWeaponRandomizer.GIRL_START_WEAPON_INDEX);
+            int spriteStarterWeapon = context.workingData.getInt(StartingWeaponRandomizer.SPRITE_START_WEAPON_INDEX);
+            Random r = context.randomFunctional;
+
+            // (seeds)
+            List<string> anySeedPrizes = new string[] { VALUE_PRIZE_WATER_SEED, VALUE_PRIZE_EARTH_SEED, VALUE_PRIZE_WIND_SEED, VALUE_PRIZE_FIRE_SEED,
+                    VALUE_PRIZE_DARK_SEED, VALUE_PRIZE_LIGHT_SEED, VALUE_PRIZE_MOON_SEED, VALUE_PRIZE_DRYAD_SEED }.ToList();
+            // if you plando more than 8 any seeds, just ignore them
+            while (startingItems.Contains(VALUE_PRIZE_ANY_SEED) && anySeedPrizes.Count > 0)
             {
-                // don't try to place the ones we start with
-                foreach(string prizeName in plandoSettings[KEY_LOCATION_START_WITH])
-                {
-                    string internalPrizeName = plandoPrizeNamesToOpenWorld[prizeName];
-                    gottenPrizes.Add(internalPrizeName);
-                }
+                startingItems.Remove(VALUE_PRIZE_ANY_SEED);
+                int seedNum = r.Next() % anySeedPrizes.Count;
+                startingItems.Add(anySeedPrizes[seedNum]);
+                anySeedPrizes.RemoveAt(seedNum);
+            }
+
+            // (spells)
+            List<string> anySpellPrizes = new string[] { VALUE_PRIZE_UNDINE, VALUE_PRIZE_GNOME, VALUE_PRIZE_SYLPHID, VALUE_PRIZE_SALAMANDO,
+                    VALUE_PRIZE_SHADE, VALUE_PRIZE_LUMINA, VALUE_PRIZE_LUNA, VALUE_PRIZE_DRYAD }.ToList();
+            // if you plando more than 8 any spells, just ignore them
+            while (startingItems.Contains(VALUE_PRIZE_ANY_SPELLS) && anySpellPrizes.Count > 0)
+            {
+                startingItems.Remove(VALUE_PRIZE_ANY_SPELLS);
+                int spellNum = r.Next() % anySpellPrizes.Count;
+                startingItems.Add(anySpellPrizes[spellNum]);
+                anySpellPrizes.RemoveAt(spellNum);
+            }
+
+            // (weapons)
+            List<string> anyWeaponPrizes = new string[] { VALUE_PRIZE_GLOVE, VALUE_PRIZE_SWORD, VALUE_PRIZE_AXE, VALUE_PRIZE_SPEAR,
+                    VALUE_PRIZE_WHIP, VALUE_PRIZE_BOW, VALUE_PRIZE_BOOMERANG, VALUE_PRIZE_JAVELIN }.ToList();
+            List<string> anyCuttingWeaponPrizes = new string[] { VALUE_PRIZE_SWORD, VALUE_PRIZE_AXE }.ToList();
+            // don't repeat starter weapons
+            if (boyStarterWeapon >= 0)
+            {
+                anyWeaponPrizes.Remove(SomVanillaValues.weaponByteToName(boyStarterWeapon));
+                anyCuttingWeaponPrizes.Remove(SomVanillaValues.weaponByteToName(boyStarterWeapon));
+            }
+            if (girlStarterWeapon >= 0)
+            {
+                anyWeaponPrizes.Remove(SomVanillaValues.weaponByteToName(girlStarterWeapon));
+                anyCuttingWeaponPrizes.Remove(SomVanillaValues.weaponByteToName(girlStarterWeapon));
+            }
+            if (spriteStarterWeapon >= 0)
+            {
+                anyWeaponPrizes.Remove(SomVanillaValues.weaponByteToName(spriteStarterWeapon));
+                anyCuttingWeaponPrizes.Remove(SomVanillaValues.weaponByteToName(spriteStarterWeapon));
+            }
+            // if you plando more than 8 any weapons, just ignore them
+            while (startingItems.Contains(VALUE_PRIZE_ANY_WEAPON) && anyWeaponPrizes.Count > 0)
+            {
+                startingItems.Remove(VALUE_PRIZE_ANY_WEAPON);
+                int weaponNum = r.Next() % anyWeaponPrizes.Count;
+                startingItems.Add(anyWeaponPrizes[weaponNum]);
+                anyWeaponPrizes.RemoveAt(weaponNum);
+            }
+            while (startingItems.Contains(VALUE_PRIZE_CUTTING_WEAPON) && anyCuttingWeaponPrizes.Count > 0)
+            {
+                startingItems.Remove(VALUE_PRIZE_CUTTING_WEAPON);
+                int weaponNum = r.Next() % anyCuttingWeaponPrizes.Count;
+                startingItems.Add(anyCuttingWeaponPrizes[weaponNum]);
+                anyCuttingWeaponPrizes.RemoveAt(weaponNum);
+            }
+
+            // (weapon orbs)
+            List<string> anyWeaponOrbPrizes = new string[] { VALUE_PRIZE_GLOVE_ORB, VALUE_PRIZE_SWORD_ORB, VALUE_PRIZE_AXE_ORB, VALUE_PRIZE_SPEAR_ORB,
+                    VALUE_PRIZE_WHIP_ORB, VALUE_PRIZE_BOW_ORB, VALUE_PRIZE_BOOMERANG_ORB, VALUE_PRIZE_JAVELIN_ORB }.ToList();
+            while (startingItems.Contains(VALUE_PRIZE_ANY_WEAPON_ORB))
+            {
+                startingItems.Remove(VALUE_PRIZE_ANY_WEAPON_ORB);
+                int weaponOrbNum = r.Next() % anyWeaponOrbPrizes.Count;
+                startingItems.Add(anyWeaponOrbPrizes[weaponOrbNum]);
             }
         }
 

@@ -1,8 +1,10 @@
 ﻿using SoMRandomizer.config.settings;
 using SoMRandomizer.processing.common;
+using SoMRandomizer.processing.hacks.openworld;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using static SoMRandomizer.processing.openworld.PlandoProperties;
 
 namespace SoMRandomizer.processing.openworld.randomization
 {
@@ -192,10 +194,13 @@ namespace SoMRandomizer.processing.openworld.randomization
 
             startingRewardsEventData.AddRange(getRandomGiftText(r, prizePrefixes, "the " + SomVanillaValues.weaponByteToName(starterWeaponId)));
 
+            // for anything we plando to start with, remove it from the pool and add its event data to the starting event.
             List<string> startingItems = new List<string>();
-            if (plandoSettings.ContainsKey("(Start with)"))
+            if (plandoSettings.ContainsKey(KEY_LOCATION_START_WITH))
             {
-                startingItems = plandoSettings["(Start with)"];
+                startingItems = plandoSettings[KEY_LOCATION_START_WITH];
+                // Process starting with "Any" for each prize type.
+                Plando.processAnyPrizes(startingItems, context);
             }
 
             List<byte> girlSpriteStarterWeaponEventData = new List<byte>();
@@ -237,7 +242,7 @@ namespace SoMRandomizer.processing.openworld.randomization
                 gloveEventData.Add(EventCommandEnum.HEAL.Value);
                 gloveEventData.Add(0x44); // full heal, presumably
                 gloveEventData.AddRange(getRandomGiftText(r, prizePrefixes, "the Glove"));
-                if (startingItems.Contains("Glove"))
+                if (startingItems.Contains(VALUE_PRIZE_GLOVE))
                 {
                     startingRewardsEventData.AddRange(gloveEventData.ToArray());
                 }
@@ -269,7 +274,7 @@ namespace SoMRandomizer.processing.openworld.randomization
                 swordEventData.Add(0x08); // used for "update weapons" here
                 swordEventData.Add(EventCommandEnum.HEAL.Value);
                 swordEventData.Add(0x44); // full heal, presumably
-                if (startingItems.Contains("Sword"))
+                if (startingItems.Contains(VALUE_PRIZE_SWORD))
                 {
                     startingRewardsEventData.AddRange(swordEventData.ToArray());
                 }
@@ -302,7 +307,7 @@ namespace SoMRandomizer.processing.openworld.randomization
                 axeEventData.Add(0x08); // used for "update weapons" here
                 axeEventData.Add(EventCommandEnum.HEAL.Value);
                 axeEventData.Add(0x44); // full heal, presumably
-                if (startingItems.Contains("Axe"))
+                if (startingItems.Contains(VALUE_PRIZE_AXE))
                 {
                     startingRewardsEventData.AddRange(axeEventData.ToArray());
                 }
@@ -334,7 +339,7 @@ namespace SoMRandomizer.processing.openworld.randomization
                 spearEventData.Add(0x08); // used for "update weapons" here
                 spearEventData.Add(EventCommandEnum.HEAL.Value);
                 spearEventData.Add(0x44); // full heal, presumably
-                if (startingItems.Contains("Spear"))
+                if (startingItems.Contains(VALUE_PRIZE_SPEAR))
                 {
                     startingRewardsEventData.AddRange(spearEventData.ToArray());
                 }
@@ -367,7 +372,7 @@ namespace SoMRandomizer.processing.openworld.randomization
                 whipEventData.Add(0x08); // used for "update weapons" here
                 whipEventData.Add(EventCommandEnum.HEAL.Value);
                 whipEventData.Add(0x44); // full heal, presumably
-                if (startingItems.Contains("Whip"))
+                if (startingItems.Contains(VALUE_PRIZE_WHIP))
                 {
                     startingRewardsEventData.AddRange(whipEventData.ToArray());
                 }
@@ -399,7 +404,7 @@ namespace SoMRandomizer.processing.openworld.randomization
                 bowEventData.Add(0x08); // used for "update weapons" here
                 bowEventData.Add(EventCommandEnum.HEAL.Value);
                 bowEventData.Add(0x44); // full heal, presumably
-                if (startingItems.Contains("Bow"))
+                if (startingItems.Contains(VALUE_PRIZE_BOW))
                 {
                     startingRewardsEventData.AddRange(bowEventData.ToArray());
                 }
@@ -431,7 +436,7 @@ namespace SoMRandomizer.processing.openworld.randomization
                 boomerangEventData.Add(0x08); // used for "update weapons" here
                 boomerangEventData.Add(EventCommandEnum.HEAL.Value);
                 boomerangEventData.Add(0x44); // full heal, presumably
-                if (startingItems.Contains("Boomerang"))
+                if (startingItems.Contains(VALUE_PRIZE_BOOMERANG))
                 {
                     startingRewardsEventData.AddRange(boomerangEventData.ToArray());
                 }
@@ -464,7 +469,7 @@ namespace SoMRandomizer.processing.openworld.randomization
                 javelinEventData.Add(0x08); // used for "update weapons" here
                 javelinEventData.Add(EventCommandEnum.HEAL.Value);
                 javelinEventData.Add(0x44); // full heal, presumably
-                if (startingItems.Contains("Javelin"))
+                if (startingItems.Contains(VALUE_PRIZE_JAVELIN))
                 {
                     startingRewardsEventData.AddRange(javelinEventData.ToArray());
                 }
@@ -500,7 +505,7 @@ namespace SoMRandomizer.processing.openworld.randomization
             // increment total mana power
             undineSeedEventData.Add((byte)(EventCommandEnum.JUMP_SUBR_BASE.Value + 0x05));
             undineSeedEventData.Add(0x94);
-            if (startingItems.Contains("Water Seed"))
+            if (startingItems.Contains(VALUE_PRIZE_WATER_SEED))
             {
                 startingRewardsEventData.AddRange(undineSeedEventData.ToArray());
             }
@@ -527,7 +532,7 @@ namespace SoMRandomizer.processing.openworld.randomization
             // increment total mana power
             gnomeSeedEventData.Add((byte)(EventCommandEnum.JUMP_SUBR_BASE.Value + 0x05));
             gnomeSeedEventData.Add(0x94);
-            if (startingItems.Contains("Earth Seed"))
+            if (startingItems.Contains(VALUE_PRIZE_EARTH_SEED))
             {
                 startingRewardsEventData.AddRange(gnomeSeedEventData.ToArray());
             }
@@ -554,7 +559,7 @@ namespace SoMRandomizer.processing.openworld.randomization
             // increment total mana power
             sylphidSeedEventData.Add((byte)(EventCommandEnum.JUMP_SUBR_BASE.Value + 0x05));
             sylphidSeedEventData.Add(0x94);
-            if (startingItems.Contains("Wind Seed"))
+            if (startingItems.Contains(VALUE_PRIZE_WIND_SEED))
             {
                 startingRewardsEventData.AddRange(sylphidSeedEventData.ToArray());
             }
@@ -581,7 +586,7 @@ namespace SoMRandomizer.processing.openworld.randomization
             // increment total mana power
             salamandoSeedEventData.Add((byte)(EventCommandEnum.JUMP_SUBR_BASE.Value + 0x05));
             salamandoSeedEventData.Add(0x94);
-            if (startingItems.Contains("Fire Seed"))
+            if (startingItems.Contains(VALUE_PRIZE_FIRE_SEED))
             {
                 startingRewardsEventData.AddRange(salamandoSeedEventData.ToArray());
             }
@@ -608,7 +613,7 @@ namespace SoMRandomizer.processing.openworld.randomization
             // increment total mana power
             luminaSeedEventData.Add((byte)(EventCommandEnum.JUMP_SUBR_BASE.Value + 0x05));
             luminaSeedEventData.Add(0x94);
-            if (startingItems.Contains("Light Seed"))
+            if (startingItems.Contains(VALUE_PRIZE_LIGHT_SEED))
             {
                 startingRewardsEventData.AddRange(luminaSeedEventData.ToArray());
             }
@@ -635,7 +640,7 @@ namespace SoMRandomizer.processing.openworld.randomization
             // increment total mana power
             shadeSeedEventData.Add((byte)(EventCommandEnum.JUMP_SUBR_BASE.Value + 0x05));
             shadeSeedEventData.Add(0x94);
-            if (startingItems.Contains("Dark Seed"))
+            if (startingItems.Contains(VALUE_PRIZE_DARK_SEED))
             {
                 startingRewardsEventData.AddRange(shadeSeedEventData.ToArray());
             }
@@ -662,7 +667,7 @@ namespace SoMRandomizer.processing.openworld.randomization
             // increment total mana power
             lunaSeedEventData.Add((byte)(EventCommandEnum.JUMP_SUBR_BASE.Value + 0x05));
             lunaSeedEventData.Add(0x94);
-            if (startingItems.Contains("Moon Seed"))
+            if (startingItems.Contains(VALUE_PRIZE_MOON_SEED))
             {
                 startingRewardsEventData.AddRange(lunaSeedEventData.ToArray());
             }
@@ -689,7 +694,7 @@ namespace SoMRandomizer.processing.openworld.randomization
             // increment total mana power
             dryadSeedEventData.Add((byte)(EventCommandEnum.JUMP_SUBR_BASE.Value + 0x05));
             dryadSeedEventData.Add(0x94);
-            if (startingItems.Contains("Dryad Seed"))
+            if (startingItems.Contains(VALUE_PRIZE_DRYAD_SEED))
             {
                 startingRewardsEventData.AddRange(dryadSeedEventData.ToArray());
             }
@@ -751,7 +756,7 @@ namespace SoMRandomizer.processing.openworld.randomization
                 undineSpellEventData.Add(EventCommandEnum.SET_FLAG.Value);
                 undineSpellEventData.Add(EventFlags.ELEMENT_UNDINE_FLAG);
                 undineSpellEventData.Add(0x01);
-                if (startingItems.Contains("Undine"))
+                if (startingItems.Contains(VALUE_PRIZE_UNDINE))
                 {
                     startingRewardsEventData.AddRange(undineSpellEventData.ToArray());
                 }
@@ -784,7 +789,7 @@ namespace SoMRandomizer.processing.openworld.randomization
                 gnomeSpellEventData.Add(EventCommandEnum.SET_FLAG.Value);
                 gnomeSpellEventData.Add(EventFlags.ELEMENT_GNOME_FLAG);
                 gnomeSpellEventData.Add(0x01);
-                if (startingItems.Contains("Gnome"))
+                if (startingItems.Contains(VALUE_PRIZE_GNOME))
                 {
                     startingRewardsEventData.AddRange(gnomeSpellEventData.ToArray());
                 }
@@ -817,7 +822,7 @@ namespace SoMRandomizer.processing.openworld.randomization
                 sylphidSpellEventData.Add(EventCommandEnum.SET_FLAG.Value);
                 sylphidSpellEventData.Add(EventFlags.ELEMENT_SYLPHID_FLAG);
                 sylphidSpellEventData.Add(0x01);
-                if (startingItems.Contains("Sylphid"))
+                if (startingItems.Contains(VALUE_PRIZE_SYLPHID))
                 {
                     startingRewardsEventData.AddRange(sylphidSpellEventData.ToArray());
                 }
@@ -850,7 +855,7 @@ namespace SoMRandomizer.processing.openworld.randomization
                 salamandoSpellEventData.Add(EventCommandEnum.SET_FLAG.Value);
                 salamandoSpellEventData.Add(EventFlags.ELEMENT_SALAMANDO_FLAG);
                 salamandoSpellEventData.Add(0x01);
-                if (startingItems.Contains("Salamando"))
+                if (startingItems.Contains(VALUE_PRIZE_SALAMANDO))
                 {
                     startingRewardsEventData.AddRange(salamandoSpellEventData.ToArray());
                 }
@@ -886,7 +891,7 @@ namespace SoMRandomizer.processing.openworld.randomization
                 luminaSpellEventData.Add(EventCommandEnum.SET_FLAG.Value);
                 luminaSpellEventData.Add(EventFlags.ELEMENT_LUMINA_FLAG);
                 luminaSpellEventData.Add(0x01);
-                if (startingItems.Contains("Lumina"))
+                if (startingItems.Contains(VALUE_PRIZE_LUMINA))
                 {
                     startingRewardsEventData.AddRange(luminaSpellEventData.ToArray());
                 }
@@ -922,7 +927,7 @@ namespace SoMRandomizer.processing.openworld.randomization
                 shadeSpellEventData.Add(EventCommandEnum.SET_FLAG.Value);
                 shadeSpellEventData.Add(EventFlags.ELEMENT_SHADE_FLAG);
                 shadeSpellEventData.Add(0x01);
-                if (startingItems.Contains("Shade"))
+                if (startingItems.Contains(VALUE_PRIZE_SHADE))
                 {
                     startingRewardsEventData.AddRange(shadeSpellEventData.ToArray());
                 }
@@ -955,7 +960,7 @@ namespace SoMRandomizer.processing.openworld.randomization
                 lunaSpellEventData.Add(EventCommandEnum.SET_FLAG.Value);
                 lunaSpellEventData.Add(EventFlags.ELEMENT_LUNA_FLAG);
                 lunaSpellEventData.Add(0x01);
-                if (startingItems.Contains("Luna"))
+                if (startingItems.Contains(VALUE_PRIZE_LUNA))
                 {
                     startingRewardsEventData.AddRange(lunaSpellEventData.ToArray());
                 }
@@ -1001,7 +1006,7 @@ namespace SoMRandomizer.processing.openworld.randomization
                 dryadSpellEventData.Add(EventFlags.ELEMENT_DRYAD_FLAG);
                 dryadSpellEventData.Add(0x01);
 
-                if (startingItems.Contains("Dryad"))
+                if (startingItems.Contains(VALUE_PRIZE_DRYAD))
                 {
                     startingRewardsEventData.AddRange(dryadSpellEventData.ToArray());
                 }
@@ -1025,7 +1030,7 @@ namespace SoMRandomizer.processing.openworld.randomization
             towerKeyEventData.Add(EventCommandEnum.SET_FLAG.Value);
             towerKeyEventData.Add(0x37); // gold tower unlock flag
             towerKeyEventData.Add(0x01); // unlocked
-            if (startingItems.Contains("Gold Key"))
+            if (startingItems.Contains(VALUE_PRIZE_GOLD_KEY))
             {
                 startingRewardsEventData.AddRange(towerKeyEventData.ToArray());
             }
@@ -1048,7 +1053,7 @@ namespace SoMRandomizer.processing.openworld.randomization
             seaHareTailEventData.Add(EventCommandEnum.SET_FLAG.Value);
             seaHareTailEventData.Add(0x29); // flag
             seaHareTailEventData.Add(0x01); // unlocked
-            if (startingItems.Contains("Sea Hare Tail"))
+            if (startingItems.Contains(VALUE_PRIZE_SEA_HARE_TAIL))
             {
                 startingRewardsEventData.AddRange(seaHareTailEventData.ToArray());
             }
@@ -1073,7 +1078,7 @@ namespace SoMRandomizer.processing.openworld.randomization
             moogleBeltEventData.Add(0x01); // unlocked
             moogleBeltEventData.Add(0x1E);
             moogleBeltEventData.Add(0x48); // add moogle belt
-            if (startingItems.Contains("Moogle Belt"))
+            if (startingItems.Contains(VALUE_PRIZE_MOOGLE_BELT))
             {
                 startingRewardsEventData.AddRange(moogleBeltEventData.ToArray());
             }
@@ -1098,7 +1103,7 @@ namespace SoMRandomizer.processing.openworld.randomization
             midgeMalletEventData.Add(0x01); // unlocked
             midgeMalletEventData.Add(0x1E);
             midgeMalletEventData.Add(0x49); // add midge mallet
-            if (startingItems.Contains("Midge Mallet"))
+            if (startingItems.Contains(VALUE_PRIZE_MIDGE_MALLET))
             {
                 startingRewardsEventData.AddRange(midgeMalletEventData.ToArray());
             }
