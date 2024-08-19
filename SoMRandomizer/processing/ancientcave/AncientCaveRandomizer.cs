@@ -171,7 +171,7 @@ namespace SoMRandomizer.processing.ancientcave
                     {
                         outdoorMapTriggers[exitPos] = bossEntryEventId;
                     }
-                    bossDoor.setTargetMap((ushort)(i + 256));
+                    bossDoor.setTargetMap((ushort)(i * 2 + 256));
                     bossDoor.setXpos((byte)floorData.bossMap.entryPos.xpos);
                     bossDoor.setYpos((byte)floorData.bossMap.entryPos.ypos);
                     bossDoor.setLayer2Collision(floorData.bossMap.layer2Collision);
