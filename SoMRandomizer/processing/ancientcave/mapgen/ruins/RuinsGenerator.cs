@@ -207,6 +207,7 @@ namespace SoMRandomizer.processing.ancientcave.mapgen.ruins
             }
 
             ProcGenMapNode startNode = new ProcGenMapNode();
+            // start at the bottom in the courtyard
             startNode.x = mapWidth / 2;
             startNode.y = mapHeight - 15;
             startNode.centerX = startNode.x;
@@ -214,22 +215,23 @@ namespace SoMRandomizer.processing.ancientcave.mapgen.ruins
 
             if ((context.randomFunctional.Next() % 2) == 0)
             {
-                // start at gate - create exit point
+                // start at gate - create exit point on the roof, and surround it with these thingies
                 layer1[roofNode.x + 7, roofNode.y + 3] = 165;
                 layer1[roofNode.x + 6, roofNode.y + 4] = 165;
                 layer1[roofNode.x + 8, roofNode.y + 4] = 165;
                 layer1[roofNode.x + 7, roofNode.y + 5] = 165;
-
+                // exit tile
                 layer1[roofNode.x + 7, roofNode.y + 4] = 186;
                 outsideMap.exitLocations.Add(new XyPos(roofNode.x + 7, roofNode.y + 4));
             }
             else
             {
-                // start on roof - create gate exit door
+                // start on roof - create gate exit door at the bottom of the courtyard - two tiles next to each other
                 layer1[mapWidth / 2 - 1, mapHeight - 10] = 185;
                 layer1[mapWidth / 2, mapHeight - 10] = 185;
                 outsideMap.exitLocations.Add(new XyPos(mapWidth / 2 - 1, mapHeight - 10));
                 outsideMap.exitLocations.Add(new XyPos(mapWidth / 2, mapHeight - 10));
+                // modify startnode to indicate roof start
                 startNode.x = roofNode.x + 7;
                 startNode.y = roofNode.y + 4;
                 startNode.centerX = startNode.x;
@@ -431,9 +433,10 @@ namespace SoMRandomizer.processing.ancientcave.mapgen.ruins
             indoorLayer1[stepsStartX + 2, mapHeight - 10] = 65; // door
             indoorLayer2[stepsStartX + 1, mapHeight - 10] = 164; // door
             indoorLayer2[stepsStartX + 2, mapHeight - 10] = 164; // door
+            // courtyard -> main stairway exit/entry position
             insideMap.altMapExitLocations[new XyPos((short)(stepsStartX + 1), (short)(mapHeight - 10))] = -1;
             insideMap.altMapExitLocations[new XyPos((short)(stepsStartX + 2), (short)(mapHeight - 10))] = -1;
-            insideMap.altMapEntryLocations[-1] = new XyPos((short)(stepsStartX + 1), (short)(mapHeight - 10));
+            insideMap.altMapEntryLocations[-1] = new XyPos((short)(stepsStartX + 1), (short)(mapHeight - 11)); 
 
             Random random = context.randomFunctional;
 
