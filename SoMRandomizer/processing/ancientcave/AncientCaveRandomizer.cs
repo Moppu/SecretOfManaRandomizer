@@ -130,6 +130,11 @@ namespace SoMRandomizer.processing.ancientcave
                     npc.setEventVisMinimum(replacementEvent.eventFlagMin);
                     npc.setEventVisMaximum(replacementEvent.eventFlagMax);
                     npc.setEvent((ushort)replacementEvent.eventId);
+                    if (replacementEvent.npcId >= 0x90 && replacementEvent.npcId <= 0x97)
+                    {
+                        // set frozen for element NPCs, otherwise their appearance glitches out
+                        npc.setFrozen(true);
+                    }
                 }
 
                 // create all necessary doors
