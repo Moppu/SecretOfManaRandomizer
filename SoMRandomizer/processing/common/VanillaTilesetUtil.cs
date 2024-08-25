@@ -73,7 +73,7 @@ namespace SoMRandomizer.processing.common
             Tile16[] tiles = new Tile16[384];
             for (int i = 0; i < 384; i++)
             {
-                Tile8[] subTiles = new Tile8[4];    
+                Tile8[] subTiles = new Tile8[4];
                 for (int j = 0; j < 4; j++)
                 {
                     ushort control1 = extractBits(compressed, 2, bitPosition);

@@ -40,12 +40,12 @@ namespace SoMRandomizer.processing.common.structure
             get
             {
                 if (index < 0 || index >= LAYER_SIZE) throw new InvalidOperationException("index has to be between 0 and 192");
-                return Tiles[foreground ? 192 : 0 + index];
+                return Tiles[foreground ? LAYER_SIZE : 0 + index];
             }
             set
             {
                 if (index < 0 || index >= LAYER_SIZE) throw new InvalidOperationException("index has to be between 0 and 192");
-                Tiles[foreground ? 192 : 0 + index] = value;
+                Tiles[foreground ? LAYER_SIZE : 0 + index] = value;
             }
         }
 
