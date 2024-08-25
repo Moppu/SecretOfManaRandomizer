@@ -133,6 +133,7 @@
     <Compile Include="processing\common\structure\MapObject.cs" />
     <Compile Include="processing\common\structure\MapPaletteSet.cs" />
     <Compile Include="processing\common\structure\SnesColor.cs" />
+    <Compile Include="processing\common\structure\Tileset16.cs" />
     <Compile Include="processing\common\VanillaDoorUtil.cs" />
     <Compile Include="processing\common\VanillaMapUtil.cs" />
     <Compile Include="processing\common\VanillaPaletteUtil.cs" />
