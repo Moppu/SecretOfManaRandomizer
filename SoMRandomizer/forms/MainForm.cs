@@ -174,6 +174,11 @@ namespace SoMRandomizer.forms
 
             t.SetToolTip(btnOptionsCopy, "Copy options string to the clipboard.");
             t.SetToolTip(btnOptionsPaste, "Paste options string from the clipboard and replace current selections.");
+            t.SetToolTip(noMusicPackLabel, "Randomized music will only have the vanilla music. Visit the blogspot for the latest music pack!");
+            if(!Directory.Exists("./music"))
+            {
+                noMusicPackLabel.Visible = true;
+            }
 
             makeOpenWorldPresets();
 
