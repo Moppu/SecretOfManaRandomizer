@@ -24,6 +24,9 @@ using SoMRandomizer.processing.openworld;
 using SoMRandomizer.util;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
@@ -47,6 +50,7 @@ namespace SoMRandomizer
         [STAThread]
         static void Main()
         {
+            AppDomain.CurrentDomain.AssemblyResolve += OnResolveAssembly;
             string[] cmdLine = Environment.GetCommandLineArgs();
             // arg [0] is the path to the binary
             // if any args are passed, process as a command-line rom generate and don't open the UI
@@ -147,6 +151,24 @@ namespace SoMRandomizer
                 {
                     Console.WriteLine("exception encountered: " + ee.Message);
                 }
+            }
+        }
+
+        private static Assembly OnResolveAssembly(object sender, ResolveEventArgs args)
+        {
+            Assembly executingAssembly = Assembly.GetExecutingAssembly();
+            AssemblyName assemblyName = new AssemblyName(args.Name);
+
+            var path = assemblyName.Name + ".dll";
+            if (assemblyName.CultureInfo.Equals(CultureInfo.InvariantCulture) == false) path = String.Format(@"{0}\{1}", assemblyName.CultureInfo, path);
+
+            using (Stream stream = executingAssembly.GetManifestResourceStream(path))
+            {
+                if (stream == null) return null;
+
+                var assemblyRawBytes = new byte[stream.Length];
+                stream.Read(assemblyRawBytes, 0, assemblyRawBytes.Length);
+                return Assembly.Load(assemblyRawBytes);
             }
         }
 
