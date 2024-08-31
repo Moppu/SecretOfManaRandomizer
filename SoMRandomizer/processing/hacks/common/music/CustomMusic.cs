@@ -244,7 +244,14 @@ namespace SoMRandomizer.processing.hacks.common.music
 
                 foreach (string category in song.categories)
                 {
-                    songReplacements[category].Add(new byte[] { (byte)song.newId, song.echoVal, 0x8F }.ToList());
+                    if (songReplacements.ContainsKey(category))
+                    {
+                        songReplacements[category].Add(new byte[] { (byte)song.newId, song.echoVal, 0x8F }.ToList());
+                    }
+                    else
+                    {
+                        Logging.log("Unrecognized music category: " + category + "; song " + song.name + " was not imported.");
+                    }
                 }
             }
 
