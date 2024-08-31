@@ -63,9 +63,13 @@ namespace SoMRandomizer
             else
             {
                 // workaround for console under mono environment; need to call this for console to appear in windows env
-                if (!IsRunningOnMono())
+                try
                 {
                     AttachConsole(ATTACH_PARENT_PROCESS);
+                }
+                catch
+                {
+                    // ignore
                 }
 
                 // process commandline args for open world.  require all of these:
@@ -170,11 +174,6 @@ namespace SoMRandomizer
                 stream.Read(assemblyRawBytes, 0, assemblyRawBytes.Length);
                 return Assembly.Load(assemblyRawBytes);
             }
-        }
-
-        private static bool IsRunningOnMono()
-        {
-            return Type.GetType("Mono.Runtime") != null;
         }
     }
 }
