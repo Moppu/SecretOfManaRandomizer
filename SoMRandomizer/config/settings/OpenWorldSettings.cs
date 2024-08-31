@@ -71,6 +71,8 @@ namespace SoMRandomizer.config.settings
         public const string PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_HARD = "hard";
         public const string PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_IMPOSSIBLE = "impossible";
 
+        public const string PROPERTYVALUE_OOPSALL_RANDOM = "random";
+
         public OpenWorldSettings(CommonSettings commonSettings) : base(commonSettings)
         {
             // default open world settings
@@ -221,7 +223,7 @@ namespace SoMRandomizer.config.settings
             enemyTypeOptions.Add("82 - Terminator");
             enemyTypeOptions.Add("83 - Master Ninja");
             string[] oopsAllFlagsValues = new string[85];
-            oopsAllFlagsValues[0] = "random";
+            oopsAllFlagsValues[0] = PROPERTYVALUE_OOPSALL_RANDOM;
             for (int i = 0; i <= 83; i++)
             {
                 oopsAllFlagsValues[i + 1] = "" + i;

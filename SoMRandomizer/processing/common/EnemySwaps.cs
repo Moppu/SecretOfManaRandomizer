@@ -38,7 +38,21 @@ namespace SoMRandomizer.processing.common
                 string enemyRandoType = settings.get(OpenWorldSettings.PROPERTYNAME_RANDOMIZE_ENEMIES);
                 if (enemyRandoType.Contains("oops"))
                 {
-                    fixedEnemy = settings.getInt(OpenWorldSettings.PROPERTYNAME_EVERY_ENEMY);
+                    if (settings.get(OpenWorldSettings.PROPERTYNAME_EVERY_ENEMY) == OpenWorldSettings.PROPERTYVALUE_OOPSALL_RANDOM)
+                    {
+                        // select a random enemy within the non-boss ids
+                        fixedEnemy = r.Next() % 83;
+                        // IDs for la funk, dark funk, specter, ghost
+                        while (fixedEnemy == 29 || fixedEnemy == 15 || fixedEnemy == 9 || fixedEnemy == 48)
+                        {
+                            // unhittables - reroll
+                            fixedEnemy = r.Next() % 83;
+                        }
+                    }
+                    else
+                    {
+                        fixedEnemy = settings.getInt(OpenWorldSettings.PROPERTYNAME_EVERY_ENEMY);
+                    }
                 }
                 doEnemySwaps = enemyRandoType.Contains("swap") || fixedEnemy != -1;
                 if(enemyRandoType.Contains("none"))
