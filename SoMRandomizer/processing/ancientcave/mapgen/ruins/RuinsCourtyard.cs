@@ -226,7 +226,6 @@ namespace SoMRandomizer.processing.ancientcave.mapgen.ruins
             }
 
 
-
             layer1[leftBoundCourtyard, mapHeight - 25] = 1;
             layer1[rightBoundCourtyard, mapHeight - 25] = 1;
             layer1[leftBoundCourtyard, mapHeight - 24] = 162;
@@ -240,9 +239,6 @@ namespace SoMRandomizer.processing.ancientcave.mapgen.ruins
                 82, 104, 72, 82,
                 98, 104, 72, 98,
             };
-
-
-
 
 
             int stepsWidth = 6;

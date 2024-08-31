@@ -101,7 +101,7 @@ namespace SoMRandomizer.config.settings
             setInitial(PROPERTYNAME_RANDOMIZE_ENEMIES, new string[] { "vanilla", "swap", "random", "oops", "none" }, new string[] { "Vanilla", "Swap", "Random spawns", "Oops! All owls", "None" }, "swap");
             setInitial(PROPERTYNAME_RANDOMIZE_BOSSES, new string[] { "vanilla", "swap", "random" }, new string[] { "Vanilla", "Swap", "Random" }, "random");
             setInitial(PROPERTYNAME_STATUS_AILMENTS, new string[] { "location", "type", "easy", "annoying", "awful" }, new string[] { "Location", "Enemy type", "Random (easy)", "Random (annoying)", "Random (awful)" }, "location");
-            setInitial(PROPERTYNAME_ENEMY_STAT_GROWTH, new string[] { "player", "boss", "timed", "nofuture", "vanilla" }, new string[] { "Match player", "Increase after bosses", "Timed", "No Future", "Vanilla" }, "player");
+            setInitial(PROPERTYNAME_ENEMY_STAT_GROWTH, new string[] { "player", "bosses", "timed", "nofuture", "vanilla" }, new string[] { "Match player", "Increase after bosses", "Timed", "No Future", "Vanilla" }, "player");
             setInitial(PROPERTYNAME_ENEMY_STAT_GROWTH_DIFFICULTY, new string[]
             {
                 PROPERTYVALUE_STAT_GROWTH_DIFFICULTY_EASY,

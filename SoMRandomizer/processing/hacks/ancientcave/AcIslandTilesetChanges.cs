@@ -2,6 +2,7 @@
 using SoMRandomizer.processing.common;
 using SoMRandomizer.util;
 using System.Collections.Generic;
+using SoMRandomizer.processing.common.structure;
 
 namespace SoMRandomizer.processing.hacks.ancientcave
 {
@@ -21,7 +22,7 @@ namespace SoMRandomizer.processing.hacks.ancientcave
         {
             int tilesetNum = 5;
             byte[] tilesetRaw = VanillaTilesetUtil.getCompressedVanillaTileset16(origRom, tilesetNum);
-            List<short> tilesetDecomp = VanillaTilesetUtil.DecodeTileset16(tilesetRaw);
+            Tileset16 tilesetDecomp = VanillaTilesetUtil.DecodeTileset16(tilesetRaw);
 
             // all numbers * 4
             // on layer2 (+192) 111, 119-127, 135-143, 159, 174-175, 186-191
@@ -33,82 +34,80 @@ namespace SoMRandomizer.processing.hacks.ancientcave
                     for (int j = 0; j < 4; j++)
                     {
                         // FG layer
-                        tilesetDecomp[192 * 4 + ii * 4 + j] |= 0x2000;
+                        tilesetDecomp[192 + ii][j].AlternateRenderLayer = true;
                     }
                 }
             }
 
-            // MOPPLE: it might be nice to have a structure for what's represented by these Tileset16 values, instead
-            // of just shoving bits onto it here (16 bit VHAPPPTTTTTTTTT)
 
             // huts on layer 1
             // palette 4
             // 0x4000 for hflip
-            tilesetDecomp[118 * 4] = 863 + (4 << 10);
-            tilesetDecomp[118 * 4 + 1] = 48 + (4 << 10);
-            tilesetDecomp[118 * 4 + 2] = 863 + (4 << 10);
-            tilesetDecomp[118 * 4 + 3] = 64 + (4 << 10);
+            tilesetDecomp[118][0] = new Tile8(tileNum: 863, palette: 4);
+            tilesetDecomp[118][1] = new Tile8(tileNum: 48, palette: 4);
+            tilesetDecomp[118][2] = new Tile8(tileNum: 863, palette: 4);
+            tilesetDecomp[118][3] = new Tile8(tileNum: 64, palette: 4);
 
-            tilesetDecomp[119 * 4] = 863 + (4 << 10);
-            tilesetDecomp[119 * 4 + 1] = 863 + (4 << 10);
-            tilesetDecomp[119 * 4 + 2] = 863 + (4 << 10);
-            tilesetDecomp[119 * 4 + 3] = 2 + (4 << 10);
+            tilesetDecomp[119][0] = new Tile8(tileNum: 863, palette: 4);
+            tilesetDecomp[119][1] = new Tile8(tileNum: 863, palette: 4);
+            tilesetDecomp[119][2] = new Tile8(tileNum: 863, palette: 4);
+            tilesetDecomp[119][3] = new Tile8(tileNum: 2, palette: 4);
 
-            tilesetDecomp[120 * 4] = 863 + (4 << 10);
-            tilesetDecomp[120 * 4 + 1] = 863 + (4 << 10);
-            tilesetDecomp[120 * 4 + 2] = 3 + (4 << 10);
-            tilesetDecomp[120 * 4 + 3] = (3 + (4 << 10)) | 0x4000;
+            tilesetDecomp[120][0] = new Tile8(tileNum: 863, palette: 4);
+            tilesetDecomp[120][1] = new Tile8(tileNum: 863, palette: 4);
+            tilesetDecomp[120][2] = new Tile8(tileNum: 3, palette: 4);
+            tilesetDecomp[120][3] = new Tile8(tileNum: 3, palette: 4, horizontalFlip: true);
 
-            tilesetDecomp[121 * 4] = 863 + (4 << 10);
-            tilesetDecomp[121 * 4 + 1] = 863 + (4 << 10);
-            tilesetDecomp[121 * 4 + 2] = (2 + (4 << 10)) | 0x4000;
-            tilesetDecomp[121 * 4 + 3] = 863 + (4 << 10);
+            tilesetDecomp[121][0] = new Tile8(tileNum: 863, palette: 4);
+            tilesetDecomp[121][1] = new Tile8(tileNum: 863, palette: 4);
+            tilesetDecomp[121][2] = new Tile8(tileNum: 2, palette: 4, horizontalFlip: true);
+            tilesetDecomp[121][3] = new Tile8(tileNum: 863, palette: 4);
 
-            tilesetDecomp[122 * 4] = (48 + (4 << 10)) | 0x4000;
-            tilesetDecomp[122 * 4 + 1] = 863 + (4 << 10);
-            tilesetDecomp[122 * 4 + 2] = (64 + (4 << 10)) | 0x4000;
-            tilesetDecomp[122 * 4 + 3] = 863 + (4 << 10);
+            tilesetDecomp[122][0] = new Tile8(tileNum: 48, palette: 4, horizontalFlip: true);
+            tilesetDecomp[122][1] = new Tile8(tileNum: 863, palette: 4);
+            tilesetDecomp[122][2] = new Tile8(tileNum: 64, palette: 4, horizontalFlip: true);
+            tilesetDecomp[122][3] = new Tile8(tileNum: 863, palette: 4);
 
 
-            tilesetDecomp[134 * 4] = 863 + (4 << 10);
-            tilesetDecomp[134 * 4 + 1] = 863 + (4 << 10);
-            tilesetDecomp[134 * 4 + 2] = 863 + (4 << 10);
-            tilesetDecomp[134 * 4 + 3] = 32 + (4 << 10);
+            tilesetDecomp[134][0] = new Tile8(tileNum: 863, palette: 4);
+            tilesetDecomp[134][1] = new Tile8(tileNum: 863, palette: 4);
+            tilesetDecomp[134][2] = new Tile8(tileNum: 863, palette: 4);
+            tilesetDecomp[134][3] = new Tile8(tileNum: 32, palette: 4);
 
-            tilesetDecomp[135 * 4] = 17 + (4 << 10);
-            tilesetDecomp[135 * 4 + 1] = 18 + (4 << 10);
-            tilesetDecomp[135 * 4 + 2] = 33 + (4 << 10);
-            tilesetDecomp[135 * 4 + 3] = 34 + (4 << 10);
+            tilesetDecomp[135][0] = new Tile8(tileNum: 17, palette: 4);
+            tilesetDecomp[135][1] = new Tile8(tileNum: 18, palette: 4);
+            tilesetDecomp[135][2] = new Tile8(tileNum: 33, palette: 4);
+            tilesetDecomp[135][3] = new Tile8(tileNum: 34, palette: 4);
 
-            tilesetDecomp[136 * 4] = 19 + (4 << 10);
-            tilesetDecomp[136 * 4 + 1] = (19 + (4 << 10)) | 0x4000;
-            tilesetDecomp[136 * 4 + 2] = 35 + (4 << 10);
-            tilesetDecomp[136 * 4 + 3] = (35 + (4 << 10)) | 0x4000;
+            tilesetDecomp[136][0] = new Tile8(tileNum: 19, palette: 4);
+            tilesetDecomp[136][1] = new Tile8(tileNum: 19, palette: 4, horizontalFlip: true);
+            tilesetDecomp[136][2] = new Tile8(tileNum: 35, palette: 4);
+            tilesetDecomp[136][3] = new Tile8(tileNum: 35, palette: 4, horizontalFlip: true);
 
-            tilesetDecomp[137 * 4] = (18 + (4 << 10)) | 0x4000;
-            tilesetDecomp[137 * 4 + 1] = (17 + (4 << 10)) | 0x4000;
-            tilesetDecomp[137 * 4 + 2] = (34 + (4 << 10)) | 0x4000;
-            tilesetDecomp[137 * 4 + 3] = (33 + (4 << 10)) | 0x4000;
+            tilesetDecomp[137][0] = new Tile8(tileNum: 18, palette: 4, horizontalFlip: true);
+            tilesetDecomp[137][1] = new Tile8(tileNum: 17, palette: 4, horizontalFlip: true);
+            tilesetDecomp[137][2] = new Tile8(tileNum: 34, palette: 4, horizontalFlip: true);
+            tilesetDecomp[137][3] = new Tile8(tileNum: 33, palette: 4, horizontalFlip: true);
 
-            tilesetDecomp[138 * 4] = 863 + (4 << 10);
-            tilesetDecomp[138 * 4 + 1] = 863 + (4 << 10);
-            tilesetDecomp[138 * 4 + 2] = (32 + (4 << 10)) | 0x4000;
-            tilesetDecomp[138 * 4 + 3] = 863 + (4 << 10);
+            tilesetDecomp[138][0] = new Tile8(tileNum: 863, palette: 4);
+            tilesetDecomp[138][1] = new Tile8(tileNum: 863, palette: 4);
+            tilesetDecomp[138][2] = new Tile8(tileNum: 32, palette: 4, horizontalFlip: true);
+            tilesetDecomp[138][3] = new Tile8(tileNum: 863, palette: 4);
 
             // grass on layer 2
-            tilesetDecomp[192 * 4 + 77 * 4] = 512 + (2 << 10);
-            tilesetDecomp[192 * 4 + 77 * 4 + 1] = 513 + (2 << 10);
-            tilesetDecomp[192 * 4 + 77 * 4 + 2] = 528 + (2 << 10);
-            tilesetDecomp[192 * 4 + 77 * 4 + 3] = 529 + (2 << 10);
+            tilesetDecomp[192 + 77][0] = new Tile8(tileNum: 512, palette: 2);
+            tilesetDecomp[192 + 77][1] = new Tile8(tileNum: 513, palette: 2);
+            tilesetDecomp[192 + 77][2] = new Tile8(tileNum: 528, palette: 2);
+            tilesetDecomp[192 + 77][3] = new Tile8(tileNum: 529, palette: 2);
 
             // fire on layer1
-            tilesetDecomp[143 * 4] = 874 + (6 << 10);
-            tilesetDecomp[143 * 4 + 1] = 875 + (6 << 10);
-            tilesetDecomp[143 * 4 + 2] = 876 + (6 << 10);
-            tilesetDecomp[143 * 4 + 3] = 877 + (6 << 10);
+            tilesetDecomp[143][0] = new Tile8(tileNum: 874, palette: 6);
+            tilesetDecomp[143][1] = new Tile8(tileNum: 875, palette: 6);
+            tilesetDecomp[143][2] = new Tile8(tileNum: 876, palette: 6);
+            tilesetDecomp[143][3] = new Tile8(tileNum: 877, palette: 6);
 
             // write tileset back to a new spot
-            List<byte> tilesetCompressed = VanillaTilesetUtil.EncodeTileset16(tilesetDecomp.ToArray());
+            List<byte> tilesetCompressed = VanillaTilesetUtil.EncodeTileset16(tilesetDecomp);
             int tilesetLocation = context.workingOffset;
             for (int i = 0; i < tilesetCompressed.Count; i++)
             {

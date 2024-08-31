@@ -59,7 +59,7 @@ namespace SoMRandomizer.processing.hacks.common.fix
             eventData.Add(0x7F); // enter
             eventData.Add(0x59);
             eventData.Add(0x06); // text shift
-            eventData.AddDialogue("Got " + SomVanillaValues.weaponByteToName(weaponType));
+            eventData.AddDialogue("Got " + SomVanillaValues.weaponByteToName(weaponType), null);
             eventData.Jump(0x509); // 's orb
             eventData.End();
             return eventData;

@@ -3,7 +3,6 @@ using SoMRandomizer.logging;
 using SoMRandomizer.processing.common;
 using SoMRandomizer.processing.common.structure;
 using SoMRandomizer.processing.openworld.randomization;
-using SoMRandomizer.processing.vanillarando;
 using SoMRandomizer.util;
 using System;
 using System.Collections.Generic;
@@ -301,32 +300,29 @@ namespace SoMRandomizer.processing.hacks.openworld
             // ----------------------------------------------------------------------------------
             // tileset16 15; xb4000 -> xb402d -> 0BA6AE (next=0BAEC7)
             byte[] tilesetRaw = VanillaTilesetUtil.getCompressedVanillaTileset16(origRom, 15);
-            List<short> tilesetDecomp = VanillaTilesetUtil.DecodeTileset16(tilesetRaw);
+            Tileset16 tileset = VanillaTilesetUtil.DecodeTileset16(tilesetRaw);
             byte targetPalNum = 4;
             byte replacementPalNum = 5;
-            // result: VHAPPPTTTTTTTTT
-            for (int i = 0; i < 384 * 4; i++)
+            for (int i = 0; i < 384; i++)
             {
-                byte pal = (byte)((tilesetDecomp[i] & 0x1C00) >> 10);
-                // anything that uses 4, make it use 5
-                if (pal == targetPalNum)
+                for (int j = 0; j < 4; j++)
                 {
-                    pal = replacementPalNum;
-                    int f = tilesetDecomp[i] & 0xE3FF;
-                    f |= (pal << 10);
-                    tilesetDecomp[i] = (short)f;
-                }
-                // make the thing we're changing into a neso use 4
-                if ((i / 4) == 192 + 133 || (i / 4) == 192 + 149)
-                {
-                    pal = targetPalNum;
-                    int f = tilesetDecomp[i] & 0xE3FF;
-                    f |= (pal << 10);
-                    tilesetDecomp[i] = (short)f;
+                    Tile8 tile = tileset[i][j];
+                    // anything that uses 4, make it use 5
+                    if (tile.Palette == targetPalNum)
+                    {
+                        tile.Palette = replacementPalNum;
+                    }
+
+                    // make the thing we're changing into a neso use 4
+                    if (i == 192 + 133 || i == 192 + 149)
+                    {
+                        tile.Palette = targetPalNum;
+                    }
                 }
             }
 
-            List<byte> tilesetCompressed = VanillaTilesetUtil.EncodeTileset16(tilesetDecomp.ToArray());
+            List<byte> tilesetCompressed = VanillaTilesetUtil.EncodeTileset16(tileset);
             CodeGenerationUtils.ensureSpaceInBank(ref context.workingOffset, tilesetCompressed.Count);
             int tilesetNewOffset = context.workingOffset;
             foreach (byte bb in tilesetCompressed)

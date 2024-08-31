@@ -88,7 +88,7 @@ namespace SoMRandomizer.processing.ancientcave
             Door startingDoor = new Door();
             context.replacementDoors[generatedDoorId++] = startingDoor;
             // as we progress through floors, we use this as the transition to the start of each next floor
-            Door previousFloorExitDoor = startingDoor;
+            List<Door> previousFloorExitDoors = new Door[] { startingDoor }.ToList();
             // running map palette set index generated for floors
             context.workingData.setInt(GeneratedMapUtil.PROPERTY_GENERATED_PALETTE_INDEX, 16);
             // generate maps
@@ -130,6 +130,11 @@ namespace SoMRandomizer.processing.ancientcave
                     npc.setEventVisMinimum(replacementEvent.eventFlagMin);
                     npc.setEventVisMaximum(replacementEvent.eventFlagMax);
                     npc.setEvent((ushort)replacementEvent.eventId);
+                    if (replacementEvent.npcId >= 0x90 && replacementEvent.npcId <= 0x97)
+                    {
+                        // set frozen for element NPCs, otherwise their appearance glitches out
+                        npc.setFrozen(true);
+                    }
                 }
 
                 // create all necessary doors
@@ -157,9 +162,12 @@ namespace SoMRandomizer.processing.ancientcave
                 }
 
                 // connect previous floor's exit door (or the start door, if this is floor 1) to this floor's entry pos
-                previousFloorExitDoor.setTargetMap(floorData.outsideMap.mapId);
-                previousFloorExitDoor.setXpos((byte)floorData.outsideMap.entryPos.xpos);
-                previousFloorExitDoor.setYpos((byte)floorData.outsideMap.entryPos.ypos);
+                foreach (Door previousFloorExitDoor in previousFloorExitDoors)
+                {
+                    previousFloorExitDoor.setTargetMap(floorData.outsideMap.mapId);
+                    previousFloorExitDoor.setXpos((byte)floorData.outsideMap.entryPos.xpos);
+                    previousFloorExitDoor.setYpos((byte)floorData.outsideMap.entryPos.ypos);
+                }
 
                 // process exit to next floor / boss map and set previousFloorExitDoor for the next floor to connect to once it decides on an entry position
                 if (bossEvents.ContainsKey(i))
@@ -171,7 +179,7 @@ namespace SoMRandomizer.processing.ancientcave
                     {
                         outdoorMapTriggers[exitPos] = bossEntryEventId;
                     }
-                    bossDoor.setTargetMap((ushort)(i + 256));
+                    bossDoor.setTargetMap((ushort)(i * 2 + 256));
                     bossDoor.setXpos((byte)floorData.bossMap.entryPos.xpos);
                     bossDoor.setYpos((byte)floorData.bossMap.entryPos.ypos);
                     bossDoor.setLayer2Collision(floorData.bossMap.layer2Collision);
@@ -181,8 +189,11 @@ namespace SoMRandomizer.processing.ancientcave
                     generatedDoorId++;
 
                     // create door from boss to next floor; later processing (next loop) will fill the mapnum/x/y in
-                    previousFloorExitDoor = new Door();
+                    previousFloorExitDoors.Clear();
+                    Door previousFloorExitDoor = new Door();
                     context.replacementDoors[generatedDoorId] = previousFloorExitDoor;
+                    previousFloorExitDoors.Add(previousFloorExitDoor);
+
                     eventDoorId = generatedDoorId + 0x800;
                     int bossDeathEventId = bossEvents[i][1];
                     VanillaEventUtil.replaceEventData(AncientCaveEventMaker.UNKNOWN_DOOR_REPLACEMENT_PATTERN, context.replacementEvents[bossDeathEventId], new byte[] { 0x18, (byte)eventDoorId, (byte)(eventDoorId >> 8) }.ToList());
@@ -200,13 +211,15 @@ namespace SoMRandomizer.processing.ancientcave
                 }
                 else
                 {
+                    previousFloorExitDoors.Clear();
                     // no boss on this floor - warp from outside map right to the next floor
                     foreach (XyPos exitPos in floorData.outsideMap.exitLocations)
                     {
-                        previousFloorExitDoor = new Door();
+                        Door previousFloorExitDoor = new Door();
                         outdoorMapTriggers[exitPos] = 0x800 + generatedDoorId;
                         context.replacementDoors[generatedDoorId] = previousFloorExitDoor;
                         generatedDoorId++;
+                        previousFloorExitDoors.Add(previousFloorExitDoor);
                     }
                 }
 
@@ -221,10 +234,13 @@ namespace SoMRandomizer.processing.ancientcave
 
             // last floor exit -> manabeast
             // this is a copy of vanilla door 0xBC, which leads to vanilla mana beast map 0xFD
-            previousFloorExitDoor.setTargetMap(0xFD);
-            previousFloorExitDoor.setXpos(18);
-            previousFloorExitDoor.setYpos(22);
-            previousFloorExitDoor.setTransitionType(0x81);
+            foreach (Door previousFloorExitDoor in previousFloorExitDoors)
+            {
+                previousFloorExitDoor.setTargetMap(0xFD);
+                previousFloorExitDoor.setXpos(18);
+                previousFloorExitDoor.setYpos(22);
+                previousFloorExitDoor.setTransitionType(0x81);
+            }
 
             // re-create mana beast map - 0xFD - and credits map - 0xB4 since ancient cave effectively wipes all vanilla maps
             ManaBeastMap.makeManaBeastMap(origRom, context);

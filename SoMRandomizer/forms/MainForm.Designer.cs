@@ -177,6 +177,7 @@
             this.picTwitch = new System.Windows.Forms.PictureBox();
             this.picDiscord = new System.Windows.Forms.PictureBox();
             this.picCatBread = new System.Windows.Forms.PictureBox();
+            this.noMusicPackLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.tabMode.SuspendLayout();
             this.tpVanilla.SuspendLayout();
@@ -1968,10 +1969,23 @@
             this.picCatBread.TabIndex = 31;
             this.picCatBread.TabStop = false;
             // 
+            // noMusicPackLabel
+            // 
+            this.noMusicPackLabel.AutoSize = true;
+            this.noMusicPackLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.noMusicPackLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.noMusicPackLabel.Location = new System.Drawing.Point(194, 460);
+            this.noMusicPackLabel.Name = "noMusicPackLabel";
+            this.noMusicPackLabel.Size = new System.Drawing.Size(149, 13);
+            this.noMusicPackLabel.TabIndex = 101;
+            this.noMusicPackLabel.Text = "No music pack detected!";
+            this.noMusicPackLabel.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1067, 482);
+            this.Controls.Add(this.noMusicPackLabel);
             this.Controls.Add(this.btnOptionsPaste);
             this.Controls.Add(this.btnOptionsCopy);
             this.Controls.Add(this.txtOptions);
@@ -2198,6 +2212,7 @@
         private System.Windows.Forms.Button btnOptionsPaste;
         private System.Windows.Forms.Button btnPlando;
         private System.Windows.Forms.CheckBox chkOpenFlammieDrumLogic;
+        private System.Windows.Forms.Label noMusicPackLabel;
     }
 }
 
