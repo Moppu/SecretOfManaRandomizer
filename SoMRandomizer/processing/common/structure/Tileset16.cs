@@ -29,7 +29,6 @@ namespace SoMRandomizer.processing.common.structure
             }
         }
         
-        /// ToDo: do we even need/want this
         /// <summary>
         /// for indexing into foreground/background layer directly
         /// </summary>
