@@ -22,6 +22,13 @@ namespace SoMRandomizer.processing.openworld.events
             {
                 return false;
             }
+            if (context.workingData.get(OpenWorldGoalProcessor.GOAL_SHORT_NAME) == OpenWorldGoalProcessor.GOAL_GIFTMODE ||
+                context.workingData.get(OpenWorldGoalProcessor.GOAL_SHORT_NAME) == OpenWorldGoalProcessor.GOAL_REINDEER)
+            {
+                // keep the christmas start text
+                return false;
+            }
+
             EventScript eventData = (EventScript)context.replacementEvents[0x106];
             eventData.Add(EventCommandEnum.PLAY_SOUND.Value);
             eventData.Add(0x01);

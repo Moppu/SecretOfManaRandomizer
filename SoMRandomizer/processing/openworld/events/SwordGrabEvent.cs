@@ -157,7 +157,7 @@ namespace SoMRandomizer.processing.openworld.events
             newEvent103.Add(0x46);
 
             // game sits for a while while x103 plays; this lets you know it's done
-            if (flammieDrumInLogic)
+            if (flammieDrumInLogic && goal != OpenWorldGoalProcessor.GOAL_GIFTMODE && goal != OpenWorldGoalProcessor.GOAL_REINDEER)
             {
                 List<byte> flammieDrumIntroDialogue = VanillaEventUtil.getBytesDelay(VanillaEventUtil.wordWrapText("Okay you can play now"), 10, 0);
                 newEvent103.Add(EventCommandEnum.OPEN_DIALOGUE.Value);

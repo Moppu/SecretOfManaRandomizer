@@ -196,7 +196,9 @@ namespace SoMRandomizer.processing.openworld.randomization
                     possibleGifts.RemoveAt(id);
                 }
                 HashSet<string> runningItemDependencies = new HashSet<string>();
-                for (int i = 0; i < 7; i++)
+                // the last prize is finishing the game, so we don't add dependencies to that
+                int numGifts = settings.getInt(OpenWorldSettings.PROPERTYNAME_NUM_XMAS_GIFTS);
+                for (int i = 0; i < numGifts - 1; i++)
                 {
                     int npcId = context.workingData.getInt(GiftDeliveryIntroEvent.GIFT_DELIVERY_INDEX_PREFIX + i);
                     NpcLocationData npc = GiftDeliveryIntroEvent.DELIVERY_LOCATIONS[npcId];

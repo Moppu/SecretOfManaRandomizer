@@ -37,10 +37,13 @@ namespace SoMRandomizer.processing.openworld.events
                     // clear out the npcs
                     newEvent400.SetFlag(EventFlags.POTOS_FLAG, 0xA);
                 }
+                // run door 0x82 as the start door.  note that OpenWorldSupportingMapChanges changes this to one of a couple different
+                // locations based on settings.
                 newEvent400.Door(0x82);
             }
             else if (!flammieDrumInLogic)
             {
+                // vanilla start door - start on the log
                 newEvent400.Door(0x00);
             }
 

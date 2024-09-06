@@ -1,6 +1,7 @@
 ﻿using SoMRandomizer.config.settings;
 using SoMRandomizer.processing.common;
 using SoMRandomizer.processing.openworld;
+using SoMRandomizer.util;
 using System.Collections.Generic;
 
 namespace SoMRandomizer.processing.hacks.openworld
@@ -25,6 +26,7 @@ namespace SoMRandomizer.processing.hacks.openworld
             
             // pull the element values for each orb off the working data, as set by ElementSwaps
             Dictionary<int, byte> elementValuesByMapNum = ElementSwaps.getCrystalOrbElementMap(context);
+            CodeGenerationUtils.ensureSpaceInBank(ref context.workingOffset, elementValuesByMapNum.Count * 40 + 10);
             int mapNumSubrCheckOffset = context.workingOffset;
             // LDA $7E00DC - current map number
             outRom[context.workingOffset++] = 0xAF;
@@ -91,6 +93,7 @@ namespace SoMRandomizer.processing.hacks.openworld
                 $C0/5625 BF 01 1C D0 LDA $D01C01,x[$D0:25A2] A:09A1 X:09A1 Y:0600 P:envmxdIzC
                 $C0/5629 99 82 E1    STA $E182,y[$7E:E782]   A:0001 X:09A1 Y:0600 P:envmxdIzC
              */
+            CodeGenerationUtils.ensureSpaceInBank(ref context.workingOffset, 20);
             outRom[0x5625] = 0x22;
             outRom[0x5626] = (byte)(context.workingOffset);
             outRom[0x5627] = (byte)(context.workingOffset >> 8);
@@ -133,6 +136,7 @@ namespace SoMRandomizer.processing.hacks.openworld
                  $01/DAEF BD 42 E1    LDA $E142,x[$7E:E342]   A:0103 X:0200 Y:E200 P:envMxdIzC
                  $01/DAF2 9D 11 E0    STA $E011,x[$7E:E211]   A:010A X:0200 Y:E200 P:envMxdIzC
             */
+            CodeGenerationUtils.ensureSpaceInBank(ref context.workingOffset, 20);
             outRom[0x1DAEF] = 0x22;
             outRom[0x1DAF0] = (byte)(context.workingOffset);
             outRom[0x1DAF1] = (byte)(context.workingOffset >> 8);
@@ -192,6 +196,7 @@ namespace SoMRandomizer.processing.hacks.openworld
             }
             // RTS -> RTL
             writeEventLetterSubroutine[writeEventLetterSubroutine.Count - 1] = 0x6B;
+            CodeGenerationUtils.ensureSpaceInBank(ref context.workingOffset, writeEventLetterSubroutine.Count);
             int writeEventLetterSubroutineAddr = context.workingOffset;
             foreach (byte b in writeEventLetterSubroutine)
             {
@@ -203,8 +208,9 @@ namespace SoMRandomizer.processing.hacks.openworld
             foreach (int mapNum in elementValuesByMapNum.Keys)
             {
                 byte eleValue = elementValuesByMapNum[mapNum];
-                mapNumToSubr[mapNum] = context.workingOffset;
                 List<byte> nameString = VanillaEventUtil.getBytes(SomVanillaValues.elementOrbByteToName(eleValue, true) + " ");
+                CodeGenerationUtils.ensureSpaceInBank(ref context.workingOffset, nameString.Count * 6 + 10);
+                mapNumToSubr[mapNum] = context.workingOffset;
                 // SEP 20
                 outRom[context.workingOffset++] = 0xE2;
                 outRom[context.workingOffset++] = 0x20;
@@ -228,6 +234,7 @@ namespace SoMRandomizer.processing.hacks.openworld
             }
 
 
+            CodeGenerationUtils.ensureSpaceInBank(ref context.workingOffset, 100);
             int showEnemyLevelSubroutine = context.workingOffset;
             if(showEnemyLevels)
             {
@@ -428,6 +435,7 @@ namespace SoMRandomizer.processing.hacks.openworld
                 $C0/1926 BF 00 00 CA LDA $CA0000,x[$CA:0A48] A:0A48 X:0A48 Y:19D3 P:envmxdIzc
                 $C0/192A 8F 01 1D 00 STA $001D01[$00:1D01]   A:E95C X:0A48 Y:19D3 P:eNvmxdIzc **
              */
+            CodeGenerationUtils.ensureSpaceInBank(ref context.workingOffset, elementValuesByMapNum.Count * 20 + 50);
             outRom[0x192A] = 0x22;
             outRom[0x192B] = (byte)(context.workingOffset);
             outRom[0x192C] = (byte)(context.workingOffset >> 8);

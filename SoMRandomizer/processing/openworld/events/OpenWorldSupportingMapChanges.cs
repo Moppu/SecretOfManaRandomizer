@@ -43,10 +43,10 @@ namespace SoMRandomizer.processing.openworld.events
                 setObjectData(outRom, santaHouseMapNum, 0, 2, 0x80 + 17); // x pos
                 setObjectData(outRom, santaHouseMapNum, 0, 3, 0x80 + 10); // y pos
             }
-
-            if (flammieDrumInLogic)
+            else if (flammieDrumInLogic)
             {
                 // repurpose door 82 (falling down waterfall) to put us in potos elder house
+                // don't do this if we're doing christmas modes - still start at ice country.  logic accounts for this.
                 int waterfallDoorNum = 0x82;
                 int potosHouseMapNum = MAPNUM_POTOS_INTERIOR_B;
                 outRom[0x83000 + waterfallDoorNum * 4] = (byte)(potosHouseMapNum);

@@ -80,7 +80,8 @@ namespace SoMRandomizer.processing.openworld.randomization
             }
 
             // add santa prize locations
-            for (int i = 0; i < 7; i++)
+            // the final "prize" is the completion of the game.
+            for (int i = 0; i < numGifts - 1; i++)
             {
                 PrizeLocation santaLoc = new PrizeLocation("santa gift " + i, -1, -1, GiftDeliveryIntroEvent.SANTA_DIALOGUE_EVENTS[i * 2 + 1], 0, new string[] { }, new string[] { "from Santa" }, new string[] { }, 1.0 - i * 0.1);
                 filteredLocations.Add(santaLoc);
