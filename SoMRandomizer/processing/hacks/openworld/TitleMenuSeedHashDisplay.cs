@@ -39,7 +39,6 @@ namespace SoMRandomizer.processing.hacks.openworld
             List<byte> introMenuReplacement = VanillaEventUtil.getBytes("Secret of Mana Open World v" + RomGenerator.VERSION_NUMBER + "\n\n" + "Seed: " + seedShortened + "\n\n" + "Hash check: " + hashString + "\n\nEnjoy", -1);
             // 0x33F0 is the "WELCOME TO SECRET OF MANA" text
             // through 348B
-            // MOPPLE: this sometimes leaves some trailing garbage on the right side, and i'm not sure why
             int introMenuSize = 0x348B - 0x33F0 + 1;
             int srcI = 0;
             for (int i = 0; i < introMenuSize; i++)
@@ -54,7 +53,7 @@ namespace SoMRandomizer.processing.hacks.openworld
                 }
                 else
                 {
-                    outRom[0x33F0 + i] = 0;
+                    outRom[0x33F0 + i] = (byte)(i == introMenuSize - 1 ? 0 : 0x80);
                 }
                 srcI++;
             }
