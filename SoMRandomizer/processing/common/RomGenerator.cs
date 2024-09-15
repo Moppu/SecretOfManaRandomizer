@@ -159,6 +159,8 @@ namespace SoMRandomizer.processing.common
             commonHacks.Add(new InitialValues());
             // change the mushroom enemies into vineshrooms
             commonHacks.Add(new Vineshroom());
+            // default player AI to aggressive
+            commonHacks.Add(new PlayerAiDefaultChanges());
         }
 
         protected void addModeSpecificHack(RandoProcessor modeSpecificHack)

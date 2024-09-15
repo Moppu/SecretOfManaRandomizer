@@ -61,7 +61,7 @@ namespace SoMRandomizer.processing.common
                     new NoEnemies().add(origRom, outRom, seed, settings, context);
                     return false;
                 }
-                else if(enemyRandoType.Contains("spawns"))
+                else if(enemyRandoType.Contains("random"))
                 {
                     Logging.log("Skipping enemy rando; random spawns selected");
                     new EnemyRandomizer().add(origRom, outRom, seed, settings, context);

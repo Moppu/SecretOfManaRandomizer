@@ -157,6 +157,7 @@
     <Compile Include="processing\hacks\common\other\NoEnergyToAttack.cs" />
     <Compile Include="processing\hacks\common\other\NoSwordPullAnimation.cs" />
     <Compile Include="processing\hacks\common\other\ObscureOwnHp.cs" />
+    <Compile Include="processing\hacks\common\other\PlayerAiDefaultChanges.cs" />
     <Compile Include="processing\hacks\common\other\StarterGear.cs" />
     <Compile Include="processing\hacks\common\other\StartingDoor.cs" />
     <Compile Include="processing\hacks\common\qol\BeakShieldDisable.cs" />
