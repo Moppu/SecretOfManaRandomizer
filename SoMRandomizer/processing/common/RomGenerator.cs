@@ -21,7 +21,7 @@ namespace SoMRandomizer.processing.common
     public abstract class RomGenerator
     {
         // rando current version.  this should be updated for every release, and should always be numeric for comparison's sake.
-        public static string VERSION_NUMBER = "1.42";
+        public static string VERSION_NUMBER = "1.43";
 
         private List<RandoProcessor> commonHacks = new List<RandoProcessor>();
         private List<RandoProcessor> modeSpecificHacks = new List<RandoProcessor>();
