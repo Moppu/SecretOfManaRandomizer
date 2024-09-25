@@ -35,8 +35,6 @@ namespace SoMRandomizer.processing.openworld
             addModeSpecificHack(new OpenWorldMtrSeedNumSelection());
             // swap/randomize enemies
             addModeSpecificHack(new EnemySwaps());
-            // swap weapon orbs
-            addModeSpecificHack(new OrbSwaps());
             // modify music to 0 volume - this allows no-music but with vanilla loadtimes
             addModeSpecificHack(new CustomMusic());
             // some minor world map fixes

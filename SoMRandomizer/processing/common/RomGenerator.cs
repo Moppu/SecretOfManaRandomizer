@@ -77,8 +77,8 @@ namespace SoMRandomizer.processing.common
             commonHacks.Add(new HittableVampire());
             // include starter gear pieces
             commonHacks.Add(new StarterGear());
-            // fix some issue with weapon orb rewards
-            commonHacks.Add(new OrbRewardFix());
+            // randomize and fix some issue with weapon orb rewards
+            commonHacks.Add(new OrbRewardEventGenerator());
             // fix softlock with character animations at boss death 
             commonHacks.Add(new BossDeathFix());
             // allow enemy type damage on weapons

@@ -114,17 +114,6 @@ namespace SoMRandomizer.processing.vanillarando
 
         public void processShortening(byte[] origRom, byte[] rom, Random r, List<int> newElementMapping, RandoContext context)
         {
-            List<string> elementNames = new List<string>();
-            elementNames.Add("Gnome");
-            elementNames.Add("Undine");
-            elementNames.Add("Salamando");
-            elementNames.Add("Sylphid");
-            elementNames.Add("Lumina");
-            elementNames.Add("Shade");
-            elementNames.Add("Luna");
-            elementNames.Add("Dryad");
-
-
             // ////////////////////////////////////////////////////
             // x81 - water palace seed/jabberwocky dialogue
             // ////////////////////////////////////////////////////
@@ -1088,7 +1077,7 @@ namespace SoMRandomizer.processing.vanillarando
             newEvent1F6.Jsr(0x7DA); // dyluck theme
             newEvent1F6.IncrFlag(EventFlags.WHIP_CHEST_VISIBILITY_FLAG);
             newEvent1F6.Logic(EventFlags.WATER_PALACE_FLAG, 0xC, 0xC, EventScript.GetIncrCmd(EventFlags.WATER_PALACE_FLAG));
-            newEvent1F6.AddDialogueBox("Now head to the water\npalace for " + elementNames[newElementMapping[1]] + ".");
+            newEvent1F6.AddDialogueBox("Now head to the water\npalace for " + ElementSwaps.elementNames[newElementMapping[1]] + ".");
             newEvent1F6.End();
 
 
@@ -1123,7 +1112,7 @@ namespace SoMRandomizer.processing.vanillarando
             newEvent22E.Add(EventCommandEnum.REFRESH_OBJECTS.Value);
             newEvent22E.Jsr(0x594); // update mana power
             newEvent22E.IncrFlag(EventFlags.EARTHPALACE_FLAG); // make the seed do nothing when you talk to it
-            newEvent22E.AddDialogueBox("Got " + elementNames[newElementMapping[0]] + " spells, and the \nGnome seed's power.\nPandora next!");
+            newEvent22E.AddDialogueBox("Got " + ElementSwaps.elementNames[newElementMapping[0]] + " spells, and the \nGnome seed's power.\nPandora next!");
             newEvent22E.End();
 
 
@@ -1167,7 +1156,7 @@ namespace SoMRandomizer.processing.vanillarando
             newEvent4E2.SetFlag(EventFlags.ELEMENT_SYLPHID_FLAG, 2);
             newEvent4E2.SetFlag(EventFlags.WIND_SEED, 1); // as if you touched the sylphid seed too
             newEvent4E2.SetFlag(EventFlags.TOTAL_MANA_POWER_FLAG, 3); // don't use the subroutine because if you touch the mana seed first it increments twice.
-            newEvent4E2.AddDialogue("Got seed's power, and\n" + elementNames[newElementMapping[3]] + " spells.");
+            newEvent4E2.AddDialogue("Got seed's power, and\n" + ElementSwaps.elementNames[newElementMapping[3]] + " spells.");
             newEvent4E2.CloseDialogueBox();
             newEvent4E2.IncrFlag(EventFlags.UPPERLAND_PROGRESS_FLAG); // make sylphid disappear
             newEvent4E2.Add(EventCommandEnum.REFRESH_OBJECTS.Value); // refresh
@@ -1276,7 +1265,7 @@ namespace SoMRandomizer.processing.vanillarando
             newEvent581.Add(EventCommandEnum.HEAL.Value);
             newEvent581.Add(0x44); // shrug
             setAttribute(1, newElementMapping, newEvent581);
-            newEvent581.AddDialogueBox("Got " + elementNames[newElementMapping[1]] + " spells.\nGo open Earth Palace.");
+            newEvent581.AddDialogueBox("Got " + ElementSwaps.elementNames[newElementMapping[1]] + " spells.\nGo open Earth Palace.");
             // flicker undine out
             for (int i = 0; i < 2; i++)
             {
@@ -1357,7 +1346,7 @@ namespace SoMRandomizer.processing.vanillarando
             newEvent38D.SetFlag(EventFlags.ELEMENT_SALAMANDO_FLAG, 2); // salamando stuff
             setAttribute(2, newElementMapping, newEvent38D);
             // 582
-            newEvent38D.AddDialogueBox("Got " + elementNames[newElementMapping[2]] + "!");
+            newEvent38D.AddDialogueBox("Got " + ElementSwaps.elementNames[newElementMapping[2]] + "!");
             newEvent38D.IncrFlag(EventFlags.SALAMANDO_STOVE_FLAG); // hide salamando ?
             newEvent38D.Add(EventCommandEnum.REFRESH_OBJECTS.Value);
             newEvent38D.Door(0x142); // cold version of the map?
@@ -1538,7 +1527,7 @@ namespace SoMRandomizer.processing.vanillarando
             newEvent586.Add(EventCommandEnum.REFRESH_OBJECTS.Value);
             newEvent586.IncrFlag(EventFlags.TOTAL_MANA_POWER_FLAG); // mana power+
             newEvent586.SetFlag(EventFlags.DARK_SEED, 1); // shade seed
-            newEvent586.AddDialogueBox("Got " + elementNames[newElementMapping[5]] + " magic, and the\nseed's power!");
+            newEvent586.AddDialogueBox("Got " + ElementSwaps.elementNames[newElementMapping[5]] + " magic, and the\nseed's power!");
             newEvent586.End();
 
 
@@ -1568,7 +1557,7 @@ namespace SoMRandomizer.processing.vanillarando
             newEvent587.Add(EventCommandEnum.REFRESH_OBJECTS.Value);
             newEvent587.IncrFlag(EventFlags.TOTAL_MANA_POWER_FLAG); // mana power+
             newEvent587.SetFlag(EventFlags.LIGHT_SEED, 1); // lumina seed
-            newEvent587.AddDialogueBox("Got " + elementNames[newElementMapping[4]] + " magic, and the\nseed's power!");
+            newEvent587.AddDialogueBox("Got " + ElementSwaps.elementNames[newElementMapping[4]] + " magic, and the\nseed's power!");
             newEvent587.End();
 
 
@@ -1580,7 +1569,7 @@ namespace SoMRandomizer.processing.vanillarando
             newEvent584.Add(EventCommandEnum.REFRESH_OBJECTS.Value);
             newEvent584.IncrFlag(EventFlags.TOTAL_MANA_POWER_FLAG); // mana power+
             newEvent584.SetFlag(EventFlags.MOON_SEED, 1); // luna seed
-            newEvent584.AddDialogueBox("Got " + elementNames[newElementMapping[6]] + " magic, and the\nseed's power!");
+            newEvent584.AddDialogueBox("Got " + ElementSwaps.elementNames[newElementMapping[6]] + " magic, and the\nseed's power!");
             newEvent584.End();
 
 
@@ -1719,7 +1708,7 @@ namespace SoMRandomizer.processing.vanillarando
             newEvent4B6.SetFlag(EventFlags.ELEMENT_DRYAD_FLAG, 1); // dryad appears
             newEvent4B6.Add(EventCommandEnum.REFRESH_OBJECTS.Value);
             setAttribute(7, newElementMapping, newEvent4B6);
-            newEvent4B6.AddDialogueBox("Got " + elementNames[newElementMapping[7]] + " magic, and the\nseed's power!");
+            newEvent4B6.AddDialogueBox("Got " + ElementSwaps.elementNames[newElementMapping[7]] + " magic, and the\nseed's power!");
             newEvent4B6.SetFlag(EventFlags.ELEMENT_DRYAD_FLAG, 2); // dryad disappears
             newEvent4B6.Add(EventCommandEnum.REFRESH_OBJECTS.Value);
             newEvent4B6.IncrFlag(EventFlags.LOST_CONTINENT_PROGRESS_FLAG_1);

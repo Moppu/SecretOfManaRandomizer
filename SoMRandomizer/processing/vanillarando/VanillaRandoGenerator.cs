@@ -39,8 +39,6 @@ namespace SoMRandomizer.processing.vanillarando
             addModeSpecificHack(new ExperienceAdjust());
             // gold multiplier
             addModeSpecificHack(new GoldAdjust());
-            // swap orb elements if selected
-            addModeSpecificHack(new OrbSwaps());
             // add mode and my name on title screen
             addModeSpecificHack(new TitleScreenAddition());
             // randomize music

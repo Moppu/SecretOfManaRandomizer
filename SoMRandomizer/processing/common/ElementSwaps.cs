@@ -20,6 +20,7 @@ namespace SoMRandomizer.processing
     {
         public const string ORBELEMENT_PREFIX = "orbElement";
         public const string VANILLARANDO_ELEMENTLIST = "vanillaRandoElementList";
+        public static List<string> elementNames = new string[] { "Gnome", "Undine", "Salamando", "Sylphid", "Lumina", "Shade", "Luna", "Dryad" }.ToList();
 
         // keys into the crystal orb colors map - all the vanilla maps that have orbs on them
         public const int ORBMAP_MATANGO = MAPNUM_MATANGOCAVE_GNOME_ORB; // 307
@@ -63,6 +64,11 @@ namespace SoMRandomizer.processing
             if (randoMode == VanillaRandoSettings.MODE_KEY)
             {
                 List<int> elementList = process(outRom, context.randomFunctional, !settings.getBool(VanillaRandoSettings.PROPERTYNAME_DIALOGUE_CUTS));
+                Logging.log("Element randomization:", "spoiler");
+                for(int i=0; i < 8; i++)
+                {
+                    Logging.log("  " + elementNames[i] + " => " + elementNames[elementList[i]], "spoiler");
+                }
                 context.workingData.setIntArray(VANILLARANDO_ELEMENTLIST, elementList.ToArray());
             }
             else if (randoMode == OpenWorldSettings.MODE_KEY)
@@ -80,7 +86,7 @@ namespace SoMRandomizer.processing
             }
             else
             {
-                Logging.log("Unsupported mode for gold multiplier");
+                Logging.log("Unsupported mode for element randomizer");
                 return false;
             }
             return true;

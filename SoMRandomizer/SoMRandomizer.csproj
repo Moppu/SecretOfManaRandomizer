@@ -157,6 +157,7 @@
     <Compile Include="processing\hacks\common\other\NoEnergyToAttack.cs" />
     <Compile Include="processing\hacks\common\other\NoSwordPullAnimation.cs" />
     <Compile Include="processing\hacks\common\other\ObscureOwnHp.cs" />
+    <Compile Include="processing\hacks\common\other\OrbRewardEventGenerator.cs" />
     <Compile Include="processing\hacks\common\other\PlayerAiDefaultChanges.cs" />
     <Compile Include="processing\hacks\common\other\StarterGear.cs" />
     <Compile Include="processing\hacks\common\other\StartingDoor.cs" />
@@ -328,7 +329,6 @@
     <Compile Include="processing\hacks\common\music\SongExpansionInfo.cs" />
     <Compile Include="processing\hacks\common\util\NamesOfThings.cs" />
     <Compile Include="processing\hacks\common\other\NoFootstepSound.cs" />
-    <Compile Include="processing\hacks\common\fix\OrbRewardFix.cs" />
     <Compile Include="processing\hacks\common\procgen\SellAllGear.cs" />
     <Compile Include="processing\hacks\common\other\SoundEffectsReduction.cs" />
     <Compile Include="processing\hacks\bossrush\StartingLevel.cs" />
@@ -425,7 +425,6 @@
     <Compile Include="processing\common\EventCommandEnum.cs" />
     <Compile Include="processing\vanillarando\FasterDialogueEvents.cs" />
     <Compile Include="processing\common\InvisClearsSlow.cs" />
-    <Compile Include="processing\common\OrbSwaps.cs" />
     <Compile Include="processing\vanillarando\VanillaRandoGenerator.cs" />
     <Compile Include="util\UpdateCheck.cs" />
     <Compile Include="util\XyPos.cs" />
