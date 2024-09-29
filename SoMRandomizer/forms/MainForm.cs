@@ -812,6 +812,10 @@ namespace SoMRandomizer.forms
         {
             // plando button
             plandoForm.Show();
+            if (plandoForm.WindowState == FormWindowState.Minimized)
+            {
+                plandoForm.WindowState = FormWindowState.Normal;
+            }
         }
     }
 }
