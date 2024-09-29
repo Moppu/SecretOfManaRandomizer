@@ -32,9 +32,9 @@ namespace SoMRandomizer.processing.openworld.randomization
             bool giveMoreGrandPalaceHints = goal == OpenWorldGoalProcessor.GOAL_MANABEAST && !context.workingData.getBool(OpenWorldGoalProcessor.MANA_FORT_ACCESSIBLE_INDICATOR);
             bool girlSpellsExist = context.workingData.getBool(OpenWorldClassSelection.GIRL_MAGIC_EXISTS);
             bool spriteSpellsExist = context.workingData.getBool(OpenWorldClassSelection.SPRITE_MAGIC_EXISTS);
-            List<string> grandPalaceDependencies = new List<string>();
+            List<string> grandPalaceBossDependencies = new List<string>();
             List<string> manafortDependencies = new List<string>();
-            OpenWorldLocations.populateDependencies(settings, context, grandPalaceDependencies, manafortDependencies);
+            OpenWorldLocations.populateDependencies(settings, context, grandPalaceBossDependencies, manafortDependencies);
 
             List<string> importantPrizes = new string[] { "boy", "boy", "girl", "girl", "sprite", "sprite", "whip", "axe", "sword" }.ToList();
             if (goal == OpenWorldGoalProcessor.GOAL_MTR)
@@ -290,7 +290,7 @@ namespace SoMRandomizer.processing.openworld.randomization
                             eleNum = (byte)(0x81 + (r.Next() % 8));
                         }
                         string dependency = SomVanillaValues.elementOrbByteToName(eleNum, false) + " spells";
-                        if (!grandPalaceDependencies.Contains(dependency))
+                        if (!grandPalaceBossDependencies.Contains(dependency))
                         {
                             string hintPhrase = "Not needed for grand palace: " + SomVanillaValues.elementOrbByteToName(eleNum, false);
                             hintPhrase = VanillaEventUtil.wordWrapText(hintPhrase);

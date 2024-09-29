@@ -17,6 +17,8 @@ namespace SoMRandomizer.processing.openworld.randomization
         public const string DEPENDENCY_GIRL_SPELLS = "girlCaster";
         public const string DEPENDENCY_SPRITE_SPELLS = "spriteCaster";
         public const string DEPENDENCY_ELINEE_ENTRY = "elinee"; // whip and cutting weapon or axe
+        public const string DEPENDENCY_CUTTING_WEAPON = "cuttingWeapon";
+        public const string DEPENDENCY_MATANGO_ENTRY = "matango";
 
         public static List<PrizeLocation> getForSelectedOptions(RandoSettings settings, RandoContext context)
         {
@@ -28,7 +30,7 @@ namespace SoMRandomizer.processing.openworld.randomization
             bool anyCharsAdded = !context.workingData.getBool(OpenWorldCharacterSelection.START_SOLO);
             Dictionary<int, byte> crystalOrbColorMap = ElementSwaps.getCrystalOrbElementMap(context);
 
-            List<string> grandPalaceDependencies = new List<string>();
+            List<string> grandPalaceBossDependencies = new List<string>();
             List<string> manafortDependencies = new List<string>();
 
             string _earthPalaceElement = (!anySpellTriggers) ? "no" : SomVanillaValues.elementOrbByteToName(crystalOrbColorMap[ElementSwaps.ORBMAP_EARTHPALACE], false);
@@ -43,19 +45,19 @@ namespace SoMRandomizer.processing.openworld.randomization
                 _upperLandElement = (!anySpellTriggers) ? "no" : SomVanillaValues.elementOrbByteToName(crystalOrbColorMap[ElementSwaps.ORBMAP_UPPERLAND], false);
             }
 
-            populateDependencies(settings, context, grandPalaceDependencies, manafortDependencies);
+            populateDependencies(settings, context, grandPalaceBossDependencies, manafortDependencies);
 
             List<PrizeLocation> allLocations = new List<PrizeLocation>();
 
             // all event numbers here (second param to PrizeLocation) should correspond to ones created in PrizeEvents, containing the OPENWORLD_EVENT_INJECTION_PATTERN,
             // where the event data for the randomized prize will be injected.
-            allLocations.Add(new PrizeLocation("mech rider 3 (new item)", 0x4a4, 0, new string[] { }, new string[] { "in a forgotten land", "in a hard to reach spot", "in a late-game area" }, grandPalaceDependencies.ToArray(), 0.1));
+            allLocations.Add(new PrizeLocation("mech rider 3 (new item)", 0x4a4, 0, new string[] { }, new string[] { "in a forgotten land", "in a hard to reach spot", "in a late-game area" }, grandPalaceBossDependencies.ToArray(), 0.1));
             if (goal == OpenWorldGoalProcessor.GOAL_MANABEAST)
             {
                 if (fastManaFort)
                 {
-                    allLocations.Add(new PrizeLocation("buffy (new item)", 0x422, 0, new string[] { }, new string[] { "in the Mana Fortress", "in a late-game area" }, new string[] { "whip", "sword" }, 0.2));
-                    allLocations.Add(new PrizeLocation("dread slime (new item)", 0x425, 0, new string[] { }, new string[] { "in the Mana Fortress", "in a late-game area" }, new string[] { "whip", "sword" }, 0.2));
+                    allLocations.Add(new PrizeLocation("buffy (new item)", 0x422, 0, new string[] { }, new string[] { "in the Mana Fortress", "in a late-game area" }, new string[] { "whip", DEPENDENCY_CUTTING_WEAPON }, 0.2));
+                    allLocations.Add(new PrizeLocation("dread slime (new item)", 0x425, 0, new string[] { }, new string[] { "in the Mana Fortress", "in a late-game area" }, new string[] { "whip", DEPENDENCY_CUTTING_WEAPON }, 0.2));
                 }
                 else
                 {
@@ -158,12 +160,12 @@ namespace SoMRandomizer.processing.openworld.randomization
                 allLocations.Add(new PrizeLocation("shade spells", 0x586, 0, new string[] { }, new string[] { "in the mountains", "at a Mana seed pedestal", "where a Mana seed should be", "in a late-game area" }, new string[] { "axe", "whip" }, 0.4));
                 allLocations.Add(new PrizeLocation("shade seed", 0x586, 1, new string[] { }, new string[] { "in the mountains", "at a Mana seed pedestal", "where a Mana seed should be", "in a late-game area" }, new string[] { "axe", "whip" }, 0.4));
             }
-            allLocations.Add(new PrizeLocation("thunder gigas (new item)", 0x5f5, 0, new string[] { }, new string[] { "in a volcano", "beyond the Pure Lands bushes", "in a late-game area" }, new string[] { "sword" }, 0.4)); // or axe?
-            allLocations.Add(new PrizeLocation("red dragon (new item)", 0x5f3, 0, new string[] { }, new string[] { "in a volcano", "beyond the Pure Lands bushes", "in a late-game area" }, new string[] { "sword" }, 0.4));
-            allLocations.Add(new PrizeLocation("blue dragon (new item)", 0x5f7, 0, new string[] { }, new string[] { "in a volcano", "beyond the Pure Lands bushes", "in a late-game area" }, new string[] { "sword" }, 0.4));
+            allLocations.Add(new PrizeLocation("thunder gigas (new item)", 0x5f5, 0, new string[] { }, new string[] { "in a volcano", "beyond the Pure Lands bushes", "in a late-game area" }, new string[] { DEPENDENCY_CUTTING_WEAPON }, 0.4));
+            allLocations.Add(new PrizeLocation("red dragon (new item)", 0x5f3, 0, new string[] { }, new string[] { "in a volcano", "beyond the Pure Lands bushes", "in a late-game area" }, new string[] { DEPENDENCY_CUTTING_WEAPON }, 0.4));
+            allLocations.Add(new PrizeLocation("blue dragon (new item)", 0x5f7, 0, new string[] { }, new string[] { "in a volcano", "beyond the Pure Lands bushes", "in a late-game area" }, new string[] { DEPENDENCY_CUTTING_WEAPON }, 0.4));
             if (goal == OpenWorldGoalProcessor.GOAL_MANABEAST)
             {
-                allLocations.Add(new PrizeLocation("mana tree (new item)", 0x5f8, 0, new string[] { }, new string[] { "in a volcano", "at the Mana Tree", "in a late-game area", "in a hard to reach spot" }, new string[] { "sword" }, 0.3));
+                allLocations.Add(new PrizeLocation("mana tree (new item)", 0x5f8, 0, new string[] { }, new string[] { "in a volcano", "at the Mana Tree", "in a late-game area", "in a hard to reach spot" }, new string[] { DEPENDENCY_CUTTING_WEAPON }, 0.3));
             }
 
             List<string> mfHints = new string[] { "in the Upper Land", "in a cave", "in a mid-game area" }.ToList();
@@ -226,7 +228,7 @@ namespace SoMRandomizer.processing.openworld.randomization
             if (flammieDrumInLogic)
             {
                 // axe to walk through the cave
-                allLocations.Add(new PrizeLocation("matango inn javelin orb chest", MAPNUM_MATANGO_INTERIOR_CHEST, 0, 0x692, 0, new string[] { }, new string[] { "in the Upper Land", "in a chest", "in a town", "in a mid-game area" }, new string[] { "axe" }, 2.0));
+                allLocations.Add(new PrizeLocation("matango inn javelin orb chest", MAPNUM_MATANGO_INTERIOR_CHEST, 0, 0x692, 0, new string[] { }, new string[] { "in the Upper Land", "in a chest", "in a town", "in a mid-game area" }, new string[] { DEPENDENCY_MATANGO_ENTRY }, 2.0));
             }
             else
             {
@@ -279,21 +281,19 @@ namespace SoMRandomizer.processing.openworld.randomization
             if (flammieDrumInLogic)
             {
                 // we can repurpose 0x532 here which is the truffle NTC roof dialogue
-                allLocations.Add(new PrizeLocation("sword pedestal", 0x532, 0, new string[] { }, new string[] { "in an early-game area", "in the rabite forest" }, new string[] { "sword" }, 0.8));
+                allLocations.Add(new PrizeLocation("sword pedestal", 0x532, 0, new string[] { }, new string[] { "in an early-game area", "in the rabite forest" }, new string[] { DEPENDENCY_CUTTING_WEAPON }, 0.8));
             }
             return allLocations;
         }
 
-        public static void populateDependencies(RandoSettings settings, RandoContext context, List<string> grandPalaceDependencies, List<string> manafortDependencies)
+        public static void populateDependencies(RandoSettings settings, RandoContext context, List<string> grandPalaceBossDependencies, List<string> manafortDependencies)
         {
             // based on which characters, spells, and spell orbs are included, determine dependencies needed to complete the grand palace
             bool randomizeGrandPalace = settings.getBool(OpenWorldSettings.PROPERTYNAME_RANDOMIZE_GRANDPALACE_ELEMENTS);
             bool girlSpellsExist = context.workingData.getBool(OpenWorldClassSelection.GIRL_MAGIC_EXISTS);
             bool spriteSpellsExist = context.workingData.getBool(OpenWorldClassSelection.SPRITE_MAGIC_EXISTS);
-            grandPalaceDependencies.Add("whip");
-            grandPalaceDependencies.Add("axe");
-            // unsure why this uses sword instead, but it's been this way for a while
-            manafortDependencies.Add("sword");
+            grandPalaceBossDependencies.Add("whip");
+            manafortDependencies.Add(DEPENDENCY_CUTTING_WEAPON);
             manafortDependencies.Add("whip");
             if (randomizeGrandPalace)
             {
@@ -322,9 +322,9 @@ namespace SoMRandomizer.processing.openworld.randomization
                             string item = elementNames[eleValue];
                             if (item != "no")
                             {
-                                if (!grandPalaceDependencies.Contains(item))
+                                if (!grandPalaceBossDependencies.Contains(item))
                                 {
-                                    grandPalaceDependencies.Add(item);
+                                    grandPalaceBossDependencies.Add(item);
                                     manafortDependencies.Add(item);
                                 }
                                 anyValid = true;
@@ -336,19 +336,19 @@ namespace SoMRandomizer.processing.openworld.randomization
                 {
                     if (girlSpellsExist && spriteSpellsExist)
                     {
-                        grandPalaceDependencies.Add(DEPENDENCY_GIRL_SPELLS);
-                        grandPalaceDependencies.Add(DEPENDENCY_SPRITE_SPELLS);
+                        grandPalaceBossDependencies.Add(DEPENDENCY_GIRL_SPELLS);
+                        grandPalaceBossDependencies.Add(DEPENDENCY_SPRITE_SPELLS);
                         manafortDependencies.Add(DEPENDENCY_GIRL_SPELLS);
                         manafortDependencies.Add(DEPENDENCY_SPRITE_SPELLS);
                     }
                     else if (girlSpellsExist)
                     {
-                        grandPalaceDependencies.Add(DEPENDENCY_GIRL_SPELLS);
+                        grandPalaceBossDependencies.Add(DEPENDENCY_GIRL_SPELLS);
                         manafortDependencies.Add(DEPENDENCY_GIRL_SPELLS);
                     }
                     else if (spriteSpellsExist)
                     {
-                        grandPalaceDependencies.Add(DEPENDENCY_SPRITE_SPELLS);
+                        grandPalaceBossDependencies.Add(DEPENDENCY_SPRITE_SPELLS);
                         manafortDependencies.Add(DEPENDENCY_SPRITE_SPELLS);
                     }
                 }
@@ -357,30 +357,30 @@ namespace SoMRandomizer.processing.openworld.randomization
             {
                 if (girlSpellsExist && spriteSpellsExist)
                 {
-                    grandPalaceDependencies.AddRange(new string[] { "gnome spells", "undine spells", "salamando spells", "sylphid spells", "lumina spells", "shade spells", "luna spells", });
-                    grandPalaceDependencies.Add("girlCaster");
-                    grandPalaceDependencies.Add("spriteCaster");
+                    grandPalaceBossDependencies.AddRange(new string[] { "gnome spells", "undine spells", "salamando spells", "sylphid spells", "lumina spells", "shade spells", "luna spells", });
+                    grandPalaceBossDependencies.Add("girlCaster");
+                    grandPalaceBossDependencies.Add("spriteCaster");
                     manafortDependencies.AddRange(new string[] { "gnome spells", "undine spells", "salamando spells", "sylphid spells", "lumina spells", "shade spells", "luna spells", });
                     manafortDependencies.Add("girlCaster");
                     manafortDependencies.Add("spriteCaster");
                 }
                 else if (girlSpellsExist)
                 {
-                    grandPalaceDependencies.AddRange(new string[] { "salamando spells", "sylphid spells", "lumina spells", });
-                    grandPalaceDependencies.Add("girlCaster");
+                    grandPalaceBossDependencies.AddRange(new string[] { "salamando spells", "sylphid spells", "lumina spells", });
+                    grandPalaceBossDependencies.Add("girlCaster");
                     manafortDependencies.AddRange(new string[] { "salamando spells", "sylphid spells", "lumina spells", });
                     manafortDependencies.Add("girlCaster");
                 }
                 else if (spriteSpellsExist)
                 {
-                    grandPalaceDependencies.AddRange(new string[] { "gnome spells", "undine spells", "salamando spells", "sylphid spells", "shade spells", "luna spells", });
-                    grandPalaceDependencies.Add("spriteCaster");
+                    grandPalaceBossDependencies.AddRange(new string[] { "gnome spells", "undine spells", "salamando spells", "sylphid spells", "shade spells", "luna spells", });
+                    grandPalaceBossDependencies.Add("spriteCaster");
                     manafortDependencies.AddRange(new string[] { "gnome spells", "undine spells", "salamando spells", "sylphid spells", "shade spells", "luna spells", });
                     manafortDependencies.Add("spriteCaster");
                 }
             }
 
-            Logging.log("Grand palace dependencies: " + DataUtil.ListToString(grandPalaceDependencies), "debug");
+            Logging.log("Grand palace dependencies: " + DataUtil.ListToString(grandPalaceBossDependencies), "debug");
         }
     }
 }

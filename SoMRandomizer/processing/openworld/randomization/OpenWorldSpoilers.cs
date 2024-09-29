@@ -26,7 +26,7 @@ namespace SoMRandomizer.processing.openworld.randomization
                     if (simulationResult.collectionCycles[cycleNum].Contains(prizeLocation.locationName))
                     {
                         PrizeItem thisPrize = prizePlacements[prizeLocation];
-                        Logging.log("  " + prizeLocation.locationName + " -> " + prizePlacements[prizeLocation].prizeName
+                        Logging.log("    " + prizeLocation.locationName + " -> " + prizePlacements[prizeLocation].prizeName
                             + " [event 0x" + prizeLocation.eventNum.ToString("X")
                             + "] [flag 0x" + thisPrize.gotItemEventFlag.ToString("X") + "]", "spoiler");
                         allLocationsLeft.Remove(prizeLocation);
@@ -68,7 +68,7 @@ namespace SoMRandomizer.processing.openworld.randomization
                     if (simulationResult.collectionCycles[cycleNum].Contains(prizeLocation.locationName))
                     {
                         PrizeItem thisPrize = prizePlacements[prizeLocation];
-                        Logging.log("  " + prizeLocation.locationName + " -> " + prizePlacements[prizeLocation].prizeName 
+                        Logging.log("    " + prizeLocation.locationName + " -> " + prizePlacements[prizeLocation].prizeName 
                             + " [event 0x" + prizeLocation.eventNum.ToString("X") 
                             + "] [flag 0x" + thisPrize.gotItemEventFlag.ToString("X") + "]", "spoiler");
                         allLocationsLeft.Remove(prizeLocation);

@@ -180,6 +180,20 @@ namespace SoMRandomizer.processing.openworld.randomization
                                         haveThisReq = true;
                                     }
                                 }
+                            } 
+                            else if (req == OpenWorldLocations.DEPENDENCY_CUTTING_WEAPON)
+                            {
+                                if (gottenPrizeNames.Contains("axe") || gottenPrizeNames.Contains("sword"))
+                                {
+                                    haveThisReq = true;
+                                }
+                            }
+                            else if (req == OpenWorldLocations.DEPENDENCY_MATANGO_ENTRY)
+                            {
+                                if (gottenPrizeNames.Contains("axe") || gottenPrizeNames.Contains("flammie drum"))
+                                {
+                                    haveThisReq = true;
+                                }
                             }
                             else
                             {
