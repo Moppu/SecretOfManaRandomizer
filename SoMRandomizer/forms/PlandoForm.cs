@@ -752,7 +752,7 @@ namespace SoMRandomizer.forms
                             }
                             else if(kvKey.StartsWith(KEY_PREFIX_NONPRIZE))
                             {
-                                string keyName = propertyToDisplay(kvKey);
+                                string keyName = KEY_PREFIX_NONPRIZE + propertyToDisplay(kvKey);
                                 string valueName = propertyToDisplay(kvValue);
                                 if (orbButtonPropertyNames.ContainsKey(keyName))
                                 {
