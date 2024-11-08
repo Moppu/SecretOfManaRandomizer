@@ -313,6 +313,14 @@ namespace SoMRandomizer.processing.common
             {
                 filenameSeed = filenameSeed.Replace(c, '_');
             }
+
+            if (settings.getBool(CommonSettings.PROPERTYNAME_RACE_MODE))
+            {
+                // advance randomness state up to 8 times.
+                // no clue if this is needed, once might be fine as well
+                int times = context.randomFunctional.Next(8);
+                for (; times > 0; times--) context.randomFunctional.Next();
+            }
             Logging.ClearLoggers();
             if (settings.getBool(CommonSettings.PROPERTYNAME_TEST_ONLY))
             {
@@ -323,7 +331,7 @@ namespace SoMRandomizer.processing.common
             else
             {
                 fileLogger = new FileLogger("./log_" + filenameSeed + ".txt");
-                if (settings.getBool(CommonSettings.PROPERTYNAME_SPOILER_LOG))
+                if (settings.getBool(CommonSettings.PROPERTYNAME_SPOILER_LOG) && !settings.getBool(CommonSettings.PROPERTYNAME_RACE_MODE))
                 {
                     fileLoggerSpoiler = new FileLogger("./log_" + filenameSeed + "_SPOILER.txt");
                 }

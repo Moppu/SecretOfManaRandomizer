@@ -97,6 +97,7 @@ namespace SoMRandomizer.forms
             // randomizations
             propertyManager.makeBooleanValueProperty("generalRandomizations", CommonSettings.PROPERTYNAME_BOSS_ELEMENT_RANDO, "Randomize Boss Elements", "Randomize defense element, color, and spells cast by most bosses.  This is still a work in progress!", commonSettings);
             propertyManager.makeBooleanValueProperty("generalRandomizations", CommonSettings.PROPERTYNAME_SPOILER_LOG, "Spoiler log", "Generate a spoiler log for the seed, with the same name as the normal log + _SPOILER.", commonSettings);
+            propertyManager.makeBooleanValueProperty("generalRandomizations", CommonSettings.PROPERTYNAME_RACE_MODE, "Race mode", "Produces different game/hash on the same seed that only match with other players on race mode and also turns off spoiler log.", commonSettings);
             // stupid stuff
             propertyManager.makeBooleanValueProperty("generalStupid", CommonSettings.PROPERTYNAME_OHKO, "One-hit KO", "Drops your HP to 1 and defense to zero.  Why would you want this?", commonSettings);
             propertyManager.makeBooleanValueProperty("generalStupid", CommonSettings.PROPERTYNAME_WALK_THROUGH_WALLS, "Walk through walls", "Well, go on.  See what's in that unreachable door in North Town.", commonSettings);

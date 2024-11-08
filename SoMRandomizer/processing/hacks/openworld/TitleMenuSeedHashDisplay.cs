@@ -30,7 +30,14 @@ namespace SoMRandomizer.processing.hacks.openworld
                 hash <<= 4;
                 hash |= (r.Next() % 16);
             }
-            string hashString = hash.ToString("X").ToUpper();
+
+            string hashString = "";
+            if (settings.getBool(CommonSettings.PROPERTYNAME_RACE_MODE))
+            {
+                hashString += "r";
+            }
+            hashString += hash.ToString("X").ToUpper();
+
             string seedShortened = seed;
             if (seedShortened.Length > 20)
             {
