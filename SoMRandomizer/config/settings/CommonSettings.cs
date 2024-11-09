@@ -75,6 +75,7 @@ namespace SoMRandomizer.config.settings
         public const string PROPERTYNAME_CANDY_HEALOUTS = "candyHealouts";
         public const string PROPERTYNAME_MAGIC_ROPE_DEATH_FIX = "magicRopeDeathFix";
         public const string PROPERTYNAME_SPOILER_LOG = "spoilerLog";
+        public const string PROPERTYNAME_RACE_MODE = "raceMode";
 
         // used by MainForm and CharacterPaletteRandomizer to coordinate custom colors for characters
         public const string PROPERTYNAME_PREFIX_CUSTOM_CHARACTER_COLORS = "CustomCharColor";
@@ -142,6 +143,7 @@ namespace SoMRandomizer.config.settings
             setInitial(PROPERTYNAME_CANDY_HEALOUTS, true); // healing consumables can be used on still-alive 0 hp character
             setInitial(PROPERTYNAME_MAGIC_ROPE_DEATH_FIX, true); // fix invulnerability when using magic rope
             setInitial(PROPERTYNAME_SPOILER_LOG, true); // generate spoiler log
+            setInitial(PROPERTYNAME_RACE_MODE, false); // race mode
             setInitial(PROPERTYNAME_TEST_ONLY, false); // for automated tests; changes how we log
 
             // enumerations
