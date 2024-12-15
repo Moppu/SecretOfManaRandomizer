@@ -19,6 +19,41 @@ namespace SoMRandomizer.processing.openworld.randomization
         public const int NUM_NESO_HINTS = 3;
         public const string NESO_PRIZE_PREFIX = "nesoPrize";
         public const string NESO_HINT_PREFIX = "nesoHint";
+        
+        private static readonly Dictionary<int, string> HintEventNames = new Dictionary<int, string>
+        {
+            { 0x3ce, "krissie northtown" },
+            { 0x3e9, "mandala orb" },
+            { 0x3ea, "mandala orb" },
+            { 0x3eb, "mandala orb" },
+            { 0x3ec, "mandala orb" },
+            { 0x3ed, "mandala orb" },
+            { 0x3ee, "mandala orb" },
+            { 0x3ef, "mandala orb" },
+            { 0x37c, "rudolph" },
+            { 0x555, "dyluck at NT ruins" },
+            { 0x21c, "flowers guy near witch forest" },
+            { 0x114, "potos elder" },
+            { 0x3dd, "jehk" },
+            { 0x3dc, "johk" },
+            { 0x2d7, "tasnica king after fight" },
+            { 0x606, "potos cannon travel sign" },
+            { 0x607, "water palace neko's sign" },
+            { 0x608, "beware of goblins sign" },
+            { 0x600, "three paths sign south of potos" },
+            { 0x601, "pandora sign" },
+            { 0x602, "kippo sign" },
+            { 0x609, "gaia's navel sign" },
+            { 0x604, "water palace sign" },
+            { 0x605, "potos forest sign" },
+        };
+
+        public enum OpenWorldSpecialHintTypes
+        {
+            FIRE_PLACE_FINAL_PRICE,
+            MECH_RIDER_3_PRICE,
+            TOTAL_ORB_ELEMENTS_GRAND_PALACE,
+        }
 
         public static void addHints(RandoSettings settings, RandoContext context, Dictionary<PrizeLocation, PrizeItem> itemPlacements, SimResult simulationResult)
         {
@@ -28,12 +63,13 @@ namespace SoMRandomizer.processing.openworld.randomization
             bool allowMissedItems = settings.getBool(OpenWorldSettings.PROPERTYNAME_ALLOW_MISSED_ITEMS);
             bool randomGrandPalaceElements = settings.getBool(OpenWorldSettings.PROPERTYNAME_RANDOMIZE_GRANDPALACE_ELEMENTS);
             bool suppressHints = settings.getBool(OpenWorldSettings.PROPERTYNAME_NO_HINTS);
-            bool anySpellTriggers = context.workingData.getBool(OpenWorldClassSelection.ANY_MAGIC_EXISTS);
             bool giveMoreGrandPalaceHints = goal == OpenWorldGoalProcessor.GOAL_MANABEAST && !context.workingData.getBool(OpenWorldGoalProcessor.MANA_FORT_ACCESSIBLE_INDICATOR);
+            bool anySpellsExists = context.workingData.getBool(OpenWorldClassSelection.ANY_MAGIC_EXISTS);
             bool girlSpellsExist = context.workingData.getBool(OpenWorldClassSelection.GIRL_MAGIC_EXISTS);
             bool spriteSpellsExist = context.workingData.getBool(OpenWorldClassSelection.SPRITE_MAGIC_EXISTS);
             List<string> grandPalaceBossDependencies = new List<string>();
             List<string> manafortDependencies = new List<string>();
+            List<byte> validElements = ElementSwaps.GetValidOrbElements(girlSpellsExist, spriteSpellsExist);
             OpenWorldLocations.populateDependencies(settings, context, grandPalaceBossDependencies, manafortDependencies);
 
             List<string> importantPrizes = new string[] { "boy", "boy", "girl", "girl", "sprite", "sprite", "whip", "axe", "sword" }.ToList();
@@ -100,33 +136,7 @@ namespace SoMRandomizer.processing.openworld.randomization
                 nesoHintNum++;
             }
 
-            int[] hintEvents = new int[]
-            {
-                0x3ce, // krissie northtown
-                0x3e9, // mandala orb
-                0x3ea, // mandala orb
-                0x3eb, // mandala orb
-                0x3ec, // mandala orb
-                0x3ed, // mandala orb
-                0x3ee, // mandala orb
-                0x3ef, // mandala orb
-                0x37c, // rudolph
-                0x555, // dyluck at NT ruins
-                0x21c, // flowers guy near witch forest
-                0x114, // potos elder
-                0x3dd, // jehk
-                0x3dc, // johk
-                0x2d7, // tasnica king after fight
-                0x606, // potos cannon travel sign
-                0x607, // water palace neko's sign
-                0x608, // beware of goblins sign
-                0x600, // three paths sign south of potos
-                0x601, // pandora sign
-                0x602, // kippo sign
-                0x609, // gaia's navel sign
-                0x604, // water palace sign
-                0x605, // potos forest sign
-            };
+            int[] hintEvents = HintEventNames.Keys.ToArray();
 
             string[] hintPhrases = new string[]
             {
@@ -217,102 +227,99 @@ namespace SoMRandomizer.processing.openworld.randomization
             };
 
             List<string> hintedPrizes = new List<string>();
-            bool gaveFirePalaceHint = false;
-            bool gaveMechRider3Hint = false;
-            bool gaveTotalElementsHint = !randomGrandPalaceElements;
-            int grandPalaceHintChance = 5;
+            int grandPalaceHintChance = 5; // 20%
             if (giveMoreGrandPalaceHints)
             {
-                grandPalaceHintChance = 3;
+                grandPalaceHintChance = 3; // 33%
             }
+
+            List<OpenWorldSpecialHintTypes> remainingSpecialHints = new List<OpenWorldSpecialHintTypes>{OpenWorldSpecialHintTypes.MECH_RIDER_3_PRICE};
+            // ToDo: is this even needed?
+            if (hasItemAtLocation(itemPlacements, "fire seed"))
+            {
+                remainingSpecialHints.Add(OpenWorldSpecialHintTypes.FIRE_PLACE_FINAL_PRICE);
+            }
+
+            if (randomGrandPalaceElements && anySpellsExists)
+            {
+                remainingSpecialHints.Add(OpenWorldSpecialHintTypes.TOTAL_ORB_ELEMENTS_GRAND_PALACE);
+            }
+
             foreach (int hintEvent in hintEvents)
             {
-                int hintType = suppressHints ? 100 : (r.Next() % 100);
+                /* Current changes for rolling hints
+                 * useful hint: 80%
+                 * useless hint: 20%
+                 * special hint: useful hint * 20% = 16%
+                 * not special hint: useful hint * 80% = 64%
+                 * gp hint | more gp hints: not special hint * 33.3…% = 21.3…%
+                 * gp hint | not more gp hints: not special hint * 20% = 12.8%
+                 * "normal" hint | more gp hints: not special hint * 66.6…% = 42.6…%
+                 * "normal" hint | not more gp hints: not special hint * 80% = 51.2%                 
+                 */
+                bool usefulHint = !suppressHints && r.Next(100) < 80;
                 // normal, useful hint
-                if (hintType < 80)
+                if (usefulHint)
                 {
+                    string hintPhrase;
                     // a few specific ones
-                    bool specialHint = (r.Next() % 5) == 0;
-                    if (specialHint && !gaveFirePalaceHint && hintExistsForLocation(itemPlacements, "fire seed"))
+                    // 80%, max. 3
+                    bool specialHint = remainingSpecialHints.Count > 0 && r.Next(5) == 0;
+                    if (specialHint)
                     {
-                        string hintPhrase = "Fire palace final prize: " + getHintForLocation(itemPlacements, "fire seed");
-                        hintPhrase = VanillaEventUtil.wordWrapText(hintPhrase);
-                        VanillaEventUtil.replaceEventData(HintEvents.OPENWORLD_HINT_INJECTION_PATTERN.ToList(), context.replacementEvents[hintEvent], VanillaEventUtil.getBytes(hintPhrase));
-                        gaveFirePalaceHint = true;
-                        Logging.log("Adding (useful) hint: " + hintPhrase, "spoiler");
+                        OpenWorldSpecialHintTypes type = remainingSpecialHints[r.Next(remainingSpecialHints.Count)];
+                        switch (type)
+                        {
+                            case OpenWorldSpecialHintTypes.FIRE_PLACE_FINAL_PRICE:
+                            {
+                                hintPhrase = "Fire palace final prize: " + getHintForLocation(itemPlacements, "fire seed");
+                                break;
+                            }
+                            case OpenWorldSpecialHintTypes.MECH_RIDER_3_PRICE:
+                            {
+                                hintPhrase = "Mech rider 3 prize: " + getHintForLocation(itemPlacements, "mech rider 3 (new item)");
+                                break;
+                            }
+                            case OpenWorldSpecialHintTypes.TOTAL_ORB_ELEMENTS_GRAND_PALACE:
+                            {
+                                HashSet<byte> uniqueElementsList = new HashSet<byte>();
+                                int[] grandPalaceOrbMaps = { 420, 421, 422, 423, 424, 425, 426 };
+                                foreach(int orbMap in grandPalaceOrbMaps)
+                                {
+                                    uniqueElementsList.Add(crystalOrbColorMap[orbMap]);
+                                }
+                                hintPhrase = "Total elements needed for grand palace: " + uniqueElementsList.Count;
+                                break;
+                            }
+                            default:
+                                throw new ArgumentOutOfRangeException();
+                        }
+                        remainingSpecialHints.Remove(type);
                     }
-                    else if (specialHint && !gaveMechRider3Hint)
+                    else if (randomGrandPalaceElements && anySpellsExists && r.Next(grandPalaceHintChance) == 0)
                     {
-                        string hintPhrase = "Mech rider 3 prize: " + getHintForLocation(itemPlacements, "mech rider 3 (new item)");
-                        hintPhrase = VanillaEventUtil.wordWrapText(hintPhrase);
-                        VanillaEventUtil.replaceEventData(HintEvents.OPENWORLD_HINT_INJECTION_PATTERN.ToList(), context.replacementEvents[hintEvent], VanillaEventUtil.getBytes(hintPhrase));
-                        gaveMechRider3Hint = true;
-                        Logging.log("Adding (useful) hint: " + hintPhrase, "spoiler");
-                    }
-                    else if (specialHint && !gaveTotalElementsHint && anySpellTriggers)
-                    {
-                        HashSet<byte> uniqueElementsList = new HashSet<byte>();
-                        int[] grandPalaceOrbMaps = new int[] { 420, 421, 422, 423, 424, 425, 426 };
-                        foreach(int orbMap in grandPalaceOrbMaps)
-                        {
-                            uniqueElementsList.Add(crystalOrbColorMap[orbMap]);
-                        }
-                        string hintPhrase = "Total elements needed for grand palace: " + uniqueElementsList.Count;
-                        hintPhrase = VanillaEventUtil.wordWrapText(hintPhrase);
-                        VanillaEventUtil.replaceEventData(HintEvents.OPENWORLD_HINT_INJECTION_PATTERN.ToList(), context.replacementEvents[hintEvent], VanillaEventUtil.getBytes(hintPhrase));
-                        gaveTotalElementsHint = true;
-                        Logging.log("Adding (useful) hint: " + hintPhrase, "spoiler");
-                    }
-                    else if (randomGrandPalaceElements && (girlSpellsExist || spriteSpellsExist) && (r.Next() % grandPalaceHintChance) == 0)
-                    {
-                        HashSet<byte> validElements = new HashSet<byte>();
-                        if (girlSpellsExist)
-                        {
-                            validElements.Add(0x83); // sala
-                            validElements.Add(0x84); // lumina
-                            validElements.Add(0x85); // sylphid
-                        }
-                        if (spriteSpellsExist)
-                        {
-                            // everything but lumina
-                            validElements.Add(0x81);
-                            validElements.Add(0x82);
-                            validElements.Add(0x83);
-                            validElements.Add(0x85);
-                            validElements.Add(0x86);
-                            validElements.Add(0x87);
-                            validElements.Add(0x88);
-                        }
-                        byte eleNum = (byte)(0x81 + (r.Next() % 8));
-                        int safety = 0;
-                        while (safety < 100 && !validElements.Contains(eleNum))
-                        {
-                            eleNum = (byte)(0x81 + (r.Next() % 8));
-                        }
+                        //orb element (not) needed for grand palace
+                        byte eleNum = (byte)(0x81 + r.Next(validElements.Count));
                         string dependency = SomVanillaValues.elementOrbByteToName(eleNum, false) + " spells";
                         if (!grandPalaceBossDependencies.Contains(dependency))
                         {
-                            string hintPhrase = "Not needed for grand palace: " + SomVanillaValues.elementOrbByteToName(eleNum, false);
-                            hintPhrase = VanillaEventUtil.wordWrapText(hintPhrase);
-                            VanillaEventUtil.replaceEventData(HintEvents.OPENWORLD_HINT_INJECTION_PATTERN.ToList(), context.replacementEvents[hintEvent], VanillaEventUtil.getBytes(hintPhrase));
-                            Logging.log("Adding (useful) hint: " + hintPhrase, "spoiler");
+                            hintPhrase = "Not needed for grand palace: " + SomVanillaValues.elementOrbByteToName(eleNum, false);
                         }
                         else
                         {
-                            string hintPhrase = "Needed for grand palace: " + SomVanillaValues.elementOrbByteToName(eleNum, false);
-                            hintPhrase = VanillaEventUtil.wordWrapText(hintPhrase);
-                            VanillaEventUtil.replaceEventData(HintEvents.OPENWORLD_HINT_INJECTION_PATTERN.ToList(), context.replacementEvents[hintEvent], VanillaEventUtil.getBytes(hintPhrase));
-                            Logging.log("Adding (useful) hint: " + hintPhrase, "spoiler");
+                            hintPhrase = "Needed for grand palace: " + SomVanillaValues.elementOrbByteToName(eleNum, false);
                         }
                     }
                     else
                     {
                         // treasure location
-                        string hintPhrase = hintPhrases[r.Next() % hintPhrases.Length];
-                        List<PrizeLocation> keys = Enumerable.ToList(itemPlacements.Keys);
+                        // ToDo: should this be change to always just pick any random location and not have it prefer key items? what to we do with allowMissedItems then?
+                        hintPhrase = hintPhrases[r.Next() % hintPhrases.Length];
+                        List<PrizeLocation> keys = itemPlacements.Keys.ToList();
                         PrizeLocation location = keys[r.Next() % keys.Count];
                         string prize = itemPlacements[location].prizeName;
                         int i = 0; // safety
+                        // ToDo: decide if MRT should skip this
                         if (prize.Contains("seed"))
                         {
                             // reroll once, these are less useful
@@ -329,64 +336,44 @@ namespace SoMRandomizer.processing.openworld.randomization
 
                         hintedPrizes.Add(prize);
                         string hintLoc = location.locationHints[r.Next() % location.locationHints.Length];
-                        if (allowMissedItems)
+                        if (allowMissedItems && simulationResult.collectionCycles.SelectMany(x => x).All(loc => loc != location.locationName))
                         {
-                            bool visitedLocation = false;
-                            foreach (List<string> cycleLocations in simulationResult.collectionCycles)
-                            {
-                                foreach (string loc in cycleLocations)
-                                {
-                                    if (loc == location.locationName)
-                                    {
-                                        visitedLocation = true;
-                                        break;
-                                    }
-                                }
-                            }
-                            if (!visitedLocation)
-                            {
-                                hintLoc = "nowhere";
-                            }
+                            hintLoc = "nowhere";
                         }
                         hintPhrase = hintPhrase.Replace("%1", itemPlacements[location].hintName);
                         hintPhrase = hintPhrase.Replace("%2", hintLoc);
-                        Logging.log("Adding (useful) hint: " + hintPhrase, "spoiler");
-                        hintPhrase = VanillaEventUtil.wordWrapText(hintPhrase);
-                        VanillaEventUtil.replaceEventData(HintEvents.OPENWORLD_HINT_INJECTION_PATTERN.ToList(), context.replacementEvents[hintEvent], VanillaEventUtil.getBytes(hintPhrase));
                     }
+                    addHintEvent(context, hintPhrase, hintEvent, "useful");
                 }
                 else
                 {
                     // mostly useless hint
                     string hintPhrase = dumbHints[r.Next() % dumbHints.Length];
-                    Logging.log("Adding (useless) hint: " + hintPhrase, "spoiler");
-                    hintPhrase = VanillaEventUtil.wordWrapText(hintPhrase);
-                    VanillaEventUtil.replaceEventData(HintEvents.OPENWORLD_HINT_INJECTION_PATTERN.ToList(), context.replacementEvents[hintEvent], VanillaEventUtil.getBytes(hintPhrase));
+                    addHintEvent(context, hintPhrase, hintEvent, "useless");
                 }
             }
+        }
+        
+        private static string hintEventNumToName(int hintEventNum)
+        {
+            return HintEventNames.TryGetValue(hintEventNum, out string name) ? name : "unnamed hint event";
         }
 
-        private static bool hintExistsForLocation(Dictionary<PrizeLocation, PrizeItem> itemPlacements, string locName)
+        private static void addHintEvent(RandoContext context, string hintPhrase, int hintEvent, string hintType)
         {
-            foreach(PrizeLocation loc in itemPlacements.Keys)
-            {
-                if (loc.locationName == locName)
-                {
-                    return true;
-                }
-            }
-            return false;
+            Logging.log($"Adding ({hintType}) hint: {hintPhrase} [event 0x{hintEvent:X}: {hintEventNumToName(hintEvent)}]" , "spoiler");
+            hintPhrase = VanillaEventUtil.wordWrapText(hintPhrase);
+            VanillaEventUtil.replaceEventData(HintEvents.OPENWORLD_HINT_INJECTION_PATTERN.ToList(), context.replacementEvents[hintEvent], VanillaEventUtil.getBytes(hintPhrase));
         }
+
+        private static bool hasItemAtLocation(Dictionary<PrizeLocation, PrizeItem> itemPlacements, string locName)
+        {
+            return itemPlacements.Keys.Any(loc => loc.locationName == locName);
+        }
+
         private static string getHintForLocation(Dictionary<PrizeLocation, PrizeItem> itemPlacements, string locName)
         {
-            foreach(PrizeLocation loc in itemPlacements.Keys)
-            {
-                if(loc.locationName == locName)
-                {
-                    return itemPlacements[loc].hintName;
-                }
-            }
-            return "";
+            return itemPlacements.FirstOrDefault(pair => pair.Key.locationName == locName).Value?.hintName ?? "";
         }
     }
 }
