@@ -234,7 +234,6 @@ namespace SoMRandomizer.processing.openworld.randomization
             }
 
             List<OpenWorldSpecialHintTypes> remainingSpecialHints = new List<OpenWorldSpecialHintTypes>{OpenWorldSpecialHintTypes.MECH_RIDER_3_PRICE};
-            // ToDo: is this even needed?
             if (hasItemAtLocation(itemPlacements, "fire seed"))
             {
                 remainingSpecialHints.Add(OpenWorldSpecialHintTypes.FIRE_PLACE_FINAL_PRICE);
@@ -247,10 +246,10 @@ namespace SoMRandomizer.processing.openworld.randomization
 
             foreach (int hintEvent in hintEvents)
             {
-                /* Current changes for rolling hints
+                /* Current chances for rolling hints
                  * useful hint: 80%
                  * useless hint: 20%
-                 * special hint: useful hint * 20% = 16%
+                 * special hint: useful hint * 20% = 16% (max 3)
                  * not special hint: useful hint * 80% = 64%
                  * gp hint | more gp hints: not special hint * 33.3…% = 21.3…%
                  * gp hint | not more gp hints: not special hint * 20% = 12.8%
@@ -259,11 +258,12 @@ namespace SoMRandomizer.processing.openworld.randomization
                  */
                 bool usefulHint = !suppressHints && r.Next(100) < 80;
                 // normal, useful hint
+                // 80%
                 if (usefulHint)
                 {
                     string hintPhrase;
                     // a few specific ones
-                    // 80%, max. 3
+                    // 20%, max. 3
                     bool specialHint = remainingSpecialHints.Count > 0 && r.Next(5) == 0;
                     if (specialHint)
                     {
@@ -313,13 +313,11 @@ namespace SoMRandomizer.processing.openworld.randomization
                     else
                     {
                         // treasure location
-                        // ToDo: should this be change to always just pick any random location and not have it prefer key items? what to we do with allowMissedItems then?
                         hintPhrase = hintPhrases[r.Next() % hintPhrases.Length];
                         List<PrizeLocation> keys = itemPlacements.Keys.ToList();
                         PrizeLocation location = keys[r.Next() % keys.Count];
                         string prize = itemPlacements[location].prizeName;
                         int i = 0; // safety
-                        // ToDo: decide if MRT should skip this
                         if (prize.Contains("seed"))
                         {
                             // reroll once, these are less useful
@@ -348,6 +346,7 @@ namespace SoMRandomizer.processing.openworld.randomization
                 else
                 {
                     // mostly useless hint
+                    // 20%
                     string hintPhrase = dumbHints[r.Next() % dumbHints.Length];
                     addHintEvent(context, hintPhrase, hintEvent, "useless");
                 }
