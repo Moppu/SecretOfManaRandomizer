@@ -682,7 +682,7 @@ namespace SoMRandomizer.processing.openworld.events
 
             // 0x5b1: don't allow entry into the sewer
             // note that in "flammie drum in logic" mode where sometimes you do have to go in the sewer,
-            // we make this guy invisible
+            // we move this guy out the way
             EventScript newEvent5b1 = new EventScript();
             context.replacementEvents[0x5b1] = newEvent5b1;
             newEvent5b1.AddDialogueBox("take my advice\ndon't go in here\nthis dungeon blows");

@@ -238,8 +238,9 @@ namespace SoMRandomizer.processing.openworld.events
 
             if (flammieDrumInLogic)
             {
-                // remove southtown password guy, who blocks you in normal open world
-                setObjectNeverVisible(outRom, MAPNUM_SOUTHTOWN, 2);
+                // move southtown password guy, who blocks you in normal open world
+                // don't remove him, because gift mode can sometimes require him.
+                setObjectXY(outRom, MAPNUM_SOUTHTOWN, 2, (byte)(getObjectX(outRom, MAPNUM_SOUTHTOWN, 2) - 1), getObjectY(outRom, MAPNUM_SOUTHTOWN, 2));
             }
 
             // enable flammie on a couple extra maps 
@@ -312,7 +313,8 @@ namespace SoMRandomizer.processing.openworld.events
 
             // south town
             setObjectNeverVisible(outRom, MAPNUM_SOUTHTOWN, 1);
-            setObjectNeverVisible(outRom, MAPNUM_SOUTHTOWN, 2);
+            // 2 is password guy
+            setObjectAlwaysVisible(outRom, MAPNUM_SOUTHTOWN, 2);
             setObjectNeverVisible(outRom, MAPNUM_SOUTHTOWN, 3);
             setObjectNeverVisible(outRom, MAPNUM_SOUTHTOWN, 4);
             setObjectNeverVisible(outRom, MAPNUM_SOUTHTOWN, 5);
