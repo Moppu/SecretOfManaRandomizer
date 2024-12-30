@@ -4,8 +4,9 @@ using SoMRandomizer.processing.common;
 using SoMRandomizer.processing.common.structure;
 using System;
 using System.IO;
+using System.Linq;
 using System.Reflection;
-using System.Xml;
+using U8Xml;
 
 namespace SoMRandomizer.processing.openworld.events
 {
@@ -34,22 +35,12 @@ namespace SoMRandomizer.processing.openworld.events
                 Assembly assemb = Assembly.GetExecutingAssembly();
                 using (Stream stream = assemb.GetManifestResourceStream("SoMRandomizer.Resources.pokedata3.xml"))
                 {
-                    XmlDataDocument xmldoc = new XmlDataDocument();
-                    xmldoc.Load(stream);
-                    XmlNodeList pokeDexNodes = xmldoc.GetElementsByTagName("pokedex");
-                    for (int i = 0; i <= pokeDexNodes.Count - 1; i++)
+                    using (var xml = XmlParser.Parse(stream))
                     {
-                        XmlNode pokeDexNode = pokeDexNodes[i];
-                        XmlNodeList pokemonNodes = pokeDexNode.ChildNodes;
-                        XmlNode randomPokemon = pokemonNodes[r.Next() % pokemonNodes.Count];
-                        XmlAttributeCollection attribs = randomPokemon.Attributes;
-                        foreach (XmlAttribute attrib in attribs)
-                        {
-                            if (attrib.Name == "id")
-                            {
-                                pokemonNumber = attrib.InnerText;
-                            }
-                        }
+                        var pokeDexNode = xml.Root;
+                        var pokemonNodes = pokeDexNode.Children;
+                        var randomPokemon = pokemonNodes.ElementAt(r.Next() % pokemonNodes.Count);
+                        pokemonNumber = randomPokemon.FindAttribute("id").Value.ToString();
 
                         int pokeNum = Int32.Parse(pokemonNumber);
                         if (pokeNum >= 1 && pokeNum <= 151)
@@ -69,15 +60,15 @@ namespace SoMRandomizer.processing.openworld.events
                             generation = 4;
                         }
 
-                        foreach (XmlNode node in randomPokemon.ChildNodes)
+                        foreach (var node in randomPokemon.Children)
                         {
-                            if (node.Name == "name")
+                            if (node.Name.ToString() == "name")
                             {
-                                pokemonName = node.InnerText;
+                                pokemonName = node.InnerText.ToString();
                             }
-                            if (node.Name == "description")
+                            if (node.Name.ToString() == "description")
                             {
-                                pokemonDescription = node.InnerText;
+                                pokemonDescription = node.InnerText.ToString();
                             }
                         }
                     }
