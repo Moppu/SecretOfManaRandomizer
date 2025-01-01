@@ -279,29 +279,7 @@ namespace SoMRandomizer.processing
             // x86->x355 = shade
             // x87->x356 = luna
             // x88->x357 = dryad
-            List<byte> orbElementsAvailable = new List<byte>();
-            if(spriteExists)
-            {
-                orbElementsAvailable.Add(0x81);
-                orbElementsAvailable.Add(0x82);
-                orbElementsAvailable.Add(0x83);
-                orbElementsAvailable.Add(0x85);
-                orbElementsAvailable.Add(0x86);
-                orbElementsAvailable.Add(0x87);
-                orbElementsAvailable.Add(0x88);
-            }
-            if (girlExists)
-            {
-                if (!orbElementsAvailable.Contains(0x83))
-                {
-                    orbElementsAvailable.Add(0x83); // sala
-                }
-                orbElementsAvailable.Add(0x84); // lumina
-                if (!orbElementsAvailable.Contains(0x85))
-                {
-                    orbElementsAvailable.Add(0x85); // sylphid
-                }
-            }
+            List<byte> orbElementsAvailable = GetValidOrbElements(girlExists, spriteExists);
 
             // boy only - remove these switches in event modifier and just set them all to none
             if(orbElementsAvailable.Count == 0)
@@ -665,6 +643,33 @@ namespace SoMRandomizer.processing
                     rom[mapObjOffset + 1] |= 0x80;
                 }
             }
+        }
+
+        public static List<byte> GetValidOrbElements(bool girlExists, bool spriteExists)
+        {
+            List<byte> orbElementsAvailable = new List<byte>();
+            if(spriteExists)
+            {
+                // everything but lumina
+                orbElementsAvailable.Add(0x81); 
+                orbElementsAvailable.Add(0x82);
+                orbElementsAvailable.Add(0x83);
+                orbElementsAvailable.Add(0x85);
+                orbElementsAvailable.Add(0x86);
+                orbElementsAvailable.Add(0x87);
+                orbElementsAvailable.Add(0x88);
+            }
+            if (girlExists)
+            {
+                orbElementsAvailable.Add(0x84); // lumina
+                if (!spriteExists)
+                {
+                    orbElementsAvailable.Add(0x83); // sala
+                    orbElementsAvailable.Add(0x85); // sylphid
+                }
+            }
+
+            return orbElementsAvailable;
         }
     }
 }
