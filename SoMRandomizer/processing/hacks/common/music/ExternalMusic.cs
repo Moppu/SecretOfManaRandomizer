@@ -3,7 +3,7 @@ using SoMRandomizer.util;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml;
+using U8Xml;
 
 namespace SoMRandomizer.processing.hacks.common.music
 {
@@ -22,79 +22,63 @@ namespace SoMRandomizer.processing.hacks.common.music
             string xmlLoadPath = xmlLoadDir + "/music.xml";
             try
             {
-                using (XmlReader reader = XmlReader.Create(xmlLoadPath))
+                using (var xml = XmlParser.ParseFile(xmlLoadPath))
                 {
-                    ImportedSong currentSong = null;
-                    XmlWrapperUtil xml = new XmlWrapperUtil(reader);
-                    while (reader.Read())
+                    // NOTE: we only look at top level songs and their children here
+                    foreach (var node in xml.Root.Children)
                     {
-                        // Only detect start elements.
-                        if (reader.IsStartElement())
+                        if (node.Name.ToString() == "song")
                         {
-                            // Get element name and switch on it.
-                            switch (reader.Name)
+                            ImportedSong song = new ImportedSong();
+                            song.name = node.FindAttribute("name").Value.ToString();
+                            string filePath = node.FindAttribute("sourceFile").Value.ToString();
+                            string songFullPath = xmlLoadDir + "/" + filePath;
+                            song.data = File.ReadAllBytes(songFullPath);
+                            string categoriesString = node.FindAttribute("categories").Value.ToString();
+                            song.echoVal = 0x13;
+                            XmlWrapperUtil wrap = new XmlWrapperUtil(node);
+                            byte? xmlEchoValue = wrap.loadOptionalByteProperty("echo", true);
+                            if(xmlEchoValue != null)
                             {
-                                case "song":
-                                    {
-                                        ImportedSong song = new ImportedSong();
-                                        song.name = reader["name"];
-                                        string filePath = reader["sourceFile"];
-                                        string songFullPath = xmlLoadDir + "/" + filePath;
-                                        song.data = File.ReadAllBytes(songFullPath);
-                                        string categoriesString = reader["categories"];
-                                        song.echoVal = 0x13;
-                                        byte? xmlEchoValue = xml.loadOptionalByteProperty("echo", true);
-                                        if(xmlEchoValue != null)
-                                        {
-                                            song.echoVal = (byte)xmlEchoValue;
-                                        }
-                                        string[] categories = categoriesString.Split(new char[] { ',' });
-                                        song.categories = categories;
-                                        song.newId = startId++;
-                                        importedSongs.Add(song);
-                                        currentSong = song;
-                                    }
-                                    break;
-                                case "sample":
-                                    {
-                                        if(currentSong != null)
-                                        {
-                                            // sample table entry
-                                            int sampleId = xml.loadRequiredIntProperty("id", false);
-                                            string sourceString = reader["source"];
-                                            string[] sourceParts = sourceString.Split(new char[] { ' ' });
-                                            if(sourceParts.Length == 2 && sourceParts[0] == "vanilla")
-                                            {
-                                                currentSong.sampleTable[sampleId] = UInt16.Parse(sourceParts[1]);
-                                            }
-                                            else if (sourceParts.Length == 2 && sourceParts[0] == "custom")
-                                            {
-                                                currentSong.sampleTable[sampleId] = sampleNamesToIds[sourceParts[1]];
-                                            }
-                                            else
-                                            {
-                                                throw new XmlException("unsupported sample source: " + sourceString);
-                                            }
-                                        }
-                                        else
-                                        {
-                                            throw new XmlException("Stray sample block");
-                                        }
-                                    }
-                                    break;
+                                song.echoVal = (byte)xmlEchoValue;
                             }
+                            string[] categories = categoriesString.Split(new char[] { ',' });
+                            song.categories = categories;
+                            song.newId = startId++;
+
+                            foreach (var child in node.Children)
+                            {
+                                if (child.Name.ToString() == "sample")
+                                {
+                                    // sample table entry
+                                    wrap = new XmlWrapperUtil(child);
+                                    int sampleId = wrap.loadRequiredIntProperty("id", false);
+                                    string sourceString = child.FindAttribute("source").Value.ToString();
+                                    string[] sourceParts = sourceString.Split(new char[] { ' ' });
+                                    if(sourceParts.Length == 2 && sourceParts[0] == "vanilla")
+                                    {
+                                        song.sampleTable[sampleId] = UInt16.Parse(sourceParts[1]);
+                                    }
+                                    else if (sourceParts.Length == 2 && sourceParts[0] == "custom")
+                                    {
+                                        song.sampleTable[sampleId] = sampleNamesToIds[sourceParts[1]];
+                                    }
+                                    else
+                                    {
+                                        throw new InvalidDataException("unsupported sample source: " + sourceString);
+                                    }
+                                }
+                                else
+                                {
+                                    throw new InvalidDataException("Unknown song child node: " + child.Name);
+                                }
+                            }
+
+                            importedSongs.Add(song);
                         }
                         else
                         {
-                            // handle end block
-                            switch (reader.Name)
-                            {
-                                case "song":
-                                    {
-                                        currentSong = null;
-                                    }
-                                    break;
-                            }
+                            throw new InvalidDataException("Unknown top level node: " + node.Name);
                         }
                     }
                 }
@@ -107,7 +91,7 @@ namespace SoMRandomizer.processing.hacks.common.music
 
             return importedSongs;
         }
-        
+
         public class ImportedSong
         {
             public string name;

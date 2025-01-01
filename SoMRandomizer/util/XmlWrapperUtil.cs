@@ -1,19 +1,20 @@
 ﻿using System;
-using System.Xml;
+using System.IO;
+using U8Xml;
 
 namespace SoMRandomizer.util
 {
     /// <summary>
-    /// Utility to more easily extract shit from an XmlReader.
+    /// Utility to more easily extract shit from an U8Xml node.
     /// </summary>
     /// 
     /// <remarks>Author: Moppleton</remarks>
     public class XmlWrapperUtil
     {
-        private XmlReader reader;
-        public XmlWrapperUtil(XmlReader reader)
+        private XmlNode node;
+        public XmlWrapperUtil(XmlNode node)
         {
-            this.reader = reader;
+            this.node = node;
         }
 
         // add other helper methods as needed
@@ -23,25 +24,24 @@ namespace SoMRandomizer.util
         // /////
         public int loadRequiredIntProperty(string propName, bool hex)
         {
-            string strAtt = reader[propName];
-            if (strAtt != null)
+            if (!node.TryFindAttribute(propName, out XmlAttribute attr))
             {
-                return hex ? Int32.Parse(strAtt, System.Globalization.NumberStyles.AllowHexSpecifier) : Int32.Parse(strAtt);
+                throw new InvalidDataException("Could not load property " + propName);
             }
-            else
-            {
-                throw new XmlException("Could not load property " + propName);
-            }
+
+            string strAtt = attr.Value.ToString();
+            return hex ? Int32.Parse(strAtt, System.Globalization.NumberStyles.AllowHexSpecifier) : Int32.Parse(strAtt);
         }
 
         public int? loadOptionalIntProperty(string propName, bool hex)
         {
-            string strAtt = reader[propName];
-            if (strAtt != null)
+            if (!node.TryFindAttribute(propName, out XmlAttribute attr))
             {
-                return hex ? Int32.Parse(strAtt, System.Globalization.NumberStyles.AllowHexSpecifier) : Int32.Parse(strAtt);
+                return null;
             }
-            return null;
+
+            string strAtt = attr.Value.ToString();
+            return hex ? Int32.Parse(strAtt, System.Globalization.NumberStyles.AllowHexSpecifier) : Int32.Parse(strAtt);
         }
 
         // //////
@@ -49,25 +49,24 @@ namespace SoMRandomizer.util
         // //////
         public ushort loadRequiredUshortProperty(string propName, bool hex)
         {
-            string strAtt = reader[propName];
-            if (strAtt != null)
+            if (!node.TryFindAttribute(propName, out XmlAttribute attr))
             {
-                return hex ? UInt16.Parse(strAtt, System.Globalization.NumberStyles.AllowHexSpecifier) : UInt16.Parse(strAtt);
+                throw new InvalidDataException("Could not load property " + propName);
             }
-            else
-            {
-                throw new XmlException("Could not load property " + propName);
-            }
+
+            string strAtt = attr.Value.ToString();
+            return hex ? UInt16.Parse(strAtt, System.Globalization.NumberStyles.AllowHexSpecifier) : UInt16.Parse(strAtt);
         }
 
         public ushort? loadOptionalUshortProperty(string propName, bool hex)
         {
-            string strAtt = reader[propName];
-            if (strAtt != null)
+            if (!node.TryFindAttribute(propName, out XmlAttribute attr))
             {
-                return hex ? UInt16.Parse(strAtt, System.Globalization.NumberStyles.AllowHexSpecifier) : UInt16.Parse(strAtt);
+                return null;
             }
-            return null;
+
+            string strAtt = attr.Value.ToString();
+            return hex ? UInt16.Parse(strAtt, System.Globalization.NumberStyles.AllowHexSpecifier) : UInt16.Parse(strAtt);
         }
 
         // /////
@@ -75,25 +74,24 @@ namespace SoMRandomizer.util
         // /////
         public byte loadRequiredByteProperty(string propName, bool hex)
         {
-            string strAtt = reader[propName];
-            if (strAtt != null)
+            if (!node.TryFindAttribute(propName, out XmlAttribute attr))
             {
-                return hex ? Byte.Parse(strAtt, System.Globalization.NumberStyles.AllowHexSpecifier) : Byte.Parse(strAtt);
+                throw new InvalidDataException("Could not load property " + propName);
             }
-            else
-            {
-                throw new XmlException("Could not load property " + propName);
-            }
+
+            string strAtt = attr.Value.ToString();
+            return hex ? Byte.Parse(strAtt, System.Globalization.NumberStyles.AllowHexSpecifier) : Byte.Parse(strAtt);
         }
 
         public byte? loadOptionalByteProperty(string propName, bool hex)
         {
-            string strAtt = reader[propName];
-            if (strAtt != null)
+            if (!node.TryFindAttribute(propName, out XmlAttribute attr))
             {
-                return hex ? Byte.Parse(strAtt, System.Globalization.NumberStyles.AllowHexSpecifier) : Byte.Parse(strAtt);
+                return null;
             }
-            return null;
+
+            string strAtt = attr.Value.ToString();
+            return hex ? Byte.Parse(strAtt, System.Globalization.NumberStyles.AllowHexSpecifier) : Byte.Parse(strAtt);
         }
     }
 }

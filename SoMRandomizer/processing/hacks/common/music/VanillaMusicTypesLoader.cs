@@ -2,8 +2,9 @@
 using SoMRandomizer.util;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Xml;
+using System.IO;
+using System.Linq; // string[].Contains
+using U8Xml;
 
 namespace SoMRandomizer.processing.hacks.common.music
 {
@@ -32,58 +33,42 @@ namespace SoMRandomizer.processing.hacks.common.music
             Dictionary<byte, string> customVanillaMusicTypes = new Dictionary<byte, string>();
             try
             {
-                using (XmlReader reader = XmlReader.Create(xmlLoadPath))
+                using (var xml = XmlParser.ParseFile(xmlLoadPath))
                 {
-                    string currentCategory = null;
-                    XmlWrapperUtil xml = new XmlWrapperUtil(reader);
-                    while (reader.Read())
+                    // NOTE: we only look at top level categories and their songs
+                    foreach (var node in xml.Root.Children)
                     {
-                        // Only detect start elements.
-                        if (reader.IsStartElement())
+                        if (node.Name == "category")
                         {
-                            // Get element name and switch on it.
-                            switch (reader.Name)
+                            string currentCategory = node.FindAttribute("name").Value.ToString();
+                            if (!VALID_CATEGORIES.Contains(currentCategory))
                             {
-                                case "category":
-                                    {
-                                        currentCategory = reader["name"];
-                                        if(!VALID_CATEGORIES.Contains(currentCategory))
+                                throw new InvalidDataException("Unsupported category: " + currentCategory
+                                    + "; supported categories: " + DataUtil.ListToString(VALID_CATEGORIES.ToList()));
+                            }
+
+                            foreach (var child in node.Children)
+                            {
+                                if (child.Name.ToString() == "song")
+                                {
+                                        // sample table entry
+                                        XmlWrapperUtil wrap = new XmlWrapperUtil(child);
+                                        int songId = wrap.loadRequiredIntProperty("id", false);
+                                        if(songId < 0 || songId > 58)
                                         {
-                                            throw new XmlException("Unsupported category: " + currentCategory + "; supported categories: " + DataUtil.ListToString(VALID_CATEGORIES.ToList()));
+                                            throw new InvalidDataException("Unsupported vanilla song ID: " + songId + "; must be between 0 and 58");
                                         }
-                                    }
-                                    break;
-                                case "song":
-                                    {
-                                        if (currentCategory != null)
-                                        {
-                                            // sample table entry
-                                            int songId = xml.loadRequiredIntProperty("id", false);
-                                            if(songId < 0 || songId > 58)
-                                            {
-                                                throw new XmlException("Unsupported vanilla song ID: " + songId + "; must be between 0 and 58");
-                                            }
-                                            customVanillaMusicTypes[(byte)songId] = currentCategory;
-                                        }
-                                        else
-                                        {
-                                            throw new XmlException("Stray sample block");
-                                        }
-                                    }
-                                    break;
+                                        customVanillaMusicTypes[(byte)songId] = currentCategory;
+                                }
+                                else
+                                {
+                                    throw new InvalidDataException("Unknown category child node: " + child.Name);
+                                }
                             }
                         }
                         else
                         {
-                            // handle end block
-                            switch (reader.Name)
-                            {
-                                case "category":
-                                    {
-                                        currentCategory = null;
-                                    }
-                                    break;
-                            }
+                            throw new InvalidDataException("Unknown top level node: " + node.Name);
                         }
                     }
                 }
