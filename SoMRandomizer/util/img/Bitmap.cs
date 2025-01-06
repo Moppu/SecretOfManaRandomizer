@@ -3,6 +3,9 @@ using System.IO;
 
 namespace SoMRandomizer.util.img
 {
+    /// <summary>
+    /// 24-bit BMP reader for processing imported images while avoiding including System.Drawing.
+    /// </summary>
     public class Bitmap
     {
         private byte[] data = Array.Empty<byte>();
@@ -29,7 +32,6 @@ namespace SoMRandomizer.util.img
                 throw new ArgumentException("Unsupported image format. Only bmp supported.");
             }
 
-            //var size = readU32(fileHeader, 2);
             var imagePtr = readU32(fileHeader, 10);
 
             var dibHeader = new byte[12];

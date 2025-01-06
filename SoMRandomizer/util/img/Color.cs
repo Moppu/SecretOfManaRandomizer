@@ -2,6 +2,9 @@ using System;
 
 namespace SoMRandomizer.util.img
 {
+    /// <summary>
+    /// 24- or 32-bit Color struct, replacing System.Drawing Color class to avoid needing that dependency.
+    /// </summary>
     public readonly struct Color : IEquatable<Color>
     {
         private Color(byte r, byte g, byte b, byte a)
