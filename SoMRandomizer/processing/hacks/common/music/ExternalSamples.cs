@@ -3,7 +3,7 @@ using SoMRandomizer.util;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Xml;
+using U8Xml;
 
 namespace SoMRandomizer.processing.hacks.common.music
 {
@@ -22,42 +22,34 @@ namespace SoMRandomizer.processing.hacks.common.music
             string xmlLoadPath = xmlLoadDir + "/samples.xml";
             try
             {
-                using (XmlReader reader = XmlReader.Create(xmlLoadPath))
+                using (var xml = XmlParser.ParseFile(xmlLoadPath))
                 {
-                    XmlWrapperUtil xml = new XmlWrapperUtil(reader);
-                    while (reader.Read())
+                    // NOTE: we only look at top level samples
+                    foreach (var node in xml.Root.Children)
                     {
-                        // Only detect start elements.
-                        if (reader.IsStartElement())
+                        if (node.Name.ToString() == "sample")
                         {
-                            // Get element name and switch on it.
-                            switch (reader.Name)
-                            {
-                                case "sample":
-                                    {
-                                        // sample import definition
-                                        ImportedSample sample = new ImportedSample();
-                                        sample.name = reader["name"];
-                                        string filePath = reader["sourceFile"];
-                                        string sampleFullPath = xmlLoadDir + "/" + filePath;
-                                        byte[] sampleData = File.ReadAllBytes(sampleFullPath);
-                                        // prepend with length as with the rest of SoM's samples
-                                        sample.data = new byte[2 + sampleData.Length];
-                                        sample.data[0] = (byte)sampleData.Length;
-                                        sample.data[1] = (byte)(sampleData.Length >> 8);
-                                        Array.Copy(sampleData, 0, sample.data, 2, sampleData.Length);
-                                        sample.loop = xml.loadRequiredUshortProperty("loop", false);
-                                        sample.baseFreq = xml.loadRequiredUshortProperty("baseFreq", false);
-                                        sample.adsr = xml.loadRequiredUshortProperty("adsr", true);
-                                        sample.newId = startId++;
-                                        importedSamples.Add(sample);
-                                    }
-                                    break;
-                            }
+                            // sample import definition
+                            ImportedSample sample = new ImportedSample();
+                            sample.name = node.FindAttribute("name").Value.ToString();
+                            string filePath = node.FindAttribute("sourceFile").Value.ToString();
+                            string sampleFullPath = xmlLoadDir + "/" + filePath;
+                            byte[] sampleData = File.ReadAllBytes(sampleFullPath);
+                            // prepend with length as with the rest of SoM's samples
+                            sample.data = new byte[2 + sampleData.Length];
+                            sample.data[0] = (byte)sampleData.Length;
+                            sample.data[1] = (byte)(sampleData.Length >> 8);
+                            Array.Copy(sampleData, 0, sample.data, 2, sampleData.Length);
+                            XmlWrapperUtil wrap = new XmlWrapperUtil(node);
+                            sample.loop = wrap.loadRequiredUshortProperty("loop", false);
+                            sample.baseFreq = wrap.loadRequiredUshortProperty("baseFreq", false);
+                            sample.adsr = wrap.loadRequiredUshortProperty("adsr", true);
+                            sample.newId = startId++;
+                            importedSamples.Add(sample);
                         }
                         else
                         {
-                            // handle end block
+                            throw new InvalidDataException("Unknown top level node: " + node.Name);
                         }
                     }
                 }
