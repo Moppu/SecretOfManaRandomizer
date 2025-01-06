@@ -4,9 +4,9 @@ using SoMRandomizer.processing.common;
 using SoMRandomizer.processing.common.structure;
 using SoMRandomizer.processing.openworld.randomization;
 using SoMRandomizer.util;
+using SoMRandomizer.util.img;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.IO;
 
 namespace SoMRandomizer.processing.hacks.openworld
@@ -56,181 +56,181 @@ namespace SoMRandomizer.processing.hacks.openworld
 
             // niji
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_rina.png", "Nijigasaki Winter"),
-                new IndividualNeso("nesoberi_rina_noboard.png", "Nijigasaki Winter - No board"),
-                new IndividualNeso("nesoberi_rina_summer.png", "Nijigasaki Summer"),
-                new IndividualNeso("nesoberi_rina_summer_noboard.png", "Nijigasaki Summer - No board"),
+                new IndividualNeso("nesoberi_rina.bmp", "Nijigasaki Winter"),
+                new IndividualNeso("nesoberi_rina_noboard.bmp", "Nijigasaki Winter - No board"),
+                new IndividualNeso("nesoberi_rina_summer.bmp", "Nijigasaki Summer"),
+                new IndividualNeso("nesoberi_rina_summer_noboard.bmp", "Nijigasaki Summer - No board"),
             }, "Tennoji Rina", 11, 13));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_ai.png", "Nijigasaki Winter"),
+                new IndividualNeso("nesoberi_ai.bmp", "Nijigasaki Winter"),
             }, "Miyashita Ai", 5, 30));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_kasumi.png", "Nijigasaki Winter"),
+                new IndividualNeso("nesoberi_kasumi.bmp", "Nijigasaki Winter"),
             }, "Nakasu Kasumi", 1, 23));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_shizuku.png", "Nijigasaki Winter"),
+                new IndividualNeso("nesoberi_shizuku.bmp", "Nijigasaki Winter"),
             }, "Osaka Shizuku", 4, 3));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_ayumu.png", "Nijigasaki Winter"),
+                new IndividualNeso("nesoberi_ayumu.bmp", "Nijigasaki Winter"),
             }, "Uehara Ayumu", 3, 1));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_setsuna.png", "Nijigasaki Winter - No wink"),
-                new IndividualNeso("nesoberi_setsuna_summer.png", "Nijigasaki Summer - Wink"),
+                new IndividualNeso("nesoberi_setsuna.bmp", "Nijigasaki Winter - No wink"),
+                new IndividualNeso("nesoberi_setsuna_summer.bmp", "Nijigasaki Summer - Wink"),
             }, "Yuki Setsuna", 8, 8));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_karin.png", "Nijigasaki Winter"),
-                new IndividualNeso("nesoberi_karin_summer.png", "Nijigasaki Summer"),
+                new IndividualNeso("nesoberi_karin.bmp", "Nijigasaki Winter"),
+                new IndividualNeso("nesoberi_karin_summer.bmp", "Nijigasaki Summer"),
             }, "Asaka Karin", 6, 26));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_kanata.png", "Nijigasaki Winter"),
+                new IndividualNeso("nesoberi_kanata.bmp", "Nijigasaki Winter"),
             }, "Konoe Kanata", 12, 16));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_emma.png", "Nijigasaki Winter"),
+                new IndividualNeso("nesoberi_emma.bmp", "Nijigasaki Winter"),
             }, "Emma Verde", 2, 5));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_shioriko.png", "Nijigasaki Winter"),
+                new IndividualNeso("nesoberi_shioriko.bmp", "Nijigasaki Winter"),
             }, "Mifune Shioriko", 10, 5));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_yu.png", "Nijigasaki Winter"),
+                new IndividualNeso("nesoberi_yu.bmp", "Nijigasaki Winter"),
             }, "Takasaki Yu", 1, 29));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_mia.png", "Nijigasaki Winter"),
+                new IndividualNeso("nesoberi_mia.bmp", "Nijigasaki Winter"),
             }, "Mia Taylor", 12, 6));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_lanzhu_queendom.png", "Queendom"),
+                new IndividualNeso("nesoberi_lanzhu_queendom.bmp", "Queendom"),
             }, "Zhong Lanzhu", 2, 15));
 
             // aqours
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_hanamaru.png", "Uranohoshi Winter"),
-                new IndividualNeso("nesoberi_hanamaru_wink.png", "Winking Jersey"),
+                new IndividualNeso("nesoberi_hanamaru.bmp", "Uranohoshi Winter"),
+                new IndividualNeso("nesoberi_hanamaru_wink.bmp", "Winking Jersey"),
             }, "Kunikida Hanamaru", 3, 4));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_yohane.png", "Uranohoshi Winter"),
-                new IndividualNeso("nesoberi_yohane_wink.png", "Winking Jersey"),
+                new IndividualNeso("nesoberi_yohane.bmp", "Uranohoshi Winter"),
+                new IndividualNeso("nesoberi_yohane_wink.bmp", "Winking Jersey"),
             }, "Fallen Angel Yohane", 7, 13));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_ruby.png", "Uranohoshi Winter"),
-                new IndividualNeso("nesoberi_ruby_wink.png", "Winking Jersey"),
+                new IndividualNeso("nesoberi_ruby.bmp", "Uranohoshi Winter"),
+                new IndividualNeso("nesoberi_ruby_wink.bmp", "Winking Jersey"),
             }, "Kurosawa Ruby", 9, 21));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_you.png", "Uranohoshi Winter"),
-                new IndividualNeso("nesoberi_you_wink.png", "Winking Jersey"),
-                new IndividualNeso("nesoberi_you_training.png", "Training Outfit"),
+                new IndividualNeso("nesoberi_you.bmp", "Uranohoshi Winter"),
+                new IndividualNeso("nesoberi_you_wink.bmp", "Winking Jersey"),
+                new IndividualNeso("nesoberi_you_training.bmp", "Training Outfit"),
             }, "Watanabe You", 4, 17));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_chika.png", "Uranohoshi Winter"),
-                new IndividualNeso("nesoberi_chika_wink.png", "Winking Jersey"),
+                new IndividualNeso("nesoberi_chika.bmp", "Uranohoshi Winter"),
+                new IndividualNeso("nesoberi_chika_wink.bmp", "Winking Jersey"),
             }, "Takami Chika", 8, 1));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_riko.png", "Uranohoshi Winter"),
-                new IndividualNeso("nesoberi_riko_wink.png", "Winking Jersey"),
+                new IndividualNeso("nesoberi_riko.bmp", "Uranohoshi Winter"),
+                new IndividualNeso("nesoberi_riko_wink.bmp", "Winking Jersey"),
             }, "Sakarauchi Riko", 9, 19));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_mari.png", "Uranohoshi Winter"),
-                new IndividualNeso("nesoberi_mari_wink.png", "Winking Jersey"),
+                new IndividualNeso("nesoberi_mari.bmp", "Uranohoshi Winter"),
+                new IndividualNeso("nesoberi_mari_wink.bmp", "Winking Jersey"),
             }, "Ohara Mari", 6, 13));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_dia.png", "Uranohoshi Winter"),
-                new IndividualNeso("nesoberi_dia_wink.png", "Winking Jersey"),
+                new IndividualNeso("nesoberi_dia.bmp", "Uranohoshi Winter"),
+                new IndividualNeso("nesoberi_dia_wink.bmp", "Winking Jersey"),
             }, "Kurosawa Dia", 1, 1));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_kanan.png", "Uranohoshi Winter"),
-                new IndividualNeso("nesoberi_kanan_wink.png", "Winking Jersey"),
+                new IndividualNeso("nesoberi_kanan.bmp", "Uranohoshi Winter"),
+                new IndividualNeso("nesoberi_kanan_wink.bmp", "Winking Jersey"),
             }, "Matsuura Kanan", 2, 10));
 
             // muse
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_nico.png", "Otonokizaka Winter"),
+                new IndividualNeso("nesoberi_nico.bmp", "Otonokizaka Winter"),
             }, "Yazawa Nico", 7, 22));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_honk.png", "Otonokizaka Winter"),
-                new IndividualNeso("nesoberi_honk_sleep.png", "Sleeping"),
+                new IndividualNeso("nesoberi_honk.bmp", "Otonokizaka Winter"),
+                new IndividualNeso("nesoberi_honk_sleep.bmp", "Sleeping"),
             }, "Kousaka Honoka", 8, 3));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_maki.png", "Otonokizaka Winter"),
+                new IndividualNeso("nesoberi_maki.bmp", "Otonokizaka Winter"),
             }, "Nishikino Maki", 4, 19));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_rin.png", "Otonokizaka Winter"),
+                new IndividualNeso("nesoberi_rin.bmp", "Otonokizaka Winter"),
             }, "Hoshizora Rin", 11, 1));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_hanayo.png", "Otonokizaka Winter"),
+                new IndividualNeso("nesoberi_hanayo.bmp", "Otonokizaka Winter"),
             }, "Koizumi Hanayo", 1, 17));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_umi.png", "Otonokizaka Winter"),
+                new IndividualNeso("nesoberi_umi.bmp", "Otonokizaka Winter"),
             }, "Sonoda Umi", 3, 15));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_kotori.png", "Otonokizaka Winter"),
+                new IndividualNeso("nesoberi_kotori.bmp", "Otonokizaka Winter"),
             }, "Minami Kotori", 9, 12));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_eli.png", "Otonokizaka Winter"),
+                new IndividualNeso("nesoberi_eli.bmp", "Otonokizaka Winter"),
             }, "Ayase Eli", 10, 21));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_nozomi.png", "Otonokizaka Winter"),
+                new IndividualNeso("nesoberi_nozomi.bmp", "Otonokizaka Winter"),
             }, "Tojo Nozomi", 6, 9));
 
             // saint snow
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_leah.png", "Seisen Academy"),
+                new IndividualNeso("nesoberi_leah.bmp", "Seisen Academy"),
             }, "Kazuno Leah", 12, 12));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_sarah.png", "Seisen Academy"),
+                new IndividualNeso("nesoberi_sarah.bmp", "Seisen Academy"),
             }, "Kazuno Sarah", 5, 4));
 
             // liella
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_kanon.png", "Yuigaoka Winter"),
-                new IndividualNeso("nesoberi_kanon_happy.png", "Extra Happy"),
+                new IndividualNeso("nesoberi_kanon.bmp", "Yuigaoka Winter"),
+                new IndividualNeso("nesoberi_kanon_happy.bmp", "Extra Happy"),
             }, "Shibuya Kanon", 5, 1));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_keke.png", "Yuigaoka Winter"),
+                new IndividualNeso("nesoberi_keke.bmp", "Yuigaoka Winter"),
             }, "Tang Keke", 7, 17));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_chisato.png", "Yuigaoka Winter"),
+                new IndividualNeso("nesoberi_chisato.bmp", "Yuigaoka Winter"),
             }, "Arashi Chisato", 2, 25));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_ren.png", "Yuigaoka Winter"),
+                new IndividualNeso("nesoberi_ren.bmp", "Yuigaoka Winter"),
             }, "Hazuki Ren", 11, 24));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_sumire.png", "Yuigaoka Winter"),
+                new IndividualNeso("nesoberi_sumire.bmp", "Yuigaoka Winter"),
             }, "Heanna Sumire", 9, 28));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_kinako.png", "Yuigaoka Winter"),
+                new IndividualNeso("nesoberi_kinako.bmp", "Yuigaoka Winter"),
             }, "Sakurakoji Kinako", 4, 10));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_shiki.png", "Yuigaoka Winter"),
+                new IndividualNeso("nesoberi_shiki.bmp", "Yuigaoka Winter"),
             }, "Wakana Shiki", 6, 17));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_mei.png", "Yuigaoka Winter"),
+                new IndividualNeso("nesoberi_mei.bmp", "Yuigaoka Winter"),
             }, "Yoneme Mei", 10, 29));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_natsumi.png", "Yuigaoka Winter"),
+                new IndividualNeso("nesoberi_natsumi.bmp", "Yuigaoka Winter"),
             }, "Onitsuka Natsumi", 8, 7));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_tomari.png", "Yuigaoka Winter"),
+                new IndividualNeso("nesoberi_tomari.bmp", "Yuigaoka Winter"),
             }, "Onitsuka Tomari", 12, 28));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_margarete.png", "Yuigaoka Winter"),
+                new IndividualNeso("nesoberi_margarete.bmp", "Yuigaoka Winter"),
             }, "Wien Margarete", 1, 20));
 
             // hasunosora
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_kaho.png", "Hasunosora"),
+                new IndividualNeso("nesoberi_kaho.bmp", "Hasunosora"),
             }, "Hinoshita Kaho", 5, 22));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_sayaka.png", "Hasunosora"),
+                new IndividualNeso("nesoberi_sayaka.bmp", "Hasunosora"),
             }, "Murano Sayaka", 1, 13));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_kozue.png", "Hasunosora"),
+                new IndividualNeso("nesoberi_kozue.bmp", "Hasunosora"),
             }, "Otomune Kozue", 6, 15));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_tsuzuri.png", "Hasunosora"),
+                new IndividualNeso("nesoberi_tsuzuri.bmp", "Hasunosora"),
             }, "Yugiri Tsuzuri", 11, 17));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_rurino.png", "Hasunosora"),
+                new IndividualNeso("nesoberi_rurino.bmp", "Hasunosora"),
             }, "Osawa Rurino", 8, 31));
             nesoResources.Add(new NesoCharInfo(new IndividualNeso[] {
-                new IndividualNeso("nesoberi_megumi.png", "Hasunosora"),
+                new IndividualNeso("nesoberi_megumi.bmp", "Hasunosora"),
             }, "Fujishima Megumi", 12, 20));
 
             // MOPPLE: should add:
@@ -269,9 +269,9 @@ namespace SoMRandomizer.processing.hacks.openworld
             string resourceName = outfitNeso.filename;
             string outfitName = outfitNeso.outfitName;
             Logging.log("Nesoberi: " + nesoInfo.characterName + " (" + outfitName + "). Headpats are encouraged and greatly appreciated.", "spoiler");
-            byte[] pngData = DataUtil.readResource("SoMRandomizer.Resources.nesoberi." + resourceName);
+            byte[] bmpData = DataUtil.readResource("SoMRandomizer.Resources.nesoberi." + resourceName);
 
-            Bitmap b = new Bitmap(new MemoryStream(pngData));
+            Bitmap b = new Bitmap(new MemoryStream(bmpData));
             // presumes 0,0 is the bg color; should be true of all these
             Color bgColor = b.GetPixel(0, 0);
             int bgColorInt = getColorInt(bgColor);
@@ -585,9 +585,9 @@ namespace SoMRandomizer.processing.hacks.openworld
             snowNesoPaletteIndexes[getColorInt(Color.FromArgb(184, 168, 208))] = 5;
             snowNesoPaletteIndexes[getColorInt(Color.FromArgb(152, 136, 192))] = 6; // snow darkest
 
-            byte[] snowNesoPngData = DataUtil.readResource("SoMRandomizer.Resources.nesoberi.snow_neso.png");
+            byte[] snowNesoBmpData = DataUtil.readResource("SoMRandomizer.Resources.nesoberi.snow_neso.bmp");
 
-            Bitmap snowNesoBitmap = new Bitmap(new MemoryStream(snowNesoPngData));
+            Bitmap snowNesoBitmap = new Bitmap(new MemoryStream(snowNesoBmpData));
             // 8-bit image by using the mapped colors above
             List<byte> snowNesoEightBitImage = new List<byte>();
             for (int y = 0; y < 24; y++)

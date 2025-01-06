@@ -21,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -30,6 +31,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <LangVersion>7.2</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\tonpole.ico</ApplicationIcon>
@@ -403,6 +405,8 @@
     <Compile Include="forms\PaletteControl.Designer.cs" />
     <Compile Include="util\DataUtil.cs" />
     <Compile Include="util\ErrorUtil.cs" />
+    <Compile Include="util\img\Bitmap.cs" />
+    <Compile Include="util\img\Color.cs" />
     <Compile Include="util\PerlinNoise.cs" />
     <Compile Include="forms\PlandoForm.cs">
       <SubType>Form</SubType>
@@ -534,75 +538,75 @@
     <EmbeddedResource Include="Resources\help\forest_goal.png" />
     <EmbeddedResource Include="Resources\help\island_goal.png" />
     <EmbeddedResource Include="Resources\pokedata3.xml" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_rina.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_hanamaru.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_yohane.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_chika.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_dia.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kanan.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_mari.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_riko.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_ruby.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_you.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_honk.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_nico.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_ai.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_maki.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_rin.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_hanayo.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_umi.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kotori.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_eli.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_nozomi.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_ayumu.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_emma.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kanata.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_karin.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kasumi.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_setsuna.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_shioriko.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_shizuku.png" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_rina.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_hanamaru.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_yohane.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_chika.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_dia.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kanan.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_mari.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_riko.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_ruby.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_you.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_honk.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_nico.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_ai.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_maki.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_rin.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_hanayo.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_umi.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kotori.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_eli.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_nozomi.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_ayumu.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_emma.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kanata.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_karin.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kasumi.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_setsuna.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_shioriko.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_shizuku.bmp" />
     <Content Include="Resources\copybutton.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_leah.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_sarah.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_riko_wink.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_chika_wink.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_hanamaru_wink.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_ruby_wink.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_yohane_wink.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_you_wink.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_dia_wink.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kanan_wink.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_mari_wink.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_you_training.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_honk_sleep.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_rina_noboard.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_setsuna_summer.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_chisato.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kanon.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_keke.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_ren.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_lanzhu_queendom.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_mia.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_karin_summer.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_rina_summer.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_rina_summer_noboard.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_yu.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_sumire.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kinako.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_mei.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_natsumi.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_shiki.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kaho.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kozue.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_megumi.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_rurino.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_sayaka.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_tsuzuri.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kanon_happy.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_margarete.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_tomari.png" />
-    <EmbeddedResource Include="Resources\nesoberi\snow_neso.png" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_leah.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_sarah.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_riko_wink.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_chika_wink.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_hanamaru_wink.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_ruby_wink.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_yohane_wink.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_you_wink.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_dia_wink.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kanan_wink.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_mari_wink.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_you_training.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_honk_sleep.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_rina_noboard.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_setsuna_summer.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_chisato.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kanon.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_keke.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_ren.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_lanzhu_queendom.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_mia.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_karin_summer.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_rina_summer.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_rina_summer_noboard.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_yu.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_sumire.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kinako.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_mei.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_natsumi.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_shiki.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kaho.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kozue.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_megumi.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_rurino.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_sayaka.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_tsuzuri.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kanon_happy.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_margarete.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\nesoberi_tomari.bmp" />
+    <EmbeddedResource Include="Resources\nesoberi\snow_neso.bmp" />
     <Content Include="Resources\pastebutton.png" />
     <Content Include="Resources\tonpole.ico" />
   </ItemGroup>
