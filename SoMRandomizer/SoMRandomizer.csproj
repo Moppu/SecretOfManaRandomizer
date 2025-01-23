@@ -1,37 +1,17 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{1F611BF5-038E-4F9D-AE99-75CB5B17C17D}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SoMRandomizer</RootNamespace>
-    <AssemblyName>SoMRandomizer</AssemblyName>
-    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
+    <TargetFramework>net462</TargetFramework>
+    <AssemblyTitle>SoMRandomizer</AssemblyTitle>
+    <Company>Moppleton</Company>
+    <Product>SoMRandomizer</Product>
+    <Copyright>Copyright ©  2016-2024</Copyright>
+    <Deterministic>false</Deterministic>
+    <AssemblyVersion>1.0.*</AssemblyVersion>
+    <FileVersion>1.0.*</FileVersion>
     <LangVersion>7.2</LangVersion>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <LangVersion>7.2</LangVersion>
+    <GenerateResourceUsePreserializedResources>true</GenerateResourceUsePreserializedResources>
   </PropertyGroup>
   <PropertyGroup>
     <ApplicationIcon>Resources\tonpole.ico</ApplicationIcon>
@@ -40,453 +20,123 @@
     <StartupObject />
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.8.0.0\lib\net462\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
-    </Reference>
-    <Reference Include="mscorlib" />
-    <Reference Include="System" />
-    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Core" />
-    <Reference Include="System.Memory, Version=4.0.1.2, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Memory.4.5.5\lib\net461\System.Memory.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Numerics" />
-    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.6.0.0\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Text.Encodings.Web, Version=8.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Encodings.Web.8.0.0\lib\net462\System.Text.Encodings.Web.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Text.Json, Version=8.0.0.4, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Text.Json.8.0.4\lib\net462\System.Text.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks.Extensions, Version=4.2.0.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\net461\System.Threading.Tasks.Extensions.dll</HintPath>
-    </Reference>
-    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
-    <Reference Include="System.Drawing" />
-    <Reference Include="System.Net.Http" />
-    <Reference Include="System.Windows.Forms" />
-    <Reference Include="U8XmlParser, Version=1.6.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\U8XmlParser.1.6.1\lib\netstandard2.0\U8XmlParser.dll</HintPath>
-    </Reference>
+    <PackageReference Include="System.Data.DataSetExtensions" Version="4.*" />
+    <PackageReference Include="Microsoft.CSharp" Version="4.*" />
+    <PackageReference Include="System.Net.Http" Version="4.*" />
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" />
+    <PackageReference Include="System.Buffers" Version="4.5.1" />
+    <PackageReference Include="System.Memory" Version="4.5.5" />
+    <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
+    <PackageReference Include="System.Resources.Extensions" Version="9.0.0" />
+    <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
+    <PackageReference Include="System.Text.Encodings.Web" Version="8.0.0" />
+    <PackageReference Include="System.Text.Json" Version="8.0.4" />
+    <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
+    <PackageReference Include="System.ValueTuple" Version="4.5.0" />
+    <PackageReference Include="U8XmlParser" Version="1.6.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="config\settings\AncientCaveSettings.cs" />
-    <Compile Include="config\settings\BossRushSettings.cs" />
-    <Compile Include="config\settings\ChaosSettings.cs" />
-    <Compile Include="config\settings\CommonSettings.cs" />
-    <Compile Include="config\settings\OpenWorldSettings.cs" />
-    <Compile Include="config\settings\RandoSettings.cs" />
-    <Compile Include="config\settings\StringValueSettings.cs" />
-    <Compile Include="config\settings\VanillaRandoSettings.cs" />
-    <Compile Include="forms\MainForm_DifficultyOptions.cs">
+    <Reference Include="mscorlib" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Windows.Forms" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="forms\MainForm_DifficultyOptions.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\MainForm_OpenWorldPresets.cs">
+    <Compile Update="forms\MainForm_OpenWorldPresets.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\MainForm_UiOptionsInitialization.cs">
+    <Compile Update="forms\MainForm_UiOptionsInitialization.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="processing\ancientcave\mapgen\AncientCaveMapGenerator.cs" />
-    <Compile Include="processing\ancientcave\AncientCaveRandomizer.cs" />
-    <Compile Include="processing\ancientcave\mapgen\cave\CaveGenerator.cs" />
-    <Compile Include="processing\ancientcave\mapgen\cave\CaveTileEdges.cs" />
-    <Compile Include="processing\chaos\ChaosGenerationState.cs" />
-    <Compile Include="processing\chaos\ChaosMapGenerationInfo.cs" />
-    <Compile Include="processing\chaos\ChaosMapGenerator.cs" />
-    <Compile Include="processing\common\mapgen\CreditsMap.cs" />
-    <Compile Include="processing\ancientcave\mapgen\forest\ForestTileEdges.cs" />
-    <Compile Include="processing\ancientcave\mapgen\forest\ForestCaveRooms.cs" />
-    <Compile Include="processing\ancientcave\mapgen\forest\ForestGenerator.cs" />
-    <Compile Include="processing\ancientcave\mapgen\forest\ForestMountainLedges.cs" />
-    <Compile Include="processing\ancientcave\mapgen\island\IslandGenerator.cs" />
-    <Compile Include="processing\ancientcave\mapgen\island\IslandHutRooms.cs" />
-    <Compile Include="processing\common\mapgen\ManaBeastMap.cs" />
-    <Compile Include="processing\ancientcave\mapgen\manafortint\ManafortInteriorGenerator.cs" />
-    <Compile Include="processing\ancientcave\mapgen\manafortint\ManafortIntNpcRooms.cs" />
-    <Compile Include="processing\ancientcave\mapgen\PaletteSetSource.cs" />
-    <Compile Include="processing\ancientcave\mapgen\ResourcePaletteSetSource.cs" />
-    <Compile Include="processing\ancientcave\mapgen\ruins\InsideRooms.cs" />
-    <Compile Include="processing\ancientcave\mapgen\ruins\OutsideRooms.cs" />
-    <Compile Include="processing\ancientcave\mapgen\ruins\RuinsCourtyard.cs" />
-    <Compile Include="processing\ancientcave\mapgen\ruins\RuinsGenerator.cs" />
-    <Compile Include="processing\ancientcave\mapgen\ruins\RuinsPathGenerator.cs" />
-    <Compile Include="processing\ancientcave\mapgen\VanillaPaletteSetSource.cs" />
-    <Compile Include="processing\bossrush\RestMap.cs" />
-    <Compile Include="processing\common\GeneratedMapUtil.cs" />
-    <Compile Include="processing\common\structure\Door.cs" />
-    <Compile Include="processing\common\structure\EventScript.cs" />
-    <Compile Include="processing\common\structure\FullMap.cs" />
-    <Compile Include="processing\common\structure\FullMapMapPieceReference.cs" />
-    <Compile Include="processing\common\structure\FullMapMapPieces.cs" />
-    <Compile Include="processing\common\structure\MapHeader.cs" />
-    <Compile Include="processing\common\structure\MapObject.cs" />
-    <Compile Include="processing\common\structure\MapPaletteSet.cs" />
-    <Compile Include="processing\common\structure\SnesColor.cs" />
-    <Compile Include="processing\common\structure\Tileset16.cs" />
-    <Compile Include="processing\common\VanillaDoorUtil.cs" />
-    <Compile Include="processing\common\VanillaMapUtil.cs" />
-    <Compile Include="processing\common\VanillaPaletteUtil.cs" />
-    <Compile Include="processing\common\VanillaRomOffsets.cs" />
-    <Compile Include="processing\common\structure\VanillaStructure.cs" />
-    <Compile Include="processing\hacks\ancientcave\AcCaveTilesetChanges.cs" />
-    <Compile Include="processing\hacks\ancientcave\AcIslandTilesetChanges.cs" />
-    <Compile Include="processing\hacks\ancientcave\AcManafortTilesetChanges.cs" />
-    <Compile Include="processing\hacks\bossrush\ManaBeastDamageScaling.cs" />
-    <Compile Include="processing\hacks\common\fix\BossDeathFix.cs" />
-    <Compile Include="processing\hacks\common\fix\MagicRopeDeathFix.cs" />
-    <Compile Include="processing\hacks\common\fix\MechRiderDeathFix.cs" />
-    <Compile Include="processing\hacks\common\music\VanillaMusicTypesLoader.cs" />
-    <Compile Include="processing\hacks\common\other\AnimatedPaletteSimplification.cs" />
-    <Compile Include="processing\hacks\common\other\DeathEventDoorwayRemoval.cs" />
-    <Compile Include="processing\hacks\common\other\FasterTopOfScreenDialogue.cs" />
-    <Compile Include="processing\hacks\common\other\FirePalaceDoorFix.cs" />
-    <Compile Include="processing\hacks\common\other\GigasesNeverSplit.cs" />
-    <Compile Include="processing\hacks\common\other\HexasFix.cs" />
-    <Compile Include="processing\hacks\common\other\Mode7EdgesFix.cs" />
-    <Compile Include="processing\hacks\common\other\NoEnergyToAttack.cs" />
-    <Compile Include="processing\hacks\common\other\NoSwordPullAnimation.cs" />
-    <Compile Include="processing\hacks\common\other\ObscureOwnHp.cs" />
-    <Compile Include="processing\hacks\common\other\OrbRewardEventGenerator.cs" />
-    <Compile Include="processing\hacks\common\other\PlayerAiDefaultChanges.cs" />
-    <Compile Include="processing\hacks\common\other\StarterGear.cs" />
-    <Compile Include="processing\hacks\common\other\StartingDoor.cs" />
-    <Compile Include="processing\hacks\common\qol\BeakShieldDisable.cs" />
-    <Compile Include="processing\hacks\common\qol\CandyHealouts.cs" />
-    <Compile Include="processing\hacks\common\qol\DontAutoResetAtFirstMenu.cs" />
-    <Compile Include="processing\hacks\common\qol\IceCountryLandableFixes.cs" />
-    <Compile Include="processing\hacks\common\qol\MaxItemsIncrease.cs" />
-    <Compile Include="processing\hacks\common\util\DoorReplacer.cs" />
-    <Compile Include="processing\hacks\common\util\FullMapReplacer.cs" />
-    <Compile Include="processing\hacks\common\util\MapPaletteSetReplacer.cs" />
-    <Compile Include="processing\openworld\randomization\PrizeItem.cs" />
-    <Compile Include="processing\openworld\randomization\PrizeLocation.cs" />
-    <Compile Include="processing\openworld\PlandoProperties.cs" />
-    <Compile Include="processing\RandoProcessor.cs" />
-    <Compile Include="processing\hacks\common\util\MapPieceExpander.cs" />
-    <Compile Include="processing\hacks\common\music\ExternalMusic.cs" />
-    <Compile Include="processing\hacks\common\music\ExternalSamples.cs" />
-    <Compile Include="processing\hacks\openworld\TitleMenuSeedHashDisplay.cs" />
-    <Compile Include="processing\ancientcave\AncientCaveGenerator.cs" />
-    <Compile Include="processing\bossrush\BossOrderRandomizer.cs" />
-    <Compile Include="processing\bossrush\BossRushRandomizer.cs" />
-    <Compile Include="processing\chaos\ChaosRandomizer.cs" />
-    <Compile Include="processing\common\RandoContext.cs" />
-    <Compile Include="processing\common\SomVanillaValues.cs" />
-    <Compile Include="processing\openworld\CharacterJoinChanges.cs" />
-    <Compile Include="processing\openworld\events\FlammieLogicIntroEvent.cs" />
-    <Compile Include="processing\openworld\events\HintEvents.cs" />
-    <Compile Include="processing\openworld\events\NewGameEvent.cs" />
-    <Compile Include="processing\openworld\events\IntroEvent.cs" />
-    <Compile Include="processing\openworld\events\OpenWorldSupportingEvents.cs" />
-    <Compile Include="processing\openworld\events\OpenWorldSupportingMapChanges.cs" />
-    <Compile Include="processing\openworld\events\PokedexEvent.cs" />
-    <Compile Include="processing\openworld\events\SwordGrabEvent.cs" />
-    <Compile Include="processing\openworld\events\WaterfallIntroEvent.cs" />
-    <Compile Include="processing\openworld\OpenWorldCharacterSelection.cs" />
-    <Compile Include="processing\openworld\OpenWorldClassSelection.cs" />
-    <Compile Include="processing\openworld\OpenWorldDifficultyProcessor.cs" />
-    <Compile Include="processing\openworld\OpenWorldGenerator.cs" />
-    <Compile Include="processing\common\EventFlags.cs" />
-    <Compile Include="processing\openworld\OpenWorldGoalProcessor.cs" />
-    <Compile Include="processing\openworld\OpenWorldMtrSeedNumSelection.cs" />
-    <Compile Include="processing\openworld\events\GiftDeliveryIntroEvent.cs" />
-    <Compile Include="processing\openworld\events\InitialEventFlagStates.cs" />
-    <Compile Include="processing\openworld\events\NekoEvents.cs" />
-    <Compile Include="processing\openworld\events\PrizeEvents.cs" />
-    <Compile Include="processing\openworld\events\OpenWorldEvents.cs" />
-    <Compile Include="processing\openworld\randomization\GiftModeProcessing.cs" />
-    <Compile Include="processing\openworld\randomization\OpenWorldResultInjector.cs" />
-    <Compile Include="processing\openworld\randomization\OpenWorldHints.cs" />
-    <Compile Include="processing\openworld\randomization\OpenWorldLocationPrizeMatcher.cs" />
-    <Compile Include="processing\openworld\randomization\OpenWorldLocations.cs" />
-    <Compile Include="processing\openworld\randomization\OpenWorldPrizes.cs" />
-    <Compile Include="processing\openworld\randomization\OpenWorldRandomizer.cs" />
-    <Compile Include="processing\bossrush\BossRushEventGenerator.cs" />
-    <Compile Include="processing\bossrush\BossRushGenerator.cs" />
-    <Compile Include="processing\chaos\ChaosBossMap.cs" />
-    <Compile Include="processing\chaos\ChaosDoor.cs" />
-    <Compile Include="processing\chaos\ChaosEventMaker.cs" />
-    <Compile Include="processing\chaos\ChaosGenerator.cs" />
-    <Compile Include="processing\chaos\ChaosVanillaMap.cs" />
-    <Compile Include="processing\chaos\ChaosVanillaMaps.cs" />
-    <Compile Include="processing\openworld\OpenWorldSillyEnemyNamePicker.cs" />
-    <Compile Include="processing\openworld\OpenWorldXmasHacks.cs" />
-    <Compile Include="processing\openworld\PlandoUtils.cs" />
-    <Compile Include="processing\openworld\events\ReindeerIntroEvent.cs" />
-    <Compile Include="processing\openworld\events\MiscDialogue.cs" />
-    <Compile Include="processing\openworld\randomization\OpenWorldSimulator.cs" />
-    <Compile Include="processing\openworld\randomization\OpenWorldSpoilers.cs" />
-    <Compile Include="processing\openworld\randomization\StartingWeaponRandomizer.cs" />
-    <Compile Include="processing\common\VanillaBossMaps.cs" />
-    <Compile Include="util\CmdArgParser.cs" />
-    <Compile Include="util\CodeGenerationUtils.cs" />
-    <Compile Include="config\ui\OptionsFormManager.cs" />
-    <Compile Include="processing\hacks\common\other\AlwaysPoisoned.cs" />
-    <Compile Include="processing\hacks\common\qol\Autosave.cs" />
-    <Compile Include="processing\hacks\openworld\AISwap.cs" />
-    <Compile Include="processing\hacks\openworld\BlackMapPalettes.cs" />
-    <Compile Include="processing\hacks\openworld\BossElementRando.cs" />
-    <Compile Include="processing\hacks\openworld\CharacterClasses.cs" />
-    <Compile Include="processing\hacks\openworld\CrystalOrbColors.cs" />
-    <Compile Include="processing\hacks\openworld\DefenseRefactor.cs" />
-    <Compile Include="processing\hacks\openworld\DropOnlyConsumables.cs" />
-    <Compile Include="processing\hacks\openworld\EnemiesAtYourLevel.cs" />
-    <Compile Include="processing\hacks\openworld\EnemyRandomizer.cs" />
-    <Compile Include="processing\hacks\openworld\FastWhipPosts.cs" />
-    <Compile Include="processing\hacks\openworld\InvincibleRabite.cs" />
-    <Compile Include="processing\hacks\openworld\LimeSlimeFlavors.cs" />
-    <Compile Include="processing\hacks\openworld\MagicRopeRefactor.cs" />
-    <Compile Include="processing\hacks\openworld\ManaMagicFix.cs" />
-    <Compile Include="processing\hacks\openworld\MapPaletteRandomizations.cs" />
-    <Compile Include="processing\hacks\openworld\MenuIconsIfArmorImprovement.cs" />
-    <Compile Include="processing\hacks\openworld\MinMaxLevel.cs" />
-    <Compile Include="processing\hacks\openworld\Nesoberi.cs" />
-    <Compile Include="processing\hacks\openworld\NoEnemies.cs" />
-    <Compile Include="processing\hacks\openworld\NoNekoOverflow.cs" />
-    <Compile Include="processing\hacks\openworld\OpenWorldWinterTheme.cs" />
-    <Compile Include="processing\hacks\openworld\Plando.cs" />
-    <Compile Include="processing\hacks\openworld\RemoveItemEventCommand.cs" />
-    <Compile Include="processing\hacks\openworld\ShopRandomizer.cs" />
-    <Compile Include="processing\hacks\openworld\StartingCharacterRandomizer.cs" />
-    <Compile Include="processing\hacks\openworld\SummonDespawnFix.cs" />
-    <Compile Include="processing\hacks\common\other\XmasDrops.cs" />
-    <Compile Include="processing\hacks\openworld\XmasMapPalettes.cs" />
-    <Compile Include="processing\hacks\openworld\XmasRandoData.cs" />
-    <Compile Include="processing\hacks\bossrush\InstantWeaponLevels.cs" />
-    <Compile Include="forms\CharacterDesigner.cs">
+    <Compile Update="forms\CharacterDesigner.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\CharacterDesigner.Designer.cs">
+    <Compile Update="forms\CharacterDesigner.Designer.cs">
       <DependentUpon>CharacterDesigner.cs</DependentUpon>
     </Compile>
-    <Compile Include="config\AppConfig.cs" />
-    <Compile Include="config\DifficultySettings.cs" />
-    <Compile Include="config\PropertyFileReader.cs" />
-    <Compile Include="util\ColorUtil.cs" />
-    <Compile Include="util\DamageCalculations.cs" />
-    <Compile Include="processing\ancientcave\DemetriMartinQuotes.cs" />
-    <Compile Include="forms\DifficultyVisualizer.cs" />
-    <Compile Include="processing\common\VanillaEventUtil.cs" />
-    <Compile Include="processing\hacks\bossrush\LimitMode7BossMp.cs" />
-    <Compile Include="processing\hacks\bossrush\MpAbsorbLimiter.cs" />
-    <Compile Include="processing\hacks\common\fix\BossZPosition.cs" />
-    <Compile Include="processing\hacks\common\qol\BuyMultipleItems.cs" />
-    <Compile Include="processing\hacks\common\util\CharacterPaletteRandomizer.cs" />
-    <Compile Include="processing\hacks\common\qol\ChestOpeningSpeedup.cs" />
-    <Compile Include="processing\hacks\common\fix\ConfuseFix.cs" />
-    <Compile Include="processing\hacks\common\qol\CupWishesOnZeroHp.cs" />
-    <Compile Include="processing\hacks\common\util\CustomEventManager.cs" />
-    <Compile Include="processing\hacks\openworld\CustomTopOfScreenText.cs" />
-    <Compile Include="processing\hacks\common\fix\DamageCancelFix.cs" />
-    <Compile Include="processing\hacks\common\qol\DamagePercentFix.cs" />
-    <Compile Include="processing\hacks\common\other\DisplayEvadesAsZero.cs" />
-    <Compile Include="processing\hacks\common\enhancement\ElementalDamage.cs" />
-    <Compile Include="processing\hacks\common\procgen\EnemyBlackMagicPower.cs" />
-    <Compile Include="processing\hacks\common\other\EnemyInfiniteMp.cs" />
-    <Compile Include="processing\hacks\common\qol\EnemyPositionAdjustments.cs" />
-    <Compile Include="processing\hacks\vanillarando\EnemyScaling.cs" />
-    <Compile Include="processing\hacks\common\enhancement\EnemyTypeDamage.cs" />
-    <Compile Include="processing\hacks\common\util\EventExpander.cs" />
-    <Compile Include="processing\hacks\common\other\FasterEnemies.cs" />
-    <Compile Include="processing\hacks\common\enhancement\Ff6StyleMiniMap.cs" />
-    <Compile Include="processing\hacks\common\enhancement\FreeTargetting.cs" />
-    <Compile Include="processing\hacks\common\fix\HighLevelEnemyNameFix.cs" />
-    <Compile Include="processing\hacks\common\util\InitialValues.cs" />
-    <Compile Include="processing\hacks\common\music\MuteMusic.cs" />
-    <Compile Include="processing\hacks\common\enhancement\NameEntryChanges.cs" />
-    <Compile Include="processing\hacks\common\other\NoCollision.cs" />
-    <Compile Include="processing\hacks\common\other\NoEnergyToRun.cs" />
-    <Compile Include="processing\hacks\common\enhancement\NumbersOnScreen.cs" />
-    <Compile Include="processing\hacks\common\other\ObscureDamage.cs" />
-    <Compile Include="processing\hacks\common\other\ObscureGoldAmount.cs" />
-    <Compile Include="processing\hacks\common\other\OneHitKo.cs" />
-    <Compile Include="processing\hacks\common\other\PercentagePoison.cs" />
-    <Compile Include="processing\hacks\common\other\Vineshroom.cs" />
-    <Compile Include="processing\hacks\openworld\WattsWeaponLevelFix.cs" />
-    <Compile Include="processing\hacks\common\fix\WhipFix.cs" />
-    <Compile Include="processing\hacks\vanillarando\WinterTheme.cs" />
-    <Compile Include="processing\hacks\vanillarando\FallTheme.cs" />
-    <Compile Include="processing\hacks\common\qol\FasterWeaponLevels.cs" />
-    <Compile Include="processing\hacks\common\other\FastTransitions.cs" />
-    <Compile Include="processing\hacks\common\other\GoldAdjust.cs" />
-    <Compile Include="processing\hacks\common\other\ExperienceAdjust.cs" />
-    <Compile Include="processing\hacks\common\qol\HittableVampire.cs" />
-    <Compile Include="processing\hacks\common\enhancement\MagDefAdjustment.cs" />
-    <Compile Include="processing\hacks\common\music\CustomMusic.cs" />
-    <Compile Include="processing\hacks\common\music\MusicExpander.cs" />
-    <Compile Include="processing\hacks\common\music\RandomMusicHack.cs" />
-    <Compile Include="processing\hacks\common\music\SongExpansionInfo.cs" />
-    <Compile Include="processing\hacks\common\util\NamesOfThings.cs" />
-    <Compile Include="processing\hacks\common\other\NoFootstepSound.cs" />
-    <Compile Include="processing\hacks\common\procgen\SellAllGear.cs" />
-    <Compile Include="processing\hacks\common\other\SoundEffectsReduction.cs" />
-    <Compile Include="processing\hacks\bossrush\StartingLevel.cs" />
-    <Compile Include="processing\hacks\common\procgen\Statistics.cs" />
-    <Compile Include="processing\hacks\common\enhancement\StatusGlow.cs" />
-    <Compile Include="processing\hacks\common\enhancement\TitleScreenAddition.cs" />
-    <Compile Include="processing\hacks\common\procgen\DoorExpansion.cs" />
-    <Compile Include="processing\hacks\common\procgen\DropChanges.cs" />
-    <Compile Include="processing\hacks\common\procgen\EnemyChanges.cs" />
-    <Compile Include="processing\hacks\common\qol\FasterMagicLevels.cs" />
-    <Compile Include="processing\hacks\common\procgen\FlammieDrum.cs" />
-    <Compile Include="processing\hacks\common\qol\FreeWalking.cs" />
-    <Compile Include="processing\hacks\common\procgen\Layer3Changes.cs" />
-    <Compile Include="processing\hacks\common\qol\LevelupMpRestore.cs" />
-    <Compile Include="processing\hacks\common\qol\MagicRebalance.cs" />
-    <Compile Include="processing\hacks\common\procgen\MagicRope.cs" />
-    <Compile Include="processing\hacks\common\other\FastBosses.cs" />
-    <Compile Include="processing\hacks\common\fix\OverchargeFix.cs" />
-    <Compile Include="processing\hacks\common\other\RabiteColorRandomizer.cs" />
-    <Compile Include="processing\hacks\common\procgen\ShopChanges.cs" />
-    <Compile Include="processing\hacks\common\enhancement\Speedup.cs" />
-    <Compile Include="processing\hacks\common\other\StatusLengths.cs" />
-    <Compile Include="processing\hacks\common\procgen\TimerDialogue.cs" />
-    <Compile Include="processing\hacks\common\enhancement\WeaponRandomizer.cs" />
-    <Compile Include="help\HelpPages.cs" />
-    <Compile Include="help\InfoForm.cs">
+    <Compile Update="help\InfoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="help\InfoForm.Designer.cs">
+    <Compile Update="help\InfoForm.Designer.cs">
       <DependentUpon>InfoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="logging\DebugLogger.cs" />
-    <Compile Include="logging\NullWriter.cs" />
-    <Compile Include="processing\ancientcave\mapgen\forest\ForestConstants.cs" />
-    <Compile Include="forms\MainForm.cs">
+    <Compile Update="forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\MainForm.Designer.cs">
+    <Compile Update="forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="logging\FileLogger.cs" />
-    <Compile Include="logging\Logging.cs" />
-    <Compile Include="processing\ancientcave\mapgen\manafortint\rooms\BridgeRoom.cs" />
-    <Compile Include="processing\ancientcave\mapgen\manafortint\rooms\CircleLineRoom.cs" />
-    <Compile Include="processing\ancientcave\mapgen\manafortint\rooms\CrystalRoom.cs" />
-    <Compile Include="processing\ancientcave\mapgen\manafortint\rooms\DiagonalRoom.cs" />
-    <Compile Include="processing\ancientcave\mapgen\manafortint\rooms\ManafortRoomMaker.cs" />
-    <Compile Include="processing\ancientcave\mapgen\manafortint\rooms\MultiDiagonalRoom.cs" />
-    <Compile Include="processing\ancientcave\mapgen\manafortint\rooms\StartEndRoom.cs" />
-    <Compile Include="processing\ancientcave\mapgen\manafortint\rooms\WhipRoom.cs" />
-    <Compile Include="processing\ancientcave\mapgen\ProcGenMapNode.cs" />
-    <Compile Include="processing\ancientcave\mapgen\ReplacementMapSegment.cs" />
-    <Compile Include="processing\ancientcave\mapgen\TileReplacer.cs" />
-    <Compile Include="processing\ancientcave\MitchHedbergQuotes.cs" />
-    <Compile Include="config\ui\OptionsCategoryForm.cs">
+    <Compile Update="config\ui\OptionsCategoryForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="config\ui\OptionsCategoryForm.Designer.cs">
+    <Compile Update="config\ui\OptionsCategoryForm.Designer.cs">
       <DependentUpon>OptionsCategoryForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="config\ui\OptionsException.cs" />
-    <Compile Include="config\ui\OptionsForm.cs">
+    <Compile Update="config\ui\OptionsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="config\ui\OptionsForm.Designer.cs">
+    <Compile Update="config\ui\OptionsForm.Designer.cs">
       <DependentUpon>OptionsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="config\ui\UiOptionsManager.cs" />
-    <Compile Include="forms\PaletteControl.cs">
+    <Compile Update="forms\PaletteControl.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="forms\PaletteControl.Designer.cs" />
-    <Compile Include="util\DataUtil.cs" />
-    <Compile Include="util\ErrorUtil.cs" />
-    <Compile Include="util\img\Bitmap.cs" />
-    <Compile Include="util\img\Color.cs" />
-    <Compile Include="util\PerlinNoise.cs" />
-    <Compile Include="forms\PlandoForm.cs">
+    <Compile Update="forms\PlandoForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\PlandoForm.Designer.cs">
+    <Compile Update="forms\PlandoForm.Designer.cs">
       <DependentUpon>PlandoForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="forms\PresetsForm.cs">
+    <Compile Update="forms\PresetsForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="forms\PresetsForm.Designer.cs">
+    <Compile Update="forms\PresetsForm.Designer.cs">
       <DependentUpon>PresetsForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Program.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="processing\common\CustomRamOffsets.cs" />
-    <Compile Include="processing\common\BossSwaps.cs" />
-    <Compile Include="processing\common\ElementSwaps.cs" />
-    <Compile Include="processing\common\EnemySwaps.cs" />
-    <Compile Include="processing\common\EventCommandEnum.cs" />
-    <Compile Include="processing\vanillarando\FasterDialogueEvents.cs" />
-    <Compile Include="processing\common\InvisClearsSlow.cs" />
-    <Compile Include="processing\vanillarando\VanillaRandoGenerator.cs" />
-    <Compile Include="util\UpdateCheck.cs" />
-    <Compile Include="util\XyPos.cs" />
-    <Compile Include="util\rng\DotNet110Random.cs" />
-    <Compile Include="util\rng\HashcodeUtil.cs" />
-    <Compile Include="processing\common\RomGenerator.cs" />
-    <Compile Include="processing\common\structure\SnesPalette.cs" />
-    <Compile Include="processing\common\structure\SnesTile.cs" />
-    <Compile Include="processing\common\SomMapCompressor.cs" />
-    <Compile Include="processing\common\VanillaTilesetUtil.cs" />
-    <Compile Include="config\ui\TablePanel.cs">
+    <Compile Update="config\ui\TablePanel.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="config\ui\TablePanel.Designer.cs">
+    <Compile Update="config\ui\TablePanel.Designer.cs">
       <DependentUpon>TablePanel.cs</DependentUpon>
     </Compile>
-    <Compile Include="processing\ancientcave\AncientCaveEventMaker.cs" />
-    <Compile Include="util\FormUtil.cs" />
-    <Compile Include="util\SomLz77.cs" />
-    <Compile Include="util\XmlWrapperUtil.cs" />
-    <EmbeddedResource Include="forms\CharacterDesigner.resx">
+    <EmbeddedResource Update="forms\CharacterDesigner.resx">
       <DependentUpon>CharacterDesigner.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\MainForm.resx">
+    <EmbeddedResource Update="forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="help\InfoForm.resx">
+    <EmbeddedResource Update="help\InfoForm.resx">
       <DependentUpon>InfoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="config\ui\OptionsCategoryForm.resx">
+    <EmbeddedResource Update="config\ui\OptionsCategoryForm.resx">
       <DependentUpon>OptionsCategoryForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="config\ui\OptionsForm.resx">
+    <EmbeddedResource Update="config\ui\OptionsForm.resx">
       <DependentUpon>OptionsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\PlandoForm.resx">
+    <EmbeddedResource Update="forms\PlandoForm.resx">
       <DependentUpon>PlandoForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="forms\PresetsForm.resx">
+    <EmbeddedResource Update="forms\PresetsForm.resx">
       <DependentUpon>PresetsForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Properties\Resources.resx">
+    <EmbeddedResource Update="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
+    <Compile Update="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Compile Include="Properties\Settings.Designer.cs">
+    <Compile Update="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
@@ -495,9 +145,6 @@
     <EmbeddedResource Include="Resources\difficulty_hard.properties" />
     <EmbeddedResource Include="Resources\difficulty_reallyhard.properties" />
     <EmbeddedResource Include="Resources\vineshroom_tiles.bin" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\backdrop_castle.png" />
@@ -610,17 +257,9 @@
     <EmbeddedResource Include="Resources\nesoberi\snow_neso.bmp" />
     <Content Include="Resources\pastebutton.png" />
     <Content Include="Resources\tonpole.ico" />
-  </ItemGroup>
-  <ItemGroup />
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  -->
-  <Target Name="AfterResolveReferences">
+  </ItemGroup> 
+  <Target Name="EmbedCopyLocalDlls" AfterTargets="ResolveReferences">
+    <Message Text="ReferenceCopyLocalPaths: @(ReferenceCopyLocalPaths)" Importance="High" />
     <ItemGroup>
       <EmbeddedResource Include="@(ReferenceCopyLocalPaths)" Condition="'%(ReferenceCopyLocalPaths.Extension)' == '.dll'">
         <LogicalName>%(ReferenceCopyLocalPaths.DestinationSubDirectory)%(ReferenceCopyLocalPaths.Filename)%(ReferenceCopyLocalPaths.Extension)</LogicalName>
