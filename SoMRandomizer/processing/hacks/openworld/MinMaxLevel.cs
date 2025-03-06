@@ -25,11 +25,11 @@ namespace SoMRandomizer.processing.hacks.openworld
         {
             bool doMinLevel = settings.getBool(OpenWorldSettings.PROPERTYNAME_MIN_ENEMY_LEVELS);
             bool doMaxLevel = settings.getBool(OpenWorldSettings.PROPERTYNAME_MAX_ENEMY_LEVELS);
+            context.workingData.setInt(MINMAXLEVEL_MIN_OFFSET_HIROM, 0);
+            context.workingData.setInt(MINMAXLEVEL_MAX_OFFSET_HIROM, 0);
             if(!doMinLevel && !doMaxLevel)
             {
                 Logging.log("Skipping min/max level; neither setting enabled");
-                context.workingData.setInt(MINMAXLEVEL_MIN_OFFSET_HIROM, 0);
-                context.workingData.setInt(MINMAXLEVEL_MAX_OFFSET_HIROM, 0);
                 return false;
             }
 
