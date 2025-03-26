@@ -84,6 +84,9 @@ namespace SoMRandomizer.processing.hacks.common.qol
             add(MAPNUM_NTR_INTERIOR_F, 2, DIR.RIGHT, 3);
             add(MAPNUM_NTR_INTERIOR_F, 2, DIR.DOWN, 3);
 
+            // 379, 0, down 3
+            add(MAPNUM_NTC_INTERIOR_B, 0, DIR.DOWN, 3);
+
             // 385, 3, right 3
             add(MAPNUM_NTC_INTERIOR_H, 3, DIR.RIGHT, 3);
             // 385, 5, up 2
