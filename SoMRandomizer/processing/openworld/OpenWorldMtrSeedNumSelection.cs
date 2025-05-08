@@ -38,7 +38,7 @@ namespace SoMRandomizer.processing.openworld
                     min = max;
                 }
                 int diff = max - min;
-                manaSeedsRequired = diff == 0 ? min : ((r.Next() % diff) + min);
+                manaSeedsRequired = diff == 0 ? min : r.Next(min, max + 1);
                 if (manaSeedsRequired < 1)
                 {
                     manaSeedsRequired = 1;
