@@ -38,6 +38,7 @@ namespace SoMRandomizer.processing.openworld
                     min = max;
                 }
                 int diff = max - min;
+                // Note that Next(min,max) treats max as exclusive.
                 manaSeedsRequired = diff == 0 ? min : r.Next(min, max + 1);
                 if (manaSeedsRequired < 1)
                 {

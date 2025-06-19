@@ -89,6 +89,9 @@ namespace SoMRandomizer.processing.hacks.openworld
                 95, // luna
                 97, // dryad palace
                 108, // credits cliff
+                105, // snow dragon arena
+                102, // red dragon arena
+                41, // blue dragon arena
             };
 
             // only make them blueish
