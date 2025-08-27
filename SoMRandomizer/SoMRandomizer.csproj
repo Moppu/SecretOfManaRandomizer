@@ -23,14 +23,14 @@
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.*" />
     <PackageReference Include="Microsoft.CSharp" Version="4.*" />
     <PackageReference Include="System.Net.Http" Version="4.*" />
-    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="8.0.0" />
+    <PackageReference Include="Microsoft.Bcl.AsyncInterfaces" Version="9.0.8" />
     <PackageReference Include="System.Buffers" Version="4.5.1" />
     <PackageReference Include="System.Memory" Version="4.5.5" />
     <PackageReference Include="System.Numerics.Vectors" Version="4.5.0" />
     <PackageReference Include="System.Resources.Extensions" Version="9.0.0" />
     <PackageReference Include="System.Runtime.CompilerServices.Unsafe" Version="6.0.0" />
-    <PackageReference Include="System.Text.Encodings.Web" Version="8.0.0" />
-    <PackageReference Include="System.Text.Json" Version="8.0.4" />
+    <PackageReference Include="System.Text.Encodings.Web" Version="9.0.8" />
+    <PackageReference Include="System.Text.Json" Version="9.0.8" />
     <PackageReference Include="System.Threading.Tasks.Extensions" Version="4.5.4" />
     <PackageReference Include="System.ValueTuple" Version="4.5.0" />
     <PackageReference Include="U8XmlParser" Version="1.6.1" />
@@ -141,123 +141,8 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Resources\difficulty_casual.properties" />
-    <EmbeddedResource Include="Resources\difficulty_hard.properties" />
-    <EmbeddedResource Include="Resources\difficulty_reallyhard.properties" />
-    <EmbeddedResource Include="Resources\vineshroom_tiles.bin" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\backdrop_castle.png" />
-    <None Include="Resources\backdrop_cave.png" />
-    <None Include="Resources\backdrop_forest.png" />
-    <None Include="Resources\backdrop_ruins.png" />
-    <EmbeddedResource Include="Resources\difficulty_bossrush_casual.properties" />
-    <EmbeddedResource Include="Resources\difficulty_bossrush_hard.properties" />
-    <EmbeddedResource Include="Resources\difficulty_bossrush_reallyhard.properties" />
-    <EmbeddedResource Include="Resources\difficulty_chaos_casual.properties" />
-    <EmbeddedResource Include="Resources\difficulty_chaos_hard.properties" />
-    <EmbeddedResource Include="Resources\difficulty_chaos_reallyhard.properties" />
-    <EmbeddedResource Include="Resources\difficulty_rando_casual.properties" />
-    <EmbeddedResource Include="Resources\difficulty_rando_hard.properties" />
-    <EmbeddedResource Include="Resources\difficulty_rando_reallyhard.properties" />
-    <EmbeddedResource Include="Resources\mapPalettes\acforest\fall.bin" />
-    <EmbeddedResource Include="Resources\mapPalettes\acforest\night.bin" />
-    <EmbeddedResource Include="Resources\mapPalettes\acforest\spring.bin" />
-    <EmbeddedResource Include="Resources\mapPalettes\acforest\sunset.bin" />
-    <EmbeddedResource Include="Resources\mapPalettes\acforest\winter.bin" />
-    <EmbeddedResource Include="Resources\mapPalettes\accave\fierycave.bin" />
-    <EmbeddedResource Include="Resources\mapPalettes\accave\graycave.bin" />
-    <EmbeddedResource Include="Resources\mapPalettes\accave\undinecave.bin" />
-    <EmbeddedResource Include="Resources\mapPalettes\acruins\darkruins.bin" />
-    <EmbeddedResource Include="Resources\mapPalettes\acruins\nightruins.bin" />
-    <EmbeddedResource Include="Resources\customMaps\bossRushRestMapL1.bin" />
-    <EmbeddedResource Include="Resources\customMaps\bossRushRestMapL2.bin" />
-    <EmbeddedResource Include="Resources\mapPalettes\bossrush\bossRushRestMapPal.bin" />
-    <EmbeddedResource Include="Resources\mapPalettes\acisland\alt.bin" />
-    <EmbeddedResource Include="Resources\mapPalettes\acisland\greenwater.bin" />
-    <EmbeddedResource Include="Resources\mapPalettes\acisland\night.bin" />
-    <EmbeddedResource Include="Resources\customMaps\acManafortBossArenaL1.bin" />
-    <EmbeddedResource Include="Resources\customMaps\acManafortNpcRoomL1.bin" />
-    <EmbeddedResource Include="Resources\giftbox_tiles.bin" />
-    <None Include="Resources\sprite_boy.png" />
-    <None Include="Resources\sprite_girl.png" />
-    <None Include="Resources\sprite_sprite.png" />
-    <EmbeddedResource Include="Resources\help\tonpole.png" />
-    <EmbeddedResource Include="Resources\help\forest_goal.png" />
-    <EmbeddedResource Include="Resources\help\island_goal.png" />
-    <EmbeddedResource Include="Resources\pokedata3.xml" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_rina.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_hanamaru.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_yohane.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_chika.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_dia.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kanan.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_mari.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_riko.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_ruby.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_you.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_honk.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_nico.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_ai.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_maki.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_rin.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_hanayo.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_umi.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kotori.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_eli.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_nozomi.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_ayumu.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_emma.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kanata.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_karin.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kasumi.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_setsuna.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_shioriko.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_shizuku.bmp" />
-    <Content Include="Resources\copybutton.png" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_leah.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_sarah.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_riko_wink.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_chika_wink.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_hanamaru_wink.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_ruby_wink.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_yohane_wink.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_you_wink.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_dia_wink.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kanan_wink.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_mari_wink.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_you_training.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_honk_sleep.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_rina_noboard.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_setsuna_summer.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_chisato.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kanon.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_keke.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_ren.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_lanzhu_queendom.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_mia.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_karin_summer.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_rina_summer.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_rina_summer_noboard.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_yu.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_sumire.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kinako.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_mei.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_natsumi.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_shiki.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kaho.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kozue.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_megumi.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_rurino.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_sayaka.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_tsuzuri.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_kanon_happy.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_margarete.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\nesoberi_tomari.bmp" />
-    <EmbeddedResource Include="Resources\nesoberi\snow_neso.bmp" />
-    <Content Include="Resources\pastebutton.png" />
-    <Content Include="Resources\tonpole.ico" />
-  </ItemGroup> 
+
   <Target Name="EmbedCopyLocalDlls" AfterTargets="ResolveReferences">
     <Message Text="ReferenceCopyLocalPaths: @(ReferenceCopyLocalPaths)" Importance="High" />
     <ItemGroup>

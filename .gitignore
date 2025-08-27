@@ -1,5 +1,5 @@
 .idea
-SoMRandomizer/bin
-SoMRandomizer/obj
+SoMRandomizer*/bin
+SoMRandomizer*/obj
 SoMRandomizer.sln.DotSettings.user
 packages/
