@@ -14,7 +14,7 @@ namespace SoMRandomizer.util
         public static List<byte> decodeSomLz77(byte[] rom, int location)
         {
             List<byte> ret = new List<byte>();
-            int seekback = rom[location];
+            int windowSize = rom[location];
             location += 2;
             // big endian for whatever reason
             int size = (rom[location] << 8) + rom[location + 1];
@@ -27,12 +27,12 @@ namespace SoMRandomizer.util
                 {
                     // seek back and read ram data
                     byte mask1 = 0x1F;
-                    for (int i = 0; i < seekback; i++)
+                    for (int i = 0; i < windowSize; i++)
                     {
                         mask1 >>= 1;
                     }
                     byte distMsb = (byte)(b & mask1);
-                    byte numBytes = (byte)(((b & 0x7F) >> (5 - seekback)) + 3);
+                    byte numBytes = (byte)(((b & 0x7F) >> (5 - windowSize)) + 3);
                     ushort dist = (ushort)(rom[location++] + 1 + (distMsb * 256));
                     for (int i = 0; pos < size && i < numBytes; i++)
                     {
@@ -55,10 +55,11 @@ namespace SoMRandomizer.util
         }
 
         // encode a block with LZ77
-        public static List<byte> encodeSomLz77(byte[] decompressedBlock, int seekback)
+        public static List<byte> encodeSomLz77(byte[] decompressedBlock, int windowSize)
         {
+            // TODO: add test that decompresses and recompresses the stuff from ROM and assert it's identical
             List<byte> compressedBlock = new List<byte>();
-            compressedBlock.Add((byte)seekback);
+            compressedBlock.Add((byte)windowSize);
             compressedBlock.Add(0);
             // big endian for some reason
             compressedBlock.Add((byte)(decompressedBlock.Length >> 8));
@@ -66,48 +67,49 @@ namespace SoMRandomizer.util
 
             int decompIndex = 0;
             int romBytes = 0;
-            int max_S = (int)Math.Pow(2, seekback + 2);
-            int max_Dist = (int)Math.Pow(2, 13 - seekback);
+            int maxLenComp = (int)Math.Pow(2, windowSize + 2) + 2;
+            int maxDistComp = (int)Math.Pow(2, 13 - windowSize);
+
             while (decompIndex < decompressedBlock.Length)
             {
-                bool foundRamString = false;
-                // search for longest RAM string we can generate
-                int s = max_S + 2;
-                int dist = 1;
-
-                // maybe make dist the outer loop.
-                for (s = max_S + 2; !foundRamString && s > 3; s--) // string length
+                // find the longest match for compression
+                int bestMatchLen = 0; // less than 3 means no usable match found
+                int bestMatchDist = 0;
+                // we can only seek back maxDist and copy at most maxLenComp bytes, but not less than 3
+                int maxLen = Math.Min(maxLenComp, decompressedBlock.Length - decompIndex);
+                int maxDist = Math.Min(maxDistComp, decompIndex);
+                for (int dist = 1; dist <= maxDist; dist++)
                 {
-                    // seekback distance
-                    for (dist = 1; !foundRamString && dist <= max_Dist; dist++)
+                    int pos = decompIndex - dist;
+                    for (int i = 0; i < maxLen; i++)
                     {
-                        if (decompIndex - dist >= 0)
+                        if (decompressedBlock[pos + i] != decompressedBlock[decompIndex + i])
                         {
-                            bool ok = true;
-                            int thisLoc = 0;
-                            for (int pos = decompIndex - dist; ok && thisLoc < s; pos++)
+                            if (i > bestMatchLen)
                             {
-                                if (decompIndex + thisLoc >= decompressedBlock.Length || decompressedBlock[pos] != decompressedBlock[decompIndex + thisLoc])
-                                {
-                                    ok = false;
-                                    break;
-                                }
-                                thisLoc++;
+                                bestMatchLen = i;
+                                bestMatchDist = dist;
                             }
-
-                            if (ok)
-                            {
-                                // found it!
-                                foundRamString = true;
-                                break;
-                            }
+                            break;
+                        }
+                        if (i == maxLen - 1)
+                        {
+                            bestMatchLen = i + 1;
+                            bestMatchDist = dist;
                         }
                     }
+
+                    if (bestMatchLen == maxLen)
+                        break;
                 }
 
-                if (foundRamString)
+                // was a usable match found?
+                if (bestMatchLen >= 3)
                 {
-                    // write previous rom stuff if exists
+                    int len = bestMatchLen;
+                    int dist = bestMatchDist;
+
+                    // write buffered uncompressed bytes, if any
                     if (romBytes > 0)
                     {
                         compressedBlock.Add((byte)(romBytes - 1));
@@ -119,9 +121,9 @@ namespace SoMRandomizer.util
                     }
                     romBytes = 0;
 
-                    // write ram block
+                    // write compression marker
                     byte ctrlByte = 0x80;
-                    byte lengthField = (byte)((s - 3) << (5 - seekback));
+                    byte lengthField = (byte)((len - 3) << (5 - windowSize));
                     ctrlByte |= lengthField;
                     byte distanceMsbPortion = (byte)(((dist - 1)) >> 8);
                     ctrlByte |= distanceMsbPortion;
@@ -130,21 +132,19 @@ namespace SoMRandomizer.util
 
                     compressedBlock.Add(ctrlByte);
                     compressedBlock.Add(distanceLsbByte);
-                    decompIndex += s;
+                    decompIndex += len;
                 }
                 else
                 {
+                    // append to uncompressed buffer
                     romBytes++;
                     decompIndex++;
                 }
-                // if found a ram string, write it; otherwise do the next byte
-                // until we hit one that's ram-able.  then write the entire
-                // previous ROM section, then the RAM.
 
-                // hit the max rombytes string size
+                // hit the max uncompressed block size?
                 if (romBytes == 128)
                 {
-                    // write rom things
+                    // write out
                     compressedBlock.Add((byte)(romBytes - 1));
                     for (int i = 0; i < romBytes; i++)
                     {
@@ -153,9 +153,9 @@ namespace SoMRandomizer.util
 
                     romBytes = 0;
                 }
-            } // compress all of first section of data
+            }
 
-            // last bits if necessary
+            // write remaining uncompressed bytes, if any
             if (romBytes > 0)
             {
                 compressedBlock.Add((byte)(romBytes - 1));
