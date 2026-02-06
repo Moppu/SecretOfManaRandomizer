@@ -94,6 +94,7 @@ namespace SoMRandomizer.processing.hacks.common.qol
             int[] skipDoors = new int[]
             {
                 0x75, // death door
+                0x82, // after bridge or at elder (depending on flammie drum logic)
                 0x38, // jehk return door
                 0x200, // santa return door
                 0x0C, // potos intro return door
