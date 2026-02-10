@@ -19,22 +19,29 @@ namespace SoMRandomizer.logging
         }
         public static void AddLogger(string messageType, Logging logger)
         {
-            List<Logging> loggers;
-            if(specificMessageTypeLoggers.ContainsKey(messageType))
+            if (logger is NullWriter)
             {
-                loggers = specificMessageTypeLoggers[messageType];
+                return;
+            }
+
+            if (specificMessageTypeLoggers.TryGetValue(messageType, out List<Logging> loggers))
+            {
+                loggers.Add(logger);
             }
             else
             {
-                loggers = new List<Logging>();
-                specificMessageTypeLoggers[messageType] = loggers;
+                specificMessageTypeLoggers[messageType] = new List<Logging>{logger};
             }
-            loggers.Add(logger);
         }
 
         public static void ClearLoggers()
         {
             specificMessageTypeLoggers.Clear();
+        }
+
+        public static bool HasLogger(string messageType)
+        {
+            return specificMessageTypeLoggers.TryGetValue(messageType, out List<Logging> loggers) && loggers.Count > 0;
         }
 
         // implementation method
@@ -53,9 +60,9 @@ namespace SoMRandomizer.logging
         // log with specific category/file
         public static void log(string msg, string messageType)
         {
-            if (specificMessageTypeLoggers.ContainsKey(messageType))
+            if (specificMessageTypeLoggers.TryGetValue(messageType, out List<Logging> loggers))
             {
-                foreach (Logging logger in specificMessageTypeLoggers[messageType])
+                foreach (Logging logger in loggers)
                 {
                     logger.logMessage("[" + messageType + "] " + msg);
                 }

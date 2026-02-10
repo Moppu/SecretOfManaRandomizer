@@ -33,6 +33,7 @@ namespace SoMRandomizer.processing.hacks.openworld
             bool vanillaManaBeast = settings.get(OpenWorldSettings.PROPERTYNAME_MANA_BEAST_SCALING) == "vanilla";
             bool pauseTimerInMenu = settings.getBool(OpenWorldSettings.PROPERTYNAME_PAUSE_TIMER_IN_MENU);
             byte noFutureLevel = (byte)settings.getInt(OpenWorldSettings.PROPERTYNAME_NO_FUTURE_LEVEL);
+            bool hasDebugLogger = Logging.HasLogger("debug");
 
             // see OpenWorldDifficultyProcessor, which determines these values based on selected difficulty
             double difficultyStatScale = context.workingData.getDouble(OpenWorldDifficultyProcessor.ENEMY_DIFFICULTY_STAT_SCALE);
@@ -552,7 +553,7 @@ namespace SoMRandomizer.processing.hacks.openworld
                                 valueHigh = Math.Min(valueHigh, 65535);
                                 valueAvg = Math.Min(valueAvg, 65535);
                                 valueLow = Math.Min(valueLow, 65535);
-                                if (debugLogging)
+                                if (debugLogging && hasDebugLogger)
                                 {
                                     Logging.log("Level " + i + " stat " + offset + " low=" + valueLow + " avg=" + valueAvg + " high=" + valueHigh + " at offset " + context.workingOffset.ToString("X"), "debug");
                                 }
@@ -591,7 +592,7 @@ namespace SoMRandomizer.processing.hacks.openworld
                                     valueLow = 6;
                                 }
 
-                                if (debugLogging)
+                                if (debugLogging && hasDebugLogger)
                                 {
                                     Logging.log("Level " + i + " stat " + offset + " low=" + valueLow + " avg=" + valueAvg + " high=" + valueHigh + " at offset " + context.workingOffset.ToString("X"), "debug");
                                 }
@@ -680,7 +681,7 @@ namespace SoMRandomizer.processing.hacks.openworld
                         {
                             diffThreshold = diffThresholds[offset];
                         }
-                        if (debugLogging)
+                        if (debugLogging && hasDebugLogger)
                         {
                             Logging.log("Enemy " + i + " v=" + vanillaValue + " z=" + zeroValue + " l=" + level + " (" + ((vanillaValue - zeroValue) / (double)level) + ") a=" + avgStatValuePerLevel[typeIndex] + " d=" + diffThreshold, "debug");
                         }
@@ -755,7 +756,7 @@ namespace SoMRandomizer.processing.hacks.openworld
 
                         enemyClass = (byte)(enemyClass + typeIndex * 3);
                         finalStatClasses[offset][i] = enemyClass; // for logging
-                        if (debugLogging)
+                        if (debugLogging && hasDebugLogger)
                         {
                             Logging.log("Enemy " + i + " is class " + enemyClass + " for stat " + offset, "debug");
                         }
@@ -765,71 +766,45 @@ namespace SoMRandomizer.processing.hacks.openworld
             }
 
             // logging for stat values
-            Logging.log("Stat values for open world enemies:", "debug");
-            for (int enemyId = 0; enemyId < 128; enemyId++)
+            if (hasDebugLogger)
             {
-                Logging.log("ENEMY: " + context.namesOfThings.getOriginalName(NamesOfThings.INDEX_ENEMIES_START + enemyId), "debug");
-                string vanillaStats = "[VANILLA] ";
-                int vanillaLevel = 0;
-                foreach (int statNum in sourceOffsets)
+                Logging.log("Stat values for open world enemies:", "debug");
+                for (int enemyId = 0; enemyId < 128; enemyId++)
                 {
-                    Dictionary<int, int> vanillaValues = vanillaStatValues[statNum];
-                    string statname = statNames[statNum];
-                    if (vanillaValues.ContainsKey(enemyId))
-                    {
-                        int vanillaValue = vanillaValues[enemyId];
-                        if (statNum == 0)
-                        {
-                            vanillaLevel = vanillaValue;
-                        }
-                        string addStr = statname + "=" + vanillaValue + " ";
-                        while (addStr.Length < 16)
-                        {
-                            addStr += " ";
-                        }
-
-                        vanillaStats += addStr;
-                    }
-                }
-
-                Logging.log(vanillaStats, "debug");
-
-                string[] statClassIndicators = new string[] { "-", " ", "+", "-", " ", "+", };
-                List<int> logLevels = new int[] { 1, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 90, 99 }.ToList();
-                for (int level = 1; level < 100; level++)
-                {
-                    String statsString = "          Level=" + level + "  ";
-                    while (statsString.Length < 26)
-                    {
-                        statsString += " ";
-                    }
-
+                    Logging.log(
+                        "ENEMY: " + context.namesOfThings.getOriginalName(NamesOfThings.INDEX_ENEMIES_START + enemyId),
+                        "debug");
+                    string vanillaStats = "[VANILLA] ";
+                    int vanillaLevel = 0;
                     foreach (int statNum in sourceOffsets)
                     {
-                        Dictionary<int, Dictionary<int, int>> statValues = finalStatValues[statNum];
-                        Dictionary<int, int> statClasses = finalStatClasses[statNum];
+                        Dictionary<int, int> vanillaValues = vanillaStatValues[statNum];
                         string statname = statNames[statNum];
-                        if (statClasses.ContainsKey(enemyId))
+                        if (vanillaValues.ContainsKey(enemyId))
                         {
-                            int statClass = statClasses[enemyId];
-                            Dictionary<int, int> levelStatValues = statValues[level];
-                            int statValue = levelStatValues[statClass];
-                            string addStr = statname + "=" + statValue + "[" + statClassIndicators[statClass] + "]  ";
+                            int vanillaValue = vanillaValues[enemyId];
+                            if (statNum == 0)
+                            {
+                                vanillaLevel = vanillaValue;
+                            }
+
+                            string addStr = statname + "=" + vanillaValue + " ";
                             while (addStr.Length < 16)
                             {
                                 addStr += " ";
                             }
-                            statsString += addStr;
+
+                            vanillaStats += addStr;
                         }
                     }
-                    if (debugLogging || logLevels.Contains(level))
-                    {
-                        Logging.log(statsString, "debug");
-                    }
 
-                    if (vanillaLevel == level)
+                    Logging.log(vanillaStats, "debug");
+
+                    string[] statClassIndicators = new string[] { "-", " ", "+", "-", " ", "+", };
+                    List<int> logLevels = new int[] { 1, 5, 10, 15, 20, 30, 40, 50, 60, 70, 80, 90, 99 }.ToList();
+                    for (int level = 1; level < 100; level++)
                     {
-                        statsString = "   DIFFS            ";
+                        String statsString = "          Level=" + level + "  ";
                         while (statsString.Length < 26)
                         {
                             statsString += " ";
@@ -837,8 +812,6 @@ namespace SoMRandomizer.processing.hacks.openworld
 
                         foreach (int statNum in sourceOffsets)
                         {
-                            Dictionary<int, int> vanillaValues = vanillaStatValues[statNum];
-                            int vanillaValue = vanillaValues[enemyId];
                             Dictionary<int, Dictionary<int, int>> statValues = finalStatValues[statNum];
                             Dictionary<int, int> statClasses = finalStatClasses[statNum];
                             string statname = statNames[statNum];
@@ -847,50 +820,96 @@ namespace SoMRandomizer.processing.hacks.openworld
                                 int statClass = statClasses[enemyId];
                                 Dictionary<int, int> levelStatValues = statValues[level];
                                 int statValue = levelStatValues[statClass];
-                                statValue = statValue - vanillaValue;
-                                string statValueString = "" + statValue;
-                                if (statValue >= 0)
-                                {
-                                    statValueString = "+" + statValueString;
-                                }
-                                string addStr = "d" + statname + "=" + statValueString;
+                                string addStr = statname + "=" + statValue + "[" + statClassIndicators[statClass] +
+                                                "]  ";
                                 while (addStr.Length < 16)
                                 {
                                     addStr += " ";
                                 }
+
                                 statsString += addStr;
                             }
                         }
-                        Logging.log(statsString, "debug");
+
+                        if (debugLogging || logLevels.Contains(level))
+                        {
+                            Logging.log(statsString, "debug");
+                        }
+
+                        if (vanillaLevel == level)
+                        {
+                            statsString = "   DIFFS            ";
+                            while (statsString.Length < 26)
+                            {
+                                statsString += " ";
+                            }
+
+                            foreach (int statNum in sourceOffsets)
+                            {
+                                Dictionary<int, int> vanillaValues = vanillaStatValues[statNum];
+                                int vanillaValue = vanillaValues[enemyId];
+                                Dictionary<int, Dictionary<int, int>> statValues = finalStatValues[statNum];
+                                Dictionary<int, int> statClasses = finalStatClasses[statNum];
+                                string statname = statNames[statNum];
+                                if (statClasses.ContainsKey(enemyId))
+                                {
+                                    int statClass = statClasses[enemyId];
+                                    Dictionary<int, int> levelStatValues = statValues[level];
+                                    int statValue = levelStatValues[statClass];
+                                    statValue = statValue - vanillaValue;
+                                    string statValueString = "" + statValue;
+                                    if (statValue >= 0)
+                                    {
+                                        statValueString = "+" + statValueString;
+                                    }
+
+                                    string addStr = "d" + statname + "=" + statValueString;
+                                    while (addStr.Length < 16)
+                                    {
+                                        addStr += " ";
+                                    }
+
+                                    statsString += addStr;
+                                }
+                            }
+
+                            Logging.log(statsString, "debug");
+                        }
                     }
                 }
-            }
 
-            // more logging for stat values
-            Logging.log("-------- STAT +/- TOTALS:", "debug");
-            foreach (int statNum in sourceOffsets)
-            {
-                int[] num = new int[] { 0, 0, 0, 0, 0, 0 };
-                string[] classNames = new string[] { "below avg", "avg", "above avg", "below avg (boss)", "avg (boss)", "above avg (boss)" };
-                Dictionary<int, int> statData = finalStatClasses[statNum];
-                foreach (int key in statData.Keys)
+                // more logging for stat values
+                Logging.log("-------- STAT +/- TOTALS:", "debug");
+                foreach (int statNum in sourceOffsets)
                 {
-                    int value = statData[key];
-                    num[value]++;
-                }
+                    int[] num = new int[] { 0, 0, 0, 0, 0, 0 };
+                    string[] classNames = new string[]
+                        { "below avg", "avg", "above avg", "below avg (boss)", "avg (boss)", "above avg (boss)" };
+                    Dictionary<int, int> statData = finalStatClasses[statNum];
+                    foreach (int key in statData.Keys)
+                    {
+                        int value = statData[key];
+                        num[value]++;
+                    }
 
-                string logString = statNames[statNum] + ": ";
-                for (int i = 0; i < 6; i++)
-                {
-                    logString += classNames[i] + ": " + num[i] + "; ";
+                    string logString = statNames[statNum] + ": ";
+                    for (int i = 0; i < 6; i++)
+                    {
+                        logString += classNames[i] + ": " + num[i] + "; ";
+                    }
+
+                    Logging.log(logString, "debug");
                 }
-                Logging.log(logString, "debug");
             }
 
             List<byte> enemyLevelupMessage = VanillaEventUtil.getBytes("Enemy level is now ");
             CodeGenerationUtils.ensureSpaceInBank(ref context.workingOffset, enemyLevelupMessage.Count + 1);
             int messageLocation = context.workingOffset;
-            Logging.log("enemy message location: " + messageLocation.ToString("X6"), "debug");
+            if (hasDebugLogger)
+            {
+                Logging.log("enemy message location: " + messageLocation.ToString("X6"), "debug");
+            }
+
             foreach (byte b in enemyLevelupMessage)
             {
                 outRom[context.workingOffset++] = b;
@@ -1247,7 +1266,11 @@ namespace SoMRandomizer.processing.hacks.openworld
             outRom[context.workingOffset++] = 0xE1;
             foreach (int offset in sourceOffsets)
             {
-                Logging.log("Writing stat " + offset.ToString("X6"), "debug");
+                if (hasDebugLogger)
+                {
+                    Logging.log("Writing stat " + offset.ToString("X6"), "debug");
+                }
+
                 if (offset == 0)
                 {
                     writeLevelLoader(outRom, context, ramLocations[offset]);
