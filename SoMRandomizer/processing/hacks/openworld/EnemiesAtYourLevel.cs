@@ -17,7 +17,7 @@ namespace SoMRandomizer.processing.hacks.openworld
     /// <remarks>Author: Moppleton</remarks>
     public class EnemiesAtYourLevel : RandoProcessor
     {
-        bool debugLogging = false;
+        private const bool debugLogging = false;
 
         protected override string getName()
         {
