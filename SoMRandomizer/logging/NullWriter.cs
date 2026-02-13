@@ -6,7 +6,7 @@ namespace SoMRandomizer.logging
     /// </summary>
     /// 
     /// <remarks>Author: Moppleton</remarks>
-    public class NullWriter : Logging
+    public sealed class NullWriter : Logging
     {
         public override void forceLogFlush()
         {
