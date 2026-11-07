@@ -509,6 +509,7 @@ namespace SoMRandomizer.forms
         {
             OpenFileDialog of = new OpenFileDialog();
             of.Multiselect = false;
+            of.Filter = FormUtil.ROM_FILE_FILTER;
             DialogResult dr = of.ShowDialog();
             int charIndex = comboBox1.SelectedIndex;
             if (dr == DialogResult.OK)

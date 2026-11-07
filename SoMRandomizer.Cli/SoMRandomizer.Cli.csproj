@@ -1,0 +1,55 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Cross-platform command-line build of the randomizer for macOS and Linux.
+
+    Rationale: the main SoMRandomizer project targets .NET Framework 4.6.2 and
+    Windows Forms, neither of which runs natively outside Windows. This project
+    compiles the same UI-independent source files against .NET 8 so that the
+    headless open world generation path can run on any .NET 8 platform.
+
+    The source files are linked, not copied, so the two projects cannot drift.
+    The exclusion list below names every file that depends on Windows Forms or
+    System.Drawing. A new UI-dependent file outside these folders will surface
+    as a compile error here, which is the intended failure mode.
+  -->
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <RootNamespace>SoMRandomizer</RootNamespace>
+    <AssemblyName>SoMRandomizer.Cli</AssemblyName>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <EnableDefaultEmbeddedResourceItems>false</EnableDefaultEmbeddedResourceItems>
+    <!--
+      Same wildcard versioning as the main project. RomGenerator derives the
+      buildDate it writes to the generation log from the assembly build and
+      revision numbers, which only the wildcard sets. A wildcard version
+      requires Deterministic=false.
+    -->
+    <AssemblyVersion>1.0.*</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <Deterministic>false</Deterministic>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <SrcRoot>..\SoMRandomizer\</SrcRoot>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="$(SrcRoot)**\*.cs"
+             Exclude="$(SrcRoot)forms\**;$(SrcRoot)help\**;$(SrcRoot)config\ui\**;$(SrcRoot)Properties\**;$(SrcRoot)obj\**;$(SrcRoot)bin\**;$(SrcRoot)Program.cs;$(SrcRoot)util\FormUtil.cs"
+             LinkBase="Shared" />
+    <Compile Include="CliProgram.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- Logical names must match the legacy project, for example SoMRandomizer.Resources.pokedata3.xml. -->
+    <EmbeddedResource Include="$(SrcRoot)Resources\**\*.bin;$(SrcRoot)Resources\**\*.properties;$(SrcRoot)Resources\**\*.xml;$(SrcRoot)Resources\**\*.bmp"
+                      LinkBase="Resources" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="U8XmlParser" Version="1.6.1" />
+  </ItemGroup>
+</Project>

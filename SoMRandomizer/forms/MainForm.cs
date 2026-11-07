@@ -390,6 +390,7 @@ namespace SoMRandomizer.forms
             // select input rom
             OpenFileDialog of = new OpenFileDialog();
             of.Multiselect = false;
+            of.Filter = FormUtil.ROM_FILE_FILTER;
             DialogResult dr = of.ShowDialog();
             if (dr == DialogResult.OK)
             {
@@ -435,6 +436,7 @@ namespace SoMRandomizer.forms
             // select output filename
             OpenFileDialog of = new OpenFileDialog();
             of.Multiselect = false;
+            of.Filter = FormUtil.ROM_FILE_FILTER;
             DialogResult dr = of.ShowDialog();
             if (dr == DialogResult.OK)
             {
