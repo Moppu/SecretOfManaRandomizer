@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Windows.Forms;
 using System.IO;
 using SoMRandomizer.logging;
 
@@ -33,7 +32,7 @@ namespace SoMRandomizer.config
                 if (!File.Exists(configFile))
                 {
                     // previous versions kept config with the exe, so if we've got one of those, copy it into the new appdata area
-                    string localConfig = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "/config.properties";
+                    string localConfig = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.properties");
                     if (File.Exists(localConfig))
                     {
                         File.Copy(localConfig, configFile);
@@ -44,7 +43,7 @@ namespace SoMRandomizer.config
             catch(Exception e)
             {
                 // can't write to appdata area for some reason, so i guess use local config
-                filename = System.IO.Path.GetDirectoryName(Application.ExecutablePath) + "/config.properties";
+                filename = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "config.properties");
             }
             loadConfigFile();
         }

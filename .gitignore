@@ -3,3 +3,5 @@ SoMRandomizer/bin
 SoMRandomizer/obj
 SoMRandomizer.sln.DotSettings.user
 packages/
+SoMRandomizer.Cli/bin
+SoMRandomizer.Cli/obj
