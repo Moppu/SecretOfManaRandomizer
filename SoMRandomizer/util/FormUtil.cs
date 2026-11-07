@@ -12,6 +12,11 @@ namespace SoMRandomizer.util
     /// <remarks>Author: Moppleton</remarks>
     public class FormUtil
     {
+        /// <summary>
+        /// File dialog filter for SNES ROM images. Without a filter, Mono shows an empty file type list.
+        /// </summary>
+        public const string ROM_FILE_FILTER = "SNES ROM (*.sfc;*.smc)|*.sfc;*.smc|All files (*.*)|*.*";
+
         delegate void Invoker(Control formInstance, String attributeName, Object value);
         // Delegate to control creation thread to safely set fields
         public static void SetFormField(Control formInstance, String attributeName, Object value)
